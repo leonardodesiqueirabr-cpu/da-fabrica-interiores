@@ -1,0 +1,57 @@
+{
+  "productId": "product-009-chaise-longue-curvo",
+  "name": "Chaise Longue Curvo",
+  "slug": "chaise-longue-curvo",
+  "updatedAt": "2026-07-18T23:42:11.219Z",
+  "data": {
+    "id": "product-009-chaise-longue-curvo",
+    "slug": "chaise-longue-curvo",
+    "name": "Chaise Longue Curvo",
+    "shortDescription": "Chaise longue com foco em conforto e estilo, ideal para compor salas modernas com melhor aproveitamento do espaço.",
+    "description": "Chaise longue pensada para quem procura conforto amplo, apoio ergonômico e presença visual no ambiente. O formato favorece momentos de descanso e convivência, enquanto o desenho contemporâneo facilita a integração com diferentes propostas de decoração, mantendo equilíbrio entre estética e funcionalidade.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": true,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Bege",
+      "Cinza",
+      "Preto"
+    ],
+    "images": [
+      {
+        "id": "product-009-chaise-longue-curvo-img-01",
+        "productId": "product-009-chaise-longue-curvo",
+        "url": "/produtos/chaise-longue-curvo/images/Chaise Longue Curvo Bege.png",
+        "alt": "Chaise Longue Curvo - Bege",
+        "colorName": "Bege",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-009-chaise-longue-curvo-img-02",
+        "productId": "product-009-chaise-longue-curvo",
+        "url": "/produtos/chaise-longue-curvo/images/Chaise Longue Curvo Cinza.png",
+        "alt": "Chaise Longue Curvo - Cinza",
+        "colorName": "Cinza",
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "id": "product-009-chaise-longue-curvo-img-03",
+        "productId": "product-009-chaise-longue-curvo",
+        "url": "/produtos/chaise-longue-curvo/images/Chaise Longue Curvo Preto.png",
+        "alt": "Chaise Longue Curvo - Preto",
+        "colorName": "Preto",
+        "isMain": false,
+        "sortOrder": 2
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

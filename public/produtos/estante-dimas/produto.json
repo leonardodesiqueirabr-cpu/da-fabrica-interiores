@@ -1,0 +1,47 @@
+{
+  "productId": "product-019-estante-dimas",
+  "name": "Estante Dimas",
+  "slug": "estante-dimas",
+  "updatedAt": "2026-07-18T23:42:11.475Z",
+  "data": {
+    "id": "product-019-estante-dimas",
+    "slug": "estante-dimas",
+    "name": "Estante Dimas",
+    "shortDescription": "Estante funcional para organizar e valorizar o ambiente, com visual moderno e acabamento pensado para o uso diário.",
+    "description": "Estante com proposta funcional e visual contemporâneo, ideal para organizar objetos decorativos, livros e itens do dia a dia. A estrutura favorece composição elegante em salas e áreas de convivência, combinando praticidade, presença estética e fácil integração com diferentes estilos de decoração.",
+    "basePrice": 0,
+    "categories": [
+      "sala"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Branco",
+      "Cambrian"
+    ],
+    "images": [
+      {
+        "id": "product-019-estante-dimas-img-01",
+        "productId": "product-019-estante-dimas",
+        "url": "/produtos/estante-dimas/images/Estante Dimas Branca.jpg",
+        "alt": "Estante Dimas - Branco",
+        "colorName": "Branco",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-019-estante-dimas-img-02",
+        "productId": "product-019-estante-dimas",
+        "url": "/produtos/estante-dimas/images/Estante Dimas Cambrian.webp",
+        "alt": "Estante Dimas - Cambrian",
+        "colorName": "Cambrian",
+        "isMain": false,
+        "sortOrder": 1
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

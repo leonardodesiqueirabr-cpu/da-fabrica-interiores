@@ -1,0 +1,65 @@
+{
+  "productId": "product-032-sofa-cama-2-lugares",
+  "name": "Sofá Cama 2 Lugares",
+  "slug": "sofa-cama-2-lugares",
+  "updatedAt": "2026-07-18T23:42:11.601Z",
+  "data": {
+    "id": "product-032-sofa-cama-2-lugares",
+    "slug": "sofa-cama-2-lugares",
+    "name": "Sofá Cama 2 Lugares",
+    "shortDescription": "Sofá-cama versátil para uso diário, combinando conforto no assento e abertura prática para acomodar visitas com facilidade.",
+    "description": "Sofá-cama projetado para oferecer conforto no dia a dia e funcionalidade extra quando necessário. A conversão para cama é simples, tornando-o ideal para salas multifuncionais. O design contemporâneo e o bom aproveitamento de espaço ajudam a compor ambientes elegantes, práticos e preparados para receber.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Bege",
+      "Cinza"
+    ],
+    "images": [
+      {
+        "id": "product-032-sofa-cama-2-lugares-img-01",
+        "productId": "product-032-sofa-cama-2-lugares",
+        "url": "/produtos/sofa-cama-2-lugares/images/Sofá Cama 2 Lugares Bege Aberto.png",
+        "alt": "Sofá Cama 2 Lugares - Bege - Aberto",
+        "colorName": "Bege",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-032-sofa-cama-2-lugares-img-02",
+        "productId": "product-032-sofa-cama-2-lugares",
+        "url": "/produtos/sofa-cama-2-lugares/images/Sofá Cama 2 Lugares Bege.png",
+        "alt": "Sofá Cama 2 Lugares - Bege",
+        "colorName": "Bege",
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "id": "product-032-sofa-cama-2-lugares-img-03",
+        "productId": "product-032-sofa-cama-2-lugares",
+        "url": "/produtos/sofa-cama-2-lugares/images/Sofá Cama 2 Lugares Cinza  Aberto.png",
+        "alt": "Sofá Cama 2 Lugares - Cinza - Aberto",
+        "colorName": "Cinza",
+        "isMain": false,
+        "sortOrder": 2
+      },
+      {
+        "id": "product-032-sofa-cama-2-lugares-img-04",
+        "productId": "product-032-sofa-cama-2-lugares",
+        "url": "/produtos/sofa-cama-2-lugares/images/Sofá Cama 2 Lugares Cinza.png",
+        "alt": "Sofá Cama 2 Lugares - Cinza",
+        "colorName": "Cinza",
+        "isMain": false,
+        "sortOrder": 3
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

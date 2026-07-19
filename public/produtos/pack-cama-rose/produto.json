@@ -1,0 +1,57 @@
+{
+  "productId": "product-030-pack-cama-rose",
+  "name": "Pack Cama Rose",
+  "slug": "pack-cama-rose",
+  "updatedAt": "2026-07-18T23:42:11.571Z",
+  "data": {
+    "id": "product-030-pack-cama-rose",
+    "slug": "pack-cama-rose",
+    "name": "Pack Cama Rose",
+    "shortDescription": "Pack de cama com design atual e estrutura resistente, pensado para oferecer conforto diário e boa integração com o quarto.",
+    "description": "Pack de cama com proposta prática e estética equilibrada, ideal para quem procura conforto e presença visual no quarto. O conjunto valoriza o ambiente com linhas modernas e acabamento cuidado, entregando uma solução funcional para descanso diário com boa durabilidade e fácil combinação com diferentes decorações.",
+    "basePrice": 0,
+    "categories": [
+      "camas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Bege",
+      "Cinza Claro",
+      "Cinza Escuro"
+    ],
+    "images": [
+      {
+        "id": "product-030-pack-cama-rose-img-01",
+        "productId": "product-030-pack-cama-rose",
+        "url": "/produtos/pack-cama-rose/images/Pack Cama Rose Bege.png",
+        "alt": "Pack Cama Rose - Bege",
+        "colorName": "Bege",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-030-pack-cama-rose-img-02",
+        "productId": "product-030-pack-cama-rose",
+        "url": "/produtos/pack-cama-rose/images/Pack Cama Rose Cinza Claro.png",
+        "alt": "Pack Cama Rose - Cinza Claro",
+        "colorName": "Cinza Claro",
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "id": "product-030-pack-cama-rose-img-03",
+        "productId": "product-030-pack-cama-rose",
+        "url": "/produtos/pack-cama-rose/images/Pack Cama Rose Cinza Escuro.png",
+        "alt": "Pack Cama Rose - Cinza Escuro",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 2
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

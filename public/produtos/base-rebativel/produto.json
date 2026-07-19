@@ -1,0 +1,34 @@
+{
+  "productId": "product-001-base-rebativel",
+  "name": "Base Rebatível",
+  "slug": "base-rebativel",
+  "updatedAt": "2026-07-18T23:42:11.062Z",
+  "data": {
+    "id": "product-001-base-rebativel",
+    "slug": "base-rebativel",
+    "name": "Base Rebatível",
+    "shortDescription": "Base rebatível para colchão, com abertura prática para otimizar arrumação sem comprometer conforto e estabilidade.",
+    "description": "Base rebatível desenvolvida para unir suporte confortável ao colchão com aproveitamento inteligente de espaço. O sistema de abertura facilita o acesso ao compartimento interno de arrumação, sendo uma solução eficiente para manter o quarto mais organizado, com visual discreto e acabamento robusto.",
+    "basePrice": 0,
+    "categories": [
+      "camas"
+    ],
+    "featured": true,
+    "bestSeller": true,
+    "available": true,
+    "characteristics": [],
+    "colors": [],
+    "images": [
+      {
+        "id": "product-001-base-rebativel-img-01",
+        "productId": "product-001-base-rebativel",
+        "url": "/produtos/base-rebativel/images/Base Rebatível.png",
+        "alt": "Base Rebatível",
+        "isMain": true,
+        "sortOrder": 0
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

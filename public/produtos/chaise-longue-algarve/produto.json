@@ -1,0 +1,83 @@
+{
+  "productId": "product-003-chaise-longue-algarve",
+  "name": "Chaise Longue Algarve",
+  "slug": "chaise-longue-algarve",
+  "updatedAt": "2026-07-18T23:42:11.127Z",
+  "data": {
+    "id": "product-003-chaise-longue-algarve",
+    "slug": "chaise-longue-algarve",
+    "name": "Chaise Longue Algarve",
+    "shortDescription": "Chaise longue com foco em conforto e estilo, ideal para compor salas modernas com melhor aproveitamento do espaço.",
+    "description": "Chaise longue pensada para quem procura conforto amplo, apoio ergonômico e presença visual no ambiente. O formato favorece momentos de descanso e convivência, enquanto o desenho contemporâneo facilita a integração com diferentes propostas de decoração, mantendo equilíbrio entre estética e funcionalidade.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": true,
+    "bestSeller": true,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Bege",
+      "Cinza"
+    ],
+    "images": [
+      {
+        "id": "product-003-chaise-longue-algarve-img-01",
+        "productId": "product-003-chaise-longue-algarve",
+        "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Bege Aberto.png",
+        "alt": "Chaise Longue Algarve - Bege - Aberto",
+        "colorName": "Bege",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-003-chaise-longue-algarve-img-02",
+        "productId": "product-003-chaise-longue-algarve",
+        "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Bege Baú.png",
+        "alt": "Chaise Longue Algarve - Bege - Baú",
+        "colorName": "Bege",
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "id": "product-003-chaise-longue-algarve-img-03",
+        "productId": "product-003-chaise-longue-algarve",
+        "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Bege.png",
+        "alt": "Chaise Longue Algarve - Bege",
+        "colorName": "Bege",
+        "isMain": false,
+        "sortOrder": 2
+      },
+      {
+        "id": "product-003-chaise-longue-algarve-img-04",
+        "productId": "product-003-chaise-longue-algarve",
+        "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Cinza Aberto.png",
+        "alt": "Chaise Longue Algarve - Cinza - Aberto",
+        "colorName": "Cinza",
+        "isMain": false,
+        "sortOrder": 3
+      },
+      {
+        "id": "product-003-chaise-longue-algarve-img-05",
+        "productId": "product-003-chaise-longue-algarve",
+        "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Cinza Baú.png",
+        "alt": "Chaise Longue Algarve - Cinza - Baú",
+        "colorName": "Cinza",
+        "isMain": false,
+        "sortOrder": 4
+      },
+      {
+        "id": "product-003-chaise-longue-algarve-img-06",
+        "productId": "product-003-chaise-longue-algarve",
+        "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Cinza.png",
+        "alt": "Chaise Longue Algarve - Cinza",
+        "colorName": "Cinza",
+        "isMain": false,
+        "sortOrder": 5
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

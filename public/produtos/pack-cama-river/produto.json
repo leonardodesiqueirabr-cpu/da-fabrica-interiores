@@ -1,0 +1,37 @@
+{
+  "productId": "product-029-pack-cama-river",
+  "name": "Pack Cama River",
+  "slug": "pack-cama-river",
+  "updatedAt": "2026-07-18T23:42:11.554Z",
+  "data": {
+    "id": "product-029-pack-cama-river",
+    "slug": "pack-cama-river",
+    "name": "Pack Cama River",
+    "shortDescription": "Pack de cama com design atual e estrutura resistente, pensado para oferecer conforto diário e boa integração com o quarto.",
+    "description": "Pack de cama com proposta prática e estética equilibrada, ideal para quem procura conforto e presença visual no quarto. O conjunto valoriza o ambiente com linhas modernas e acabamento cuidado, entregando uma solução funcional para descanso diário com boa durabilidade e fácil combinação com diferentes decorações.",
+    "basePrice": 0,
+    "categories": [
+      "camas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Cinza"
+    ],
+    "images": [
+      {
+        "id": "product-029-pack-cama-river-img-01",
+        "productId": "product-029-pack-cama-river",
+        "url": "/produtos/pack-cama-river/images/Pack Cama River Cinza.png",
+        "alt": "Pack Cama River - Cinza",
+        "colorName": "Cinza",
+        "isMain": true,
+        "sortOrder": 0
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

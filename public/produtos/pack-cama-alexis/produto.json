@@ -1,0 +1,37 @@
+{
+  "productId": "product-020-pack-cama-alexis",
+  "name": "Pack Cama Alexis",
+  "slug": "pack-cama-alexis",
+  "updatedAt": "2026-07-18T23:42:11.479Z",
+  "data": {
+    "id": "product-020-pack-cama-alexis",
+    "slug": "pack-cama-alexis",
+    "name": "Pack Cama Alexis",
+    "shortDescription": "Pack de cama com design atual e estrutura resistente, pensado para oferecer conforto diário e boa integração com o quarto.",
+    "description": "Pack de cama com proposta prática e estética equilibrada, ideal para quem procura conforto e presença visual no quarto. O conjunto valoriza o ambiente com linhas modernas e acabamento cuidado, entregando uma solução funcional para descanso diário com boa durabilidade e fácil combinação com diferentes decorações.",
+    "basePrice": 0,
+    "categories": [
+      "camas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Cinza"
+    ],
+    "images": [
+      {
+        "id": "product-020-pack-cama-alexis-img-01",
+        "productId": "product-020-pack-cama-alexis",
+        "url": "/produtos/pack-cama-alexis/images/Pack Cama Alexis Cinza.png",
+        "alt": "Pack Cama Alexis - Cinza",
+        "colorName": "Cinza",
+        "isMain": true,
+        "sortOrder": 0
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

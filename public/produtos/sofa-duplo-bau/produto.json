@@ -1,0 +1,61 @@
+{
+  "productId": "product-037-sofa-duplo-bau",
+  "name": "Sofá Duplo Baú",
+  "slug": "sofa-duplo-bau",
+  "updatedAt": "2026-07-19T12:51:54.483Z",
+  "data": {
+    "name": "Sofá Duplo Baú",
+    "slug": "sofa-duplo-bau",
+    "shortDescription": "Sofá Duplo Baú desenvolvido para maximizar conforto e praticidade no dia a dia. Além do assento confortável, o modelo incorpora compartimentos de arrumação que ajudam a manter a sala organizada, sendo uma excelente escolha para quem procura funcionalidade sem abdicar de um visual moderno.",
+    "description": "Sofá Duplo Baú desenvolvido para maximizar conforto e praticidade no dia a dia. Além do assento confortável, o modelo incorpora compartimentos de arrumação que ajudam a manter a sala organizada, sendo uma excelente escolha para quem procura funcionalidade sem abdicar de um visual moderno.",
+    "basePrice": 599,
+    "featured": true,
+    "bestSeller": true,
+    "available": true,
+    "characteristics": [],
+    "categories": [
+      "sofas",
+      "sala"
+    ],
+    "colors": [
+      "Bege",
+      "Cinza"
+    ],
+    "images": [
+      {
+        "url": "/produtos/sofa-duplo-bau/images/Sofá Duplo Baú Bege Aberto.png",
+        "alt": "Sofá Duplo Baú - Bege - Aberto",
+        "colorName": "Bege",
+        "colorHex": null,
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "url": "/produtos/sofa-duplo-bau/images/Sofá Duplo Baú Bege.png",
+        "alt": "Sofá Duplo Baú - Bege - Baú",
+        "colorName": "Bege",
+        "colorHex": null,
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "url": "/produtos/sofa-duplo-bau/images/Sofá Duplo Baú Cinza Aberto.png",
+        "alt": "Sofá Duplo Baú - Cinza - Aberto",
+        "colorName": "Cinza",
+        "colorHex": "#626164",
+        "isMain": false,
+        "sortOrder": 2
+      },
+      {
+        "url": "/produtos/sofa-duplo-bau/images/Sofá Duplo Baú Cinza.png",
+        "alt": "Sofá Duplo Baú - Cinza - Baú",
+        "colorName": "Cinza",
+        "colorHex": "#615f5d",
+        "isMain": false,
+        "sortOrder": 3
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

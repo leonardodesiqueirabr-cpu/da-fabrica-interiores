@@ -1,0 +1,47 @@
+{
+  "productId": "product-025-pack-cama-lorena",
+  "name": "Pack Cama Lorena",
+  "slug": "pack-cama-lorena",
+  "updatedAt": "2026-07-18T23:42:11.527Z",
+  "data": {
+    "id": "product-025-pack-cama-lorena",
+    "slug": "pack-cama-lorena",
+    "name": "Pack Cama Lorena",
+    "shortDescription": "Pack de cama com design atual e estrutura resistente, pensado para oferecer conforto diário e boa integração com o quarto.",
+    "description": "Pack de cama com proposta prática e estética equilibrada, ideal para quem procura conforto e presença visual no quarto. O conjunto valoriza o ambiente com linhas modernas e acabamento cuidado, entregando uma solução funcional para descanso diário com boa durabilidade e fácil combinação com diferentes decorações.",
+    "basePrice": 0,
+    "categories": [
+      "camas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Branco",
+      "Preto"
+    ],
+    "images": [
+      {
+        "id": "product-025-pack-cama-lorena-img-01",
+        "productId": "product-025-pack-cama-lorena",
+        "url": "/produtos/pack-cama-lorena/images/Pack Cama Lorena branca.png",
+        "alt": "Pack Cama Lorena - Branco",
+        "colorName": "Branco",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-025-pack-cama-lorena-img-02",
+        "productId": "product-025-pack-cama-lorena",
+        "url": "/produtos/pack-cama-lorena/images/Pack Cama Lorena preta.png",
+        "alt": "Pack Cama Lorena - Preto",
+        "colorName": "Preto",
+        "isMain": false,
+        "sortOrder": 1
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

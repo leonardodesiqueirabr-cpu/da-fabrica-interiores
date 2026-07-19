@@ -1,0 +1,177 @@
+{
+  "productId": "product-018-dupla-chaise-longue",
+  "name": "Dupla Chaise Longue",
+  "slug": "dupla-chaise-longue",
+  "updatedAt": "2026-07-18T23:42:11.470Z",
+  "data": {
+    "id": "product-018-dupla-chaise-longue",
+    "slug": "dupla-chaise-longue",
+    "name": "Dupla Chaise Longue",
+    "shortDescription": "Chaise longue com foco em conforto e estilo, ideal para compor salas modernas com melhor aproveitamento do espaço.",
+    "description": "Chaise longue pensada para quem procura conforto amplo, apoio ergonômico e presença visual no ambiente. O formato favorece momentos de descanso e convivência, enquanto o desenho contemporâneo facilita a integração com diferentes propostas de decoração, mantendo equilíbrio entre estética e funcionalidade.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Azul",
+      "Bege",
+      "Caramelo",
+      "Castanho",
+      "Cinza Claro",
+      "Cinza Escuro"
+    ],
+    "images": [
+      {
+        "id": "product-018-dupla-chaise-longue-img-01",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Azul Aberto.png",
+        "alt": "Dupla Chaise Longue - Azul - Aberto",
+        "colorName": "Azul",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-02",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Azul.png",
+        "alt": "Dupla Chaise Longue - Azul",
+        "colorName": "Azul",
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-03",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Bege Baú.png",
+        "alt": "Dupla Chaise Longue - Bege - Baú",
+        "colorName": "Bege",
+        "isMain": false,
+        "sortOrder": 2
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-04",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/dupla chaise longue bege.png",
+        "alt": "Dupla Chaise Longue - Bege",
+        "colorName": "Bege",
+        "isMain": false,
+        "sortOrder": 3
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-05",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Caramelo Aberto.png",
+        "alt": "Dupla Chaise Longue - Caramelo - Aberto",
+        "colorName": "Caramelo",
+        "isMain": false,
+        "sortOrder": 4
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-06",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Caramelo.png",
+        "alt": "Dupla Chaise Longue - Caramelo",
+        "colorName": "Caramelo",
+        "isMain": false,
+        "sortOrder": 5
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-07",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Castanho Aberto.png",
+        "alt": "Dupla Chaise Longue - Castanho - Aberto",
+        "colorName": "Castanho",
+        "isMain": false,
+        "sortOrder": 6
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-08",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Castanho.png",
+        "alt": "Dupla Chaise Longue - Castanho",
+        "colorName": "Castanho",
+        "isMain": false,
+        "sortOrder": 7
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-09",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/dupla chaise longue Cinza Claro Aberto.png",
+        "alt": "Dupla Chaise Longue - Cinza Claro - Aberto",
+        "colorName": "Cinza Claro",
+        "isMain": false,
+        "sortOrder": 8
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-10",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/dupla chaise longue Cinza Claro.png",
+        "alt": "Dupla Chaise Longue - Cinza Claro",
+        "colorName": "Cinza Claro",
+        "isMain": false,
+        "sortOrder": 9
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-11",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Aberto.png",
+        "alt": "Dupla Chaise Longue - Cinza Escuro - Aberto",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 10
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-12",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Aveludado Aberto.png",
+        "alt": "Dupla Chaise Longue - Cinza Escuro - Aberto",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 11
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-13",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Aveludado.png",
+        "alt": "Dupla Chaise Longue - Cinza Escuro",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 12
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-14",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Quins9 Aberto.png",
+        "alt": "Dupla Chaise Longue - Cinza Escuro - Aberto",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 13
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-15",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Quins9.png",
+        "alt": "Dupla Chaise Longue - Cinza Escuro",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 14
+      },
+      {
+        "id": "product-018-dupla-chaise-longue-img-16",
+        "productId": "product-018-dupla-chaise-longue",
+        "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro.png",
+        "alt": "Dupla Chaise Longue - Cinza Escuro",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 15
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

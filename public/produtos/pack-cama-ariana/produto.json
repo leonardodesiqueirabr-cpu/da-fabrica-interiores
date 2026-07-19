@@ -1,0 +1,37 @@
+{
+  "productId": "product-022-pack-cama-ariana",
+  "name": "Pack Cama Ariana",
+  "slug": "pack-cama-ariana",
+  "updatedAt": "2026-07-18T23:42:11.489Z",
+  "data": {
+    "id": "product-022-pack-cama-ariana",
+    "slug": "pack-cama-ariana",
+    "name": "Pack Cama Ariana",
+    "shortDescription": "Pack de cama com design atual e estrutura resistente, pensado para oferecer conforto diário e boa integração com o quarto.",
+    "description": "Pack de cama com proposta prática e estética equilibrada, ideal para quem procura conforto e presença visual no quarto. O conjunto valoriza o ambiente com linhas modernas e acabamento cuidado, entregando uma solução funcional para descanso diário com boa durabilidade e fácil combinação com diferentes decorações.",
+    "basePrice": 0,
+    "categories": [
+      "camas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Bege"
+    ],
+    "images": [
+      {
+        "id": "product-022-pack-cama-ariana-img-01",
+        "productId": "product-022-pack-cama-ariana",
+        "url": "/produtos/pack-cama-ariana/images/Pack Cama Ariana Bege.png",
+        "alt": "Pack Cama Ariana - Bege",
+        "colorName": "Bege",
+        "isMain": true,
+        "sortOrder": 0
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "productId": "product-015-chaise-longue-monarca",
+  "name": "Chaise Longue Monarca",
+  "slug": "chaise-longue-monarca",
+  "updatedAt": "2026-07-18T23:42:11.346Z",
+  "data": {
+    "id": "product-015-chaise-longue-monarca",
+    "slug": "chaise-longue-monarca",
+    "name": "Chaise Longue Monarca",
+    "shortDescription": "Chaise longue com foco em conforto e estilo, ideal para compor salas modernas com melhor aproveitamento do espaço.",
+    "description": "Chaise longue pensada para quem procura conforto amplo, apoio ergonômico e presença visual no ambiente. O formato favorece momentos de descanso e convivência, enquanto o desenho contemporâneo facilita a integração com diferentes propostas de decoração, mantendo equilíbrio entre estética e funcionalidade.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Cinza Claro",
+      "Cinza Escuro"
+    ],
+    "images": [
+      {
+        "id": "product-015-chaise-longue-monarca-img-01",
+        "productId": "product-015-chaise-longue-monarca",
+        "url": "/produtos/chaise-longue-monarca/images/Chaise Longue Monarca Cinza Claro.png",
+        "alt": "Chaise Longue Monarca - Cinza Claro",
+        "colorName": "Cinza Claro",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-015-chaise-longue-monarca-img-02",
+        "productId": "product-015-chaise-longue-monarca",
+        "url": "/produtos/chaise-longue-monarca/images/Chaise Longue Monarca Cinza Escuro Forte.png",
+        "alt": "Chaise Longue Monarca - Cinza Escuro",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "id": "product-015-chaise-longue-monarca-img-03",
+        "productId": "product-015-chaise-longue-monarca",
+        "url": "/produtos/chaise-longue-monarca/images/Chaise Longue Monarca Cinza Escuro.png",
+        "alt": "Chaise Longue Monarca - Cinza Escuro",
+        "colorName": "Cinza Escuro",
+        "isMain": false,
+        "sortOrder": 2
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

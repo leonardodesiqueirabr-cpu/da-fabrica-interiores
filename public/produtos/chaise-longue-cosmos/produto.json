@@ -1,0 +1,57 @@
+{
+  "productId": "product-008-chaise-longue-cosmos",
+  "name": "Chaise Longue Cosmos",
+  "slug": "chaise-longue-cosmos",
+  "updatedAt": "2026-07-18T23:42:11.197Z",
+  "data": {
+    "id": "product-008-chaise-longue-cosmos",
+    "slug": "chaise-longue-cosmos",
+    "name": "Chaise Longue Cosmos",
+    "shortDescription": "Chaise longue com foco em conforto e estilo, ideal para compor salas modernas com melhor aproveitamento do espaço.",
+    "description": "Chaise longue pensada para quem procura conforto amplo, apoio ergonômico e presença visual no ambiente. O formato favorece momentos de descanso e convivência, enquanto o desenho contemporâneo facilita a integração com diferentes propostas de decoração, mantendo equilíbrio entre estética e funcionalidade.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": true,
+    "bestSeller": true,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Preto",
+      "Bege",
+      "Cinza"
+    ],
+    "images": [
+      {
+        "id": "product-008-chaise-longue-cosmos-img-01",
+        "productId": "product-008-chaise-longue-cosmos",
+        "url": "/produtos/chaise-longue-cosmos/images/Chaise Longue Cosmos  Preto.png",
+        "alt": "Chaise Longue Cosmos - Preto",
+        "colorName": "Preto",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-008-chaise-longue-cosmos-img-02",
+        "productId": "product-008-chaise-longue-cosmos",
+        "url": "/produtos/chaise-longue-cosmos/images/Chaise Longue Cosmos Bege.png",
+        "alt": "Chaise Longue Cosmos - Bege",
+        "colorName": "Bege",
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "id": "product-008-chaise-longue-cosmos-img-03",
+        "productId": "product-008-chaise-longue-cosmos",
+        "url": "/produtos/chaise-longue-cosmos/images/Chaise Longue Cosmos Cinza.png",
+        "alt": "Chaise Longue Cosmos - Cinza",
+        "colorName": "Cinza",
+        "isMain": false,
+        "sortOrder": 2
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

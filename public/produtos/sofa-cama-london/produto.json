@@ -1,0 +1,46 @@
+{
+  "productId": "product-035-sofa-cama-london",
+  "name": "Sofá Cama London",
+  "slug": "sofa-cama-london",
+  "updatedAt": "2026-07-18T23:42:11.655Z",
+  "data": {
+    "id": "product-035-sofa-cama-london",
+    "slug": "sofa-cama-london",
+    "name": "Sofá Cama London",
+    "shortDescription": "Sofá-cama versátil para uso diário, combinando conforto no assento e abertura prática para acomodar visitas com facilidade.",
+    "description": "Sofá-cama projetado para oferecer conforto no dia a dia e funcionalidade extra quando necessário. A conversão para cama é simples, tornando-o ideal para salas multifuncionais. O design contemporâneo e o bom aproveitamento de espaço ajudam a compor ambientes elegantes, práticos e preparados para receber.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Bege"
+    ],
+    "images": [
+      {
+        "id": "product-035-sofa-cama-london-img-01",
+        "productId": "product-035-sofa-cama-london",
+        "url": "/produtos/sofa-cama-london/images/Sofá Cama London Bege Aberto.png",
+        "alt": "Sofá Cama London - Bege - Aberto",
+        "colorName": "Bege",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-035-sofa-cama-london-img-02",
+        "productId": "product-035-sofa-cama-london",
+        "url": "/produtos/sofa-cama-london/images/Sofá Cama London Bege.png",
+        "alt": "Sofá Cama London - Bege",
+        "colorName": "Bege",
+        "isMain": false,
+        "sortOrder": 1
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

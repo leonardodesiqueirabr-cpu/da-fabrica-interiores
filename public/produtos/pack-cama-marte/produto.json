@@ -1,0 +1,37 @@
+{
+  "productId": "product-027-pack-cama-marte",
+  "name": "Pack Cama Marte",
+  "slug": "pack-cama-marte",
+  "updatedAt": "2026-07-18T23:42:11.537Z",
+  "data": {
+    "id": "product-027-pack-cama-marte",
+    "slug": "pack-cama-marte",
+    "name": "Pack Cama Marte",
+    "shortDescription": "Pack de cama com design atual e estrutura resistente, pensado para oferecer conforto diário e boa integração com o quarto.",
+    "description": "Pack de cama com proposta prática e estética equilibrada, ideal para quem procura conforto e presença visual no quarto. O conjunto valoriza o ambiente com linhas modernas e acabamento cuidado, entregando uma solução funcional para descanso diário com boa durabilidade e fácil combinação com diferentes decorações.",
+    "basePrice": 0,
+    "categories": [
+      "camas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Preto"
+    ],
+    "images": [
+      {
+        "id": "product-027-pack-cama-marte-img-01",
+        "productId": "product-027-pack-cama-marte",
+        "url": "/produtos/pack-cama-marte/images/Pack Cama Marte Preta.png",
+        "alt": "Pack Cama Marte - Preto",
+        "colorName": "Preto",
+        "isMain": true,
+        "sortOrder": 0
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

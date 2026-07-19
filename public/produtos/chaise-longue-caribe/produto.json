@@ -1,0 +1,37 @@
+{
+  "productId": "product-007-chaise-longue-caribe",
+  "name": "Chaise Longue Caribe",
+  "slug": "chaise-longue-caribe",
+  "updatedAt": "2026-07-18T23:42:11.179Z",
+  "data": {
+    "id": "product-007-chaise-longue-caribe",
+    "slug": "chaise-longue-caribe",
+    "name": "Chaise Longue Caribe",
+    "shortDescription": "Chaise longue com foco em conforto e estilo, ideal para compor salas modernas com melhor aproveitamento do espaço.",
+    "description": "Chaise longue pensada para quem procura conforto amplo, apoio ergonômico e presença visual no ambiente. O formato favorece momentos de descanso e convivência, enquanto o desenho contemporâneo facilita a integração com diferentes propostas de decoração, mantendo equilíbrio entre estética e funcionalidade.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": true,
+    "bestSeller": true,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Castanho"
+    ],
+    "images": [
+      {
+        "id": "product-007-chaise-longue-caribe-img-01",
+        "productId": "product-007-chaise-longue-caribe",
+        "url": "/produtos/chaise-longue-caribe/images/Chaise Longue Caribe Castanho.png",
+        "alt": "Chaise Longue Caribe - Castanho",
+        "colorName": "Castanho",
+        "isMain": true,
+        "sortOrder": 0
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

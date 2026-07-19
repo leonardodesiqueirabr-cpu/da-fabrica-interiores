@@ -1,0 +1,37 @@
+{
+  "productId": "product-036-sofa-confort",
+  "name": "Sofá Confort",
+  "slug": "sofa-confort",
+  "updatedAt": "2026-07-18T23:42:11.665Z",
+  "data": {
+    "id": "product-036-sofa-confort",
+    "slug": "sofa-confort",
+    "name": "Sofá Confort",
+    "shortDescription": "Chaise longue com foco em conforto e estilo, ideal para compor salas modernas com melhor aproveitamento do espaço.",
+    "description": "Chaise longue pensada para quem procura conforto amplo, apoio ergonômico e presença visual no ambiente. O formato favorece momentos de descanso e convivência, enquanto o desenho contemporâneo facilita a integração com diferentes propostas de decoração, mantendo equilíbrio entre estética e funcionalidade.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Cinza"
+    ],
+    "images": [
+      {
+        "id": "product-036-sofa-confort-img-01",
+        "productId": "product-036-sofa-confort",
+        "url": "/produtos/sofa-confort/images/Sofá Confort Cinza.png",
+        "alt": "Sofá Confort - Cinza",
+        "colorName": "Cinza",
+        "isMain": true,
+        "sortOrder": 0
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

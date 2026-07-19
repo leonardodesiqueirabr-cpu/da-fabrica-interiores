@@ -1,0 +1,57 @@
+{
+  "productId": "product-010-chaise-longue-dante",
+  "name": "Chaise Longue Dante",
+  "slug": "chaise-longue-dante",
+  "updatedAt": "2026-07-18T23:42:11.237Z",
+  "data": {
+    "id": "product-010-chaise-longue-dante",
+    "slug": "chaise-longue-dante",
+    "name": "Chaise Longue Dante",
+    "shortDescription": "Chaise longue com foco em conforto e estilo, ideal para compor salas modernas com melhor aproveitamento do espaço.",
+    "description": "Chaise longue pensada para quem procura conforto amplo, apoio ergonômico e presença visual no ambiente. O formato favorece momentos de descanso e convivência, enquanto o desenho contemporâneo facilita a integração com diferentes propostas de decoração, mantendo equilíbrio entre estética e funcionalidade.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": true,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Bege",
+      "Cinza",
+      "Preto"
+    ],
+    "images": [
+      {
+        "id": "product-010-chaise-longue-dante-img-01",
+        "productId": "product-010-chaise-longue-dante",
+        "url": "/produtos/chaise-longue-dante/images/Chaise Longue Dante Bege.png",
+        "alt": "Chaise Longue Dante - Bege",
+        "colorName": "Bege",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-010-chaise-longue-dante-img-02",
+        "productId": "product-010-chaise-longue-dante",
+        "url": "/produtos/chaise-longue-dante/images/Chaise Longue Dante Cinza.png",
+        "alt": "Chaise Longue Dante - Cinza",
+        "colorName": "Cinza",
+        "isMain": false,
+        "sortOrder": 1
+      },
+      {
+        "id": "product-010-chaise-longue-dante-img-03",
+        "productId": "product-010-chaise-longue-dante",
+        "url": "/produtos/chaise-longue-dante/images/Chaise Longue Dante Preto.png",
+        "alt": "Chaise Longue Dante - Preto",
+        "colorName": "Preto",
+        "isMain": false,
+        "sortOrder": 2
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

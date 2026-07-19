@@ -1,0 +1,46 @@
+{
+  "productId": "product-034-sofa-cama-kate",
+  "name": "Sofá Cama Kate",
+  "slug": "sofa-cama-kate",
+  "updatedAt": "2026-07-18T23:42:11.645Z",
+  "data": {
+    "id": "product-034-sofa-cama-kate",
+    "slug": "sofa-cama-kate",
+    "name": "Sofá Cama Kate",
+    "shortDescription": "Sofá-cama versátil para uso diário, combinando conforto no assento e abertura prática para acomodar visitas com facilidade.",
+    "description": "Sofá-cama projetado para oferecer conforto no dia a dia e funcionalidade extra quando necessário. A conversão para cama é simples, tornando-o ideal para salas multifuncionais. O design contemporâneo e o bom aproveitamento de espaço ajudam a compor ambientes elegantes, práticos e preparados para receber.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Cinza Claro"
+    ],
+    "images": [
+      {
+        "id": "product-034-sofa-cama-kate-img-01",
+        "productId": "product-034-sofa-cama-kate",
+        "url": "/produtos/sofa-cama-kate/images/Sofá Cama Kate Cinza Claro Aberto.png",
+        "alt": "Sofá Cama Kate - Cinza Claro - Aberto",
+        "colorName": "Cinza Claro",
+        "isMain": true,
+        "sortOrder": 0
+      },
+      {
+        "id": "product-034-sofa-cama-kate-img-02",
+        "productId": "product-034-sofa-cama-kate",
+        "url": "/produtos/sofa-cama-kate/images/Sofá Cama Kate Cinza Claro.png",
+        "alt": "Sofá Cama Kate - Cinza Claro",
+        "colorName": "Cinza Claro",
+        "isMain": false,
+        "sortOrder": 1
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}

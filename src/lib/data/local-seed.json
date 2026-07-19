@@ -1,0 +1,1777 @@
+{
+  "products": [
+    {
+      "id": "product-037-sofa-duplo-bau",
+      "slug": "sofa-duplo-bau",
+      "name": "Sofá Duplo Baú",
+      "shortDescription": "Sofá com duplo baú de arrumação, ideal para unir conforto diário e organização inteligente em salas multifuncionais.",
+      "description": "Sofá Duplo Baú desenvolvido para maximizar conforto e praticidade no dia a dia. Além do assento confortável, o modelo incorpora compartimentos de arrumação que ajudam a manter a sala organizada, sendo uma excelente escolha para quem procura funcionalidade sem abdicar de um visual moderno.",
+      "basePrice": 499,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": true,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-037-sofa-duplo-bau-img-01",
+          "productId": "product-037-sofa-duplo-bau",
+          "url": "/produtos/sofa-duplo-bau/images/Sofá Duplo Baú Bege Aberto.png",
+          "alt": "Sofá Duplo Baú - Bege - Aberto",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-037-sofa-duplo-bau-img-02",
+          "productId": "product-037-sofa-duplo-bau",
+          "url": "/produtos/sofa-duplo-bau/images/Sofá Duplo Baú Bege.png",
+          "alt": "Sofá Duplo Baú - Bege - Baú",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-037-sofa-duplo-bau-img-03",
+          "productId": "product-037-sofa-duplo-bau",
+          "url": "/produtos/sofa-duplo-bau/images/Sofá Duplo Baú Cinza Aberto.png",
+          "alt": "Sofá Duplo Baú - Cinza - Aberto",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 2
+        },
+        {
+          "id": "product-037-sofa-duplo-bau-img-04",
+          "productId": "product-037-sofa-duplo-bau",
+          "url": "/produtos/sofa-duplo-bau/images/Sofá Duplo Baú Cinza.png",
+          "alt": "Sofá Duplo Baú - Cinza - Baú",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 3
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-035-sofa-cama-london",
+      "slug": "sofa-cama-london",
+      "name": "Sofá Cama London",
+      "shortDescription": "Sofá Cama London com proposta funcional e visual atual, perfeito para quem precisa de praticidade sem perder estilo.",
+      "description": "Sofá Cama London oferece uma combinação eficiente de conforto e flexibilidade. A estrutura favorece uso contínuo como sofá e permite conversão funcional para cama, contribuindo para um ambiente mais preparado para diferentes necessidades.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": true,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege"
+      ],
+      "images": [
+        {
+          "id": "product-035-sofa-cama-london-img-01",
+          "productId": "product-035-sofa-cama-london",
+          "url": "/produtos/sofa-cama-london/images/Sofá Cama London Bege Aberto.png",
+          "alt": "Sofá Cama London - Bege - Aberto",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-035-sofa-cama-london-img-02",
+          "productId": "product-035-sofa-cama-london",
+          "url": "/produtos/sofa-cama-london/images/Sofá Cama London Bege.png",
+          "alt": "Sofá Cama London - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-034-sofa-cama-kate",
+      "slug": "sofa-cama-kate",
+      "name": "Sofá Cama Kate",
+      "shortDescription": "Sofá Cama Kate pensado para ambientes multifuncionais, combinando uso diário confortável e função cama com agilidade.",
+      "description": "Sofá Cama Kate foi pensado para facilitar a rotina em casas com espaços versáteis. O modelo atua como sofá confortável na maior parte do tempo e, quando necessário, oferece área de descanso adicional com boa ergonomia e uso intuitivo.",
+      "basePrice": 299,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": true,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Cinza Claro"
+      ],
+      "images": [
+        {
+          "id": "product-034-sofa-cama-kate-img-01",
+          "productId": "product-034-sofa-cama-kate",
+          "url": "/produtos/sofa-cama-kate/images/Sofá Cama Kate Cinza Claro Aberto.png",
+          "alt": "Sofá Cama Kate - Cinza Claro - Aberto",
+          "colorName": "Cinza Claro",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-034-sofa-cama-kate-img-02",
+          "productId": "product-034-sofa-cama-kate",
+          "url": "/produtos/sofa-cama-kate/images/Sofá Cama Kate Cinza Claro.png",
+          "alt": "Sofá Cama Kate - Cinza Claro",
+          "colorName": "Cinza Claro",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-032-sofa-cama-2-lugares",
+      "slug": "sofa-cama-2-lugares",
+      "name": "Sofá Cama 2 Lugares",
+      "shortDescription": "Sofá Cama 2 Lugares com abertura simplificada, ideal para transformar a sala em espaço de descanso quando necessário.",
+      "description": "Sofá Cama 2 Lugares apresenta proposta prática para quem procura mobiliário adaptável. O design conversa com diferentes estilos de decoração, enquanto a função cama amplia a utilidade do espaço sem exigir mudanças estruturais na sala.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-032-sofa-cama-2-lugares-img-01",
+          "productId": "product-032-sofa-cama-2-lugares",
+          "url": "/produtos/sofa-cama-2-lugares/images/Sofá Cama 2 Lugares Bege Aberto.png",
+          "alt": "Sofá Cama 2 Lugares - Bege - Aberto",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-032-sofa-cama-2-lugares-img-02",
+          "productId": "product-032-sofa-cama-2-lugares",
+          "url": "/produtos/sofa-cama-2-lugares/images/Sofá Cama 2 Lugares Bege.png",
+          "alt": "Sofá Cama 2 Lugares - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-032-sofa-cama-2-lugares-img-03",
+          "productId": "product-032-sofa-cama-2-lugares",
+          "url": "/produtos/sofa-cama-2-lugares/images/Sofá Cama 2 Lugares Cinza  Aberto.png",
+          "alt": "Sofá Cama 2 Lugares - Cinza - Aberto",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 2
+        },
+        {
+          "id": "product-032-sofa-cama-2-lugares-img-04",
+          "productId": "product-032-sofa-cama-2-lugares",
+          "url": "/produtos/sofa-cama-2-lugares/images/Sofá Cama 2 Lugares Cinza.png",
+          "alt": "Sofá Cama 2 Lugares - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 3
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-018-dupla-chaise-longue",
+      "slug": "dupla-chaise-longue",
+      "name": "Dupla Chaise Longue",
+      "shortDescription": "Dupla chaise longue com ampla área de assento, ideal para salas espaçosas que pedem conforto elevado e presença marcante.",
+      "description": "Dupla Chaise Longue indicada para quem valoriza conforto amplo e visual imponente na área social. O modelo oferece excelente aproveitamento de assento para momentos de descanso e convivência, com linhas modernas que reforçam sofisticação e funcionalidade no ambiente.",
+      "basePrice": 599,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": true,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Azul",
+        "Bege",
+        "Caramelo",
+        "Castanho",
+        "Cinza Claro",
+        "Cinza Escuro"
+      ],
+      "images": [
+        {
+          "id": "product-018-dupla-chaise-longue-img-01",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Azul Aberto.png",
+          "alt": "Dupla Chaise Longue - Azul - Aberto",
+          "colorName": "Azul",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-02",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Azul.png",
+          "alt": "Dupla Chaise Longue - Azul",
+          "colorName": "Azul",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-03",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Bege Baú.png",
+          "alt": "Dupla Chaise Longue - Bege - Baú",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 2
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-04",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/dupla chaise longue bege.png",
+          "alt": "Dupla Chaise Longue - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 3
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-05",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Caramelo Aberto.png",
+          "alt": "Dupla Chaise Longue - Caramelo - Aberto",
+          "colorName": "Caramelo",
+          "isMain": false,
+          "sortOrder": 4
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-06",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Caramelo.png",
+          "alt": "Dupla Chaise Longue - Caramelo",
+          "colorName": "Caramelo",
+          "isMain": false,
+          "sortOrder": 5
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-07",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Castanho Aberto.png",
+          "alt": "Dupla Chaise Longue - Castanho - Aberto",
+          "colorName": "Castanho",
+          "isMain": false,
+          "sortOrder": 6
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-08",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Castanho.png",
+          "alt": "Dupla Chaise Longue - Castanho",
+          "colorName": "Castanho",
+          "isMain": false,
+          "sortOrder": 7
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-09",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/dupla chaise longue Cinza Claro Aberto.png",
+          "alt": "Dupla Chaise Longue - Cinza Claro - Aberto",
+          "colorName": "Cinza Claro",
+          "isMain": false,
+          "sortOrder": 8
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-10",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/dupla chaise longue Cinza Claro.png",
+          "alt": "Dupla Chaise Longue - Cinza Claro",
+          "colorName": "Cinza Claro",
+          "isMain": false,
+          "sortOrder": 9
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-11",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Aberto.png",
+          "alt": "Dupla Chaise Longue - Cinza Escuro - Aberto",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 10
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-12",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Aveludado Aberto.png",
+          "alt": "Dupla Chaise Longue - Cinza Escuro - Aberto",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 11
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-13",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Aveludado.png",
+          "alt": "Dupla Chaise Longue - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 12
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-14",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Quins9 Aberto.png",
+          "alt": "Dupla Chaise Longue - Cinza Escuro - Aberto",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 13
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-15",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro Quins9.png",
+          "alt": "Dupla Chaise Longue - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 14
+        },
+        {
+          "id": "product-018-dupla-chaise-longue-img-16",
+          "productId": "product-018-dupla-chaise-longue",
+          "url": "/produtos/dupla-chaise-longue/images/Dupla Chaise Longue Cinza Escuro.png",
+          "alt": "Dupla Chaise Longue - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 15
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-003-chaise-longue-algarve",
+      "slug": "chaise-longue-algarve",
+      "name": "Chaise Longue Algarve",
+      "shortDescription": "Chaise Longue Algarve pensada para relaxamento diário, com presença visual equilibrada e excelente aproveitamento de espaço.",
+      "description": "Chaise Longue Algarve foi pensada para compor salas com personalidade, trazendo conforto de uso contínuo e leitura visual leve. O resultado é um móvel versátil, capaz de combinar com propostas decorativas modernas e rotinas de convivência variadas.",
+      "basePrice": 299,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": true,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-003-chaise-longue-algarve-img-01",
+          "productId": "product-003-chaise-longue-algarve",
+          "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Bege Aberto.png",
+          "alt": "Chaise Longue Algarve - Bege - Aberto",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-003-chaise-longue-algarve-img-02",
+          "productId": "product-003-chaise-longue-algarve",
+          "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Bege Baú.png",
+          "alt": "Chaise Longue Algarve - Bege - Baú",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-003-chaise-longue-algarve-img-03",
+          "productId": "product-003-chaise-longue-algarve",
+          "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Bege.png",
+          "alt": "Chaise Longue Algarve - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 2
+        },
+        {
+          "id": "product-003-chaise-longue-algarve-img-04",
+          "productId": "product-003-chaise-longue-algarve",
+          "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Cinza Aberto.png",
+          "alt": "Chaise Longue Algarve - Cinza - Aberto",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 3
+        },
+        {
+          "id": "product-003-chaise-longue-algarve-img-05",
+          "productId": "product-003-chaise-longue-algarve",
+          "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Cinza Baú.png",
+          "alt": "Chaise Longue Algarve - Cinza - Baú",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 4
+        },
+        {
+          "id": "product-003-chaise-longue-algarve-img-06",
+          "productId": "product-003-chaise-longue-algarve",
+          "url": "/produtos/chaise-longue-algarve/images/Chaise Longue Algarve Cinza.png",
+          "alt": "Chaise Longue Algarve - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 5
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-015-chaise-longue-monarca",
+      "slug": "chaise-longue-monarca",
+      "name": "Chaise Longue Monarca",
+      "shortDescription": "Chaise Longue Monarca indicada para quem busca um móvel acolhedor, funcional e fácil de integrar à decoração.",
+      "description": "Chaise Longue Monarca foi desenvolvida para proporcionar apoio confortável em momentos de pausa, leitura ou convívio. O formato favorece uma postura relaxada e ajuda a compor uma sala mais acolhedora, com linguagem estética atual e integração simples com diferentes estilos de decoração.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Cinza Claro",
+        "Cinza Escuro"
+      ],
+      "images": [
+        {
+          "id": "product-015-chaise-longue-monarca-img-01",
+          "productId": "product-015-chaise-longue-monarca",
+          "url": "/produtos/chaise-longue-monarca/images/Chaise Longue Monarca Cinza Claro.png",
+          "alt": "Chaise Longue Monarca - Cinza Claro",
+          "colorName": "Cinza Claro",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-015-chaise-longue-monarca-img-02",
+          "productId": "product-015-chaise-longue-monarca",
+          "url": "/produtos/chaise-longue-monarca/images/Chaise Longue Monarca Cinza Escuro Forte.png",
+          "alt": "Chaise Longue Monarca - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-015-chaise-longue-monarca-img-03",
+          "productId": "product-015-chaise-longue-monarca",
+          "url": "/produtos/chaise-longue-monarca/images/Chaise Longue Monarca Cinza Escuro.png",
+          "alt": "Chaise Longue Monarca - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-014-chaise-longue-milao",
+      "slug": "chaise-longue-milao",
+      "name": "Chaise Longue Milão",
+      "shortDescription": "Chaise Longue Milão desenhada para valorizar o ambiente com conforto contínuo e acabamento de perfil moderno.",
+      "description": "Chaise Longue Milão foi projetada para quem procura conforto consistente e visual refinado. O modelo destaca-se pelo bom aproveitamento do espaço e pela capacidade de complementar ambientes com um toque moderno e funcional.",
+      "basePrice": 399,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza",
+        "Preto"
+      ],
+      "images": [
+        {
+          "id": "product-014-chaise-longue-milao-img-01",
+          "productId": "product-014-chaise-longue-milao",
+          "url": "/produtos/chaise-longue-milao/images/Chaise Longue Milão Bege.png",
+          "alt": "Chaise Longue Milão - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-014-chaise-longue-milao-img-02",
+          "productId": "product-014-chaise-longue-milao",
+          "url": "/produtos/chaise-longue-milao/images/Chaise Longue Milão Cinza.png",
+          "alt": "Chaise Longue Milão - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-014-chaise-longue-milao-img-03",
+          "productId": "product-014-chaise-longue-milao",
+          "url": "/produtos/chaise-longue-milao/images/Chaise Longue Milão Preto.png",
+          "alt": "Chaise Longue Milão - Preto",
+          "colorName": "Preto",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-028-pack-cama-orlando",
+      "slug": "pack-cama-orlando",
+      "name": "Pack Cama Orlando",
+      "shortDescription": "Pack Cama Orlando com desenho atual e acabamento cuidadoso, indicada para quartos que valorizam conforto e organização visual.",
+      "description": "Pack Cama Orlando combina resistência estrutural, conforto de uso diário e visual bem resolvido. É ideal para ambientes que precisam de um móvel funcional sem abrir mão de uma apresentação refinada.",
+      "basePrice": 299,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": true,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza Claro",
+        "Cinza Escuro"
+      ],
+      "images": [
+        {
+          "id": "product-028-pack-cama-orlando-img-01",
+          "productId": "product-028-pack-cama-orlando",
+          "url": "/produtos/pack-cama-orlando/images/Pack Cama Orlando Bege.png",
+          "alt": "Pack Cama Orlando - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-028-pack-cama-orlando-img-02",
+          "productId": "product-028-pack-cama-orlando",
+          "url": "/produtos/pack-cama-orlando/images/Pack Cama Orlando Cinza Claro.png",
+          "alt": "Pack Cama Orlando - Cinza Claro",
+          "colorName": "Cinza Claro",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-028-pack-cama-orlando-img-03",
+          "productId": "product-028-pack-cama-orlando",
+          "url": "/produtos/pack-cama-orlando/images/Pack Cama Orlando Cinza Escuro.png",
+          "alt": "Pack Cama Orlando - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-023-pack-cama-carla",
+      "slug": "pack-cama-carla",
+      "name": "Pack Cama Carla",
+      "shortDescription": "Pack Cama Carla com proposta funcional e visual sofisticado, trazendo praticidade para a rotina sem excessos.",
+      "description": "Pack Cama Carla foi pensada para quem valoriza conforto contínuo e acabamento atual. O desenho favorece uma leitura visual leve no ambiente e contribui para uma rotina mais funcional no espaço de descanso.",
+      "basePrice": 0,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": true,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza Claro",
+        "Cinza Escuro"
+      ],
+      "images": [
+        {
+          "id": "product-023-pack-cama-carla-img-01",
+          "productId": "product-023-pack-cama-carla",
+          "url": "/produtos/pack-cama-carla/images/Pack Cama Carla Bege.png",
+          "alt": "Pack Cama Carla - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-023-pack-cama-carla-img-02",
+          "productId": "product-023-pack-cama-carla",
+          "url": "/produtos/pack-cama-carla/images/Pack Cama Carla Cinza Claro..png",
+          "alt": "Pack Cama Carla - Cinza Claro",
+          "colorName": "Cinza Claro",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-023-pack-cama-carla-img-03",
+          "productId": "product-023-pack-cama-carla",
+          "url": "/produtos/pack-cama-carla/images/Pack Cama Carla Cinza Escuro.png",
+          "alt": "Pack Cama Carla - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-030-pack-cama-rose",
+      "slug": "pack-cama-rose",
+      "name": "Pack Cama Rose",
+      "shortDescription": "Pack Cama Rose ideal para renovar o quarto com equilíbrio entre estética contemporânea e uso diário confortável.",
+      "description": "Pack Cama Rose oferece suporte estável e presença visual elegante, funcionando como peça central em composições contemporâneas. A proposta une bom desempenho no uso cotidiano e fácil integração com outros elementos do quarto.",
+      "basePrice": 299,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza Claro",
+        "Cinza Escuro"
+      ],
+      "images": [
+        {
+          "id": "product-030-pack-cama-rose-img-01",
+          "productId": "product-030-pack-cama-rose",
+          "url": "/produtos/pack-cama-rose/images/Pack Cama Rose Bege.png",
+          "alt": "Pack Cama Rose - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-030-pack-cama-rose-img-02",
+          "productId": "product-030-pack-cama-rose",
+          "url": "/produtos/pack-cama-rose/images/Pack Cama Rose Cinza Claro.png",
+          "alt": "Pack Cama Rose - Cinza Claro",
+          "colorName": "Cinza Claro",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-030-pack-cama-rose-img-03",
+          "productId": "product-030-pack-cama-rose",
+          "url": "/produtos/pack-cama-rose/images/Pack Cama Rose Cinza Escuro.png",
+          "alt": "Pack Cama Rose - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-019-estante-dimas",
+      "slug": "estante-dimas",
+      "name": "Estante Dimas",
+      "shortDescription": "Estante modular com visual contemporâneo para organizar livros, objetos decorativos e itens de uso diário com elegância.",
+      "description": "Estante Dimas pensada para organização eficiente e composição decorativa da sala. O desenho moderno favorece a exposição de objetos e a arrumação do ambiente, mantendo equilíbrio entre funcionalidade e estética para espaços residenciais com diferentes estilos.",
+      "basePrice": 149,
+      "categories": [
+        "sala"
+      ],
+      "featured": true,
+      "bestSeller": true,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Branco",
+        "Cambrian"
+      ],
+      "images": [
+        {
+          "id": "product-019-estante-dimas-img-01",
+          "productId": "product-019-estante-dimas",
+          "url": "/produtos/estante-dimas/images/Estante Dimas Branca.jpg",
+          "alt": "Estante Dimas - Branco",
+          "colorName": "Branco",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-019-estante-dimas-img-02",
+          "productId": "product-019-estante-dimas",
+          "url": "/produtos/estante-dimas/images/Estante Dimas Cambrian.webp",
+          "alt": "Estante Dimas - Cambrian",
+          "colorName": "Cambrian",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-001-base-rebativel",
+      "slug": "base-rebativel",
+      "name": "Base Rebatível",
+      "shortDescription": "Base rebatível com abertura facilitada, ideal para ampliar a arrumação do quarto sem perder estabilidade no uso diário.",
+      "description": "Base rebatível projetada para otimizar espaço com compartimento interno de arrumação e abertura prática. A estrutura oferece suporte firme ao colchão e contribui para um ambiente mais organizado, unindo funcionalidade, discrição estética e conforto no dia a dia.",
+      "basePrice": 0,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [],
+      "images": [
+        {
+          "id": "product-001-base-rebativel-img-01",
+          "productId": "product-001-base-rebativel",
+          "url": "/produtos/base-rebativel/images/Base Rebatível.png",
+          "alt": "Base Rebatível",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-002-chaise-longue-3-1",
+      "slug": "chaise-longue-3-1",
+      "name": "Chaise Longue 3+1",
+      "shortDescription": "Chaise Longue 3+1 com linhas modernas e assento generoso, indicada para salas que pedem conforto sem abrir mão de elegância.",
+      "description": "Chaise Longue 3+1 oferece uma proposta funcional para uso diário, com área de assento confortável e visual sofisticado. O modelo se adapta a diferentes layouts de sala e contribui para um ambiente mais convidativo, organizado e elegante.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza",
+        "Preto"
+      ],
+      "images": [
+        {
+          "id": "product-002-chaise-longue-3-1-img-01",
+          "productId": "product-002-chaise-longue-3-1",
+          "url": "/produtos/chaise-longue-3-1/images/Chaise Longue 3+1 Bege.png",
+          "alt": "Chaise Longue 3+1 - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-002-chaise-longue-3-1-img-02",
+          "productId": "product-002-chaise-longue-3-1",
+          "url": "/produtos/chaise-longue-3-1/images/Chaise Longue 3+1 Cinza.png",
+          "alt": "Chaise Longue 3+1 - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-002-chaise-longue-3-1-img-03",
+          "productId": "product-002-chaise-longue-3-1",
+          "url": "/produtos/chaise-longue-3-1/images/Chaise Longue 3+1 Preto.png",
+          "alt": "Chaise Longue 3+1 - Preto",
+          "colorName": "Preto",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-004-chaise-longue-barcelos",
+      "slug": "chaise-longue-barcelos",
+      "name": "Chaise Longue Barcelos",
+      "shortDescription": "Chaise Longue Barcelos ideal para compor ambientes sofisticados, oferecendo apoio confortável e estética contemporânea.",
+      "description": "Chaise Longue Barcelos reúne conforto amplo e desenho contemporâneo para transformar a experiência na sala. Além de valorizar o espaço, o modelo favorece descanso prolongado e se integra com facilidade a diferentes paletas e acabamentos de ambiente.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-004-chaise-longue-barcelos-img-01",
+          "productId": "product-004-chaise-longue-barcelos",
+          "url": "/produtos/chaise-longue-barcelos/images/Chaise Longue Barcelos Bege.png",
+          "alt": "Chaise Longue Barcelos - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-004-chaise-longue-barcelos-img-02",
+          "productId": "product-004-chaise-longue-barcelos",
+          "url": "/produtos/chaise-longue-barcelos/images/chaise longue barcelos cinza..png",
+          "alt": "Chaise Longue Barcelos - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-005-chaise-longue-benur",
+      "slug": "chaise-longue-benur",
+      "name": "Chaise Longue Benur",
+      "shortDescription": "Chaise Longue Benur com proposta versátil para sala, unindo ergonomia, estilo atual e boa área útil de descanso.",
+      "description": "Chaise Longue Benur tem foco em bem-estar e estética equilibrada. O formato amplia a sensação de conforto, enquanto o visual atual ajuda a criar uma composição elegante e prática para o uso cotidiano da área social.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege"
+      ],
+      "images": [
+        {
+          "id": "product-005-chaise-longue-benur-img-01",
+          "productId": "product-005-chaise-longue-benur",
+          "url": "/produtos/chaise-longue-benur/images/Chaise Longue Benur bege - aberto.png",
+          "alt": "Chaise Longue Benur - Bege - Aberto",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-005-chaise-longue-benur-img-02",
+          "productId": "product-005-chaise-longue-benur",
+          "url": "/produtos/chaise-longue-benur/images/Chaise Longue Benur bege.png",
+          "alt": "Chaise Longue Benur - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-006-chaise-longue-braga",
+      "slug": "chaise-longue-braga",
+      "name": "Chaise Longue Braga",
+      "shortDescription": "Chaise Longue Braga desenhada para valorizar o ambiente com conforto contínuo e acabamento de perfil moderno.",
+      "description": "Chaise Longue Braga foi projetada para quem procura conforto consistente e visual refinado. O modelo destaca-se pelo bom aproveitamento do espaço e pela capacidade de complementar ambientes com um toque moderno e funcional.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-006-chaise-longue-braga-img-01",
+          "productId": "product-006-chaise-longue-braga",
+          "url": "/produtos/chaise-longue-braga/images/Chaise Longue Braga Bege.png",
+          "alt": "Chaise Longue Braga - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-006-chaise-longue-braga-img-02",
+          "productId": "product-006-chaise-longue-braga",
+          "url": "/produtos/chaise-longue-braga/images/Chaise Longue Braga Cinza.png",
+          "alt": "Chaise Longue Braga - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-007-chaise-longue-caribe",
+      "slug": "chaise-longue-caribe",
+      "name": "Chaise Longue Caribe",
+      "shortDescription": "Chaise Longue Caribe indicada para quem busca um móvel acolhedor, funcional e fácil de integrar à decoração.",
+      "description": "Chaise Longue Caribe foi desenvolvida para proporcionar apoio confortável em momentos de pausa, leitura ou convívio. O formato favorece uma postura relaxada e ajuda a compor uma sala mais acolhedora, com linguagem estética atual e integração simples com diferentes estilos de decoração.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Castanho"
+      ],
+      "images": [
+        {
+          "id": "product-007-chaise-longue-caribe-img-01",
+          "productId": "product-007-chaise-longue-caribe",
+          "url": "/produtos/chaise-longue-caribe/images/Chaise Longue Caribe Castanho.png",
+          "alt": "Chaise Longue Caribe - Castanho",
+          "colorName": "Castanho",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-008-chaise-longue-cosmos",
+      "slug": "chaise-longue-cosmos",
+      "name": "Chaise Longue Cosmos",
+      "shortDescription": "Chaise Longue Cosmos com visual limpo e assento amplo, perfeita para rotinas de descanso e convivência.",
+      "description": "Chaise Longue Cosmos entrega equilíbrio entre conforto e presença visual. O desenho valoriza o ambiente sem pesar na composição, enquanto o assento espaçoso contribui para uma experiência agradável no dia a dia, seja em salas compactas ou em espaços mais amplos.",
+      "basePrice": 189,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Preto",
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-008-chaise-longue-cosmos-img-01",
+          "productId": "product-008-chaise-longue-cosmos",
+          "url": "/produtos/chaise-longue-cosmos/images/Chaise Longue Cosmos  Preto.png",
+          "alt": "Chaise Longue Cosmos - Preto",
+          "colorName": "Preto",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-008-chaise-longue-cosmos-img-02",
+          "productId": "product-008-chaise-longue-cosmos",
+          "url": "/produtos/chaise-longue-cosmos/images/Chaise Longue Cosmos Bege.png",
+          "alt": "Chaise Longue Cosmos - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-008-chaise-longue-cosmos-img-03",
+          "productId": "product-008-chaise-longue-cosmos",
+          "url": "/produtos/chaise-longue-cosmos/images/Chaise Longue Cosmos Cinza.png",
+          "alt": "Chaise Longue Cosmos - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-009-chaise-longue-curvo",
+      "slug": "chaise-longue-curvo",
+      "name": "Chaise Longue Curvo",
+      "shortDescription": "Chaise Longue Curvo criada para elevar o conforto da sala, combinando design atual e praticidade no uso diário.",
+      "description": "Chaise Longue Curvo combina proporções bem resolvidas, ergonomia e acabamento contemporâneo. É uma opção prática para quem quer renovar a área social com um produto que favorece relaxamento, boa circulação e harmonia com o restante do mobiliário.",
+      "basePrice": 299,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza",
+        "Preto"
+      ],
+      "images": [
+        {
+          "id": "product-009-chaise-longue-curvo-img-01",
+          "productId": "product-009-chaise-longue-curvo",
+          "url": "/produtos/chaise-longue-curvo/images/Chaise Longue Curvo Bege.png",
+          "alt": "Chaise Longue Curvo - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-009-chaise-longue-curvo-img-02",
+          "productId": "product-009-chaise-longue-curvo",
+          "url": "/produtos/chaise-longue-curvo/images/Chaise Longue Curvo Cinza.png",
+          "alt": "Chaise Longue Curvo - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-009-chaise-longue-curvo-img-03",
+          "productId": "product-009-chaise-longue-curvo",
+          "url": "/produtos/chaise-longue-curvo/images/Chaise Longue Curvo Preto.png",
+          "alt": "Chaise Longue Curvo - Preto",
+          "colorName": "Preto",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-010-chaise-longue-dante",
+      "slug": "chaise-longue-dante",
+      "name": "Chaise Longue Dante",
+      "shortDescription": "Chaise Longue Dante com linhas modernas e assento generoso, indicada para salas que pedem conforto sem abrir mão de elegância.",
+      "description": "Chaise Longue Dante oferece uma proposta funcional para uso diário, com área de assento confortável e visual sofisticado. O modelo se adapta a diferentes layouts de sala e contribui para um ambiente mais convidativo, organizado e elegante.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza",
+        "Preto"
+      ],
+      "images": [
+        {
+          "id": "product-010-chaise-longue-dante-img-01",
+          "productId": "product-010-chaise-longue-dante",
+          "url": "/produtos/chaise-longue-dante/images/Chaise Longue Dante Bege.png",
+          "alt": "Chaise Longue Dante - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-010-chaise-longue-dante-img-02",
+          "productId": "product-010-chaise-longue-dante",
+          "url": "/produtos/chaise-longue-dante/images/Chaise Longue Dante Cinza.png",
+          "alt": "Chaise Longue Dante - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-010-chaise-longue-dante-img-03",
+          "productId": "product-010-chaise-longue-dante",
+          "url": "/produtos/chaise-longue-dante/images/Chaise Longue Dante Preto.png",
+          "alt": "Chaise Longue Dante - Preto",
+          "colorName": "Preto",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-011-chaise-longue-delta",
+      "slug": "chaise-longue-delta",
+      "name": "Chaise Longue Delta",
+      "shortDescription": "Chaise Longue Delta pensada para relaxamento diário, com presença visual equilibrada e excelente aproveitamento de espaço.",
+      "description": "Chaise Longue Delta foi pensada para compor salas com personalidade, trazendo conforto de uso contínuo e leitura visual leve. O resultado é um móvel versátil, capaz de combinar com propostas decorativas modernas e rotinas de convivência variadas.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-011-chaise-longue-delta-img-01",
+          "productId": "product-011-chaise-longue-delta",
+          "url": "/produtos/chaise-longue-delta/images/Chaise  Longue Delta Bege.png",
+          "alt": "Chaise Longue Delta - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-011-chaise-longue-delta-img-02",
+          "productId": "product-011-chaise-longue-delta",
+          "url": "/produtos/chaise-longue-delta/images/Chaise Longue Delta Cinza.png",
+          "alt": "Chaise Longue Delta - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-012-chaise-longue-esmeralda",
+      "slug": "chaise-longue-esmeralda",
+      "name": "Chaise Longue Esmeralda",
+      "shortDescription": "Chaise Longue Esmeralda ideal para compor ambientes sofisticados, oferecendo apoio confortável e estética contemporânea.",
+      "description": "Chaise Longue Esmeralda reúne conforto amplo e desenho contemporâneo para transformar a experiência na sala. Além de valorizar o espaço, o modelo favorece descanso prolongado e se integra com facilidade a diferentes paletas e acabamentos de ambiente.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza",
+        "Preto"
+      ],
+      "images": [
+        {
+          "id": "product-012-chaise-longue-esmeralda-img-01",
+          "productId": "product-012-chaise-longue-esmeralda",
+          "url": "/produtos/chaise-longue-esmeralda/images/Chaise Longue Esmeralda Bege.png",
+          "alt": "Chaise Longue Esmeralda - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-012-chaise-longue-esmeralda-img-02",
+          "productId": "product-012-chaise-longue-esmeralda",
+          "url": "/produtos/chaise-longue-esmeralda/images/Chaise Longue Esmeralda Cinza.png",
+          "alt": "Chaise Longue Esmeralda - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-012-chaise-longue-esmeralda-img-03",
+          "productId": "product-012-chaise-longue-esmeralda",
+          "url": "/produtos/chaise-longue-esmeralda/images/Chaise Longue Esmeralda Preto.png",
+          "alt": "Chaise Longue Esmeralda - Preto",
+          "colorName": "Preto",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-013-chaise-longue-luana",
+      "slug": "chaise-longue-luana",
+      "name": "Chaise Longue Luana",
+      "shortDescription": "Chaise Longue Luana com proposta versátil para sala, unindo ergonomia, estilo atual e boa área útil de descanso.",
+      "description": "Chaise Longue Luana tem foco em bem-estar e estética equilibrada. O formato amplia a sensação de conforto, enquanto o visual atual ajuda a criar uma composição elegante e prática para o uso cotidiano da área social.",
+      "basePrice": 388,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Preto",
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-013-chaise-longue-luana-img-01",
+          "productId": "product-013-chaise-longue-luana",
+          "url": "/produtos/chaise-longue-luana/images/Chaise Longue Luana  Preto.png",
+          "alt": "Chaise Longue Luana - Preto",
+          "colorName": "Preto",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-013-chaise-longue-luana-img-02",
+          "productId": "product-013-chaise-longue-luana",
+          "url": "/produtos/chaise-longue-luana/images/Chaise Longue Luana Bege.png",
+          "alt": "Chaise Longue Luana - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-013-chaise-longue-luana-img-03",
+          "productId": "product-013-chaise-longue-luana",
+          "url": "/produtos/chaise-longue-luana/images/Chaise Longue Luana Cinza.png",
+          "alt": "Chaise Longue Luana - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-016-chaise-longue-santarem",
+      "slug": "chaise-longue-santarem",
+      "name": "Chaise Longue Santarém",
+      "shortDescription": "Chaise Longue Santarém com visual limpo e assento amplo, perfeita para rotinas de descanso e convivência.",
+      "description": "Chaise Longue Santarém entrega equilíbrio entre conforto e presença visual. O desenho valoriza o ambiente sem pesar na composição, enquanto o assento espaçoso contribui para uma experiência agradável no dia a dia, seja em salas compactas ou em espaços mais amplos.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege",
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-016-chaise-longue-santarem-img-01",
+          "productId": "product-016-chaise-longue-santarem",
+          "url": "/produtos/chaise-longue-santarem/images/Chaise Longue Santarém Bege Baú.png",
+          "alt": "Chaise Longue Santarém - Bege - Baú",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-016-chaise-longue-santarem-img-02",
+          "productId": "product-016-chaise-longue-santarem",
+          "url": "/produtos/chaise-longue-santarem/images/Chaise Longue Santarém Bege.png",
+          "alt": "Chaise Longue Santarém - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-016-chaise-longue-santarem-img-03",
+          "productId": "product-016-chaise-longue-santarem",
+          "url": "/produtos/chaise-longue-santarem/images/Chaise Longue Santarém Cinza.png",
+          "alt": "Chaise Longue Santarém - Cinza",
+          "colorName": "Cinza",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-017-chaise-longue-zara",
+      "slug": "chaise-longue-zara",
+      "name": "Chaise Longue Zara",
+      "shortDescription": "Chaise Longue Zara criada para elevar o conforto da sala, combinando design atual e praticidade no uso diário.",
+      "description": "Chaise Longue Zara combina proporções bem resolvidas, ergonomia e acabamento contemporâneo. É uma opção prática para quem quer renovar a área social com um produto que favorece relaxamento, boa circulação e harmonia com o restante do mobiliário.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege"
+      ],
+      "images": [
+        {
+          "id": "product-017-chaise-longue-zara-img-01",
+          "productId": "product-017-chaise-longue-zara",
+          "url": "/produtos/chaise-longue-zara/images/Chaise Longue Zara Bege.png",
+          "alt": "Chaise Longue Zara - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-020-pack-cama-alexis",
+      "slug": "pack-cama-alexis",
+      "name": "Pack Cama Alexis",
+      "shortDescription": "Pack Cama Alexis com desenho atual e acabamento cuidadoso, indicada para quartos que valorizam conforto e organização visual.",
+      "description": "Pack Cama Alexis combina resistência estrutural, conforto de uso diário e visual bem resolvido. É ideal para ambientes que precisam de um móvel funcional sem abrir mão de uma apresentação refinada.",
+      "basePrice": 0,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-020-pack-cama-alexis-img-01",
+          "productId": "product-020-pack-cama-alexis",
+          "url": "/produtos/pack-cama-alexis/images/Pack Cama Alexis Cinza.png",
+          "alt": "Pack Cama Alexis - Cinza",
+          "colorName": "Cinza",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-021-pack-cama-arabela",
+      "slug": "pack-cama-arabela",
+      "name": "Pack Cama Arabela",
+      "shortDescription": "Pack Cama Arabela pensada para oferecer base de descanso estável, com presença elegante e boa integração ao ambiente.",
+      "description": "Pack Cama Arabela foi desenvolvida para compor quartos com foco em conforto, praticidade e estética limpa. O modelo se adapta a diferentes layouts e ajuda a criar uma atmosfera mais agradável para descanso.",
+      "basePrice": 299,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege Castanho"
+      ],
+      "images": [
+        {
+          "id": "product-021-pack-cama-arabela-img-01",
+          "productId": "product-021-pack-cama-arabela",
+          "url": "/produtos/pack-cama-arabela/images/Pack Cama Arabela Bege Castanho.png",
+          "alt": "Pack Cama Arabela - Bege Castanho",
+          "colorName": "Bege Castanho",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-022-pack-cama-ariana",
+      "slug": "pack-cama-ariana",
+      "name": "Pack Cama Ariana",
+      "shortDescription": "Pack Cama Ariana ideal para renovar o quarto com equilíbrio entre estética contemporânea e uso diário confortável.",
+      "description": "Pack Cama Ariana oferece suporte estável e presença visual elegante, funcionando como peça central em composições contemporâneas. A proposta une bom desempenho no uso cotidiano e fácil integração com outros elementos do quarto.",
+      "basePrice": 349,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege"
+      ],
+      "images": [
+        {
+          "id": "product-022-pack-cama-ariana-img-01",
+          "productId": "product-022-pack-cama-ariana",
+          "url": "/produtos/pack-cama-ariana/images/Pack Cama Ariana Bege.png",
+          "alt": "Pack Cama Ariana - Bege",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-024-pack-cama-flavi",
+      "slug": "pack-cama-flavi",
+      "name": "Pack Cama Flavi",
+      "shortDescription": "Pack Cama Flavi desenvolvida para compor quartos acolhedores, aliando conforto, durabilidade e estilo discreto.",
+      "description": "Pack Cama Flavi reúne aspectos de conforto, durabilidade e aparência moderna para um quarto mais harmonioso. O modelo facilita combinações decorativas e atende bem às necessidades de uso recorrente.",
+      "basePrice": 0,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Cinza Escuro",
+        "Bege",
+        "Cinza Claro"
+      ],
+      "images": [
+        {
+          "id": "product-024-pack-cama-flavi-img-01",
+          "productId": "product-024-pack-cama-flavi",
+          "url": "/produtos/pack-cama-flavi/images/Pack Cama Flavi  Cinza Escuro.png",
+          "alt": "Pack Cama Flavi - Cinza Escuro",
+          "colorName": "Cinza Escuro",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-024-pack-cama-flavi-img-02",
+          "productId": "product-024-pack-cama-flavi",
+          "url": "/produtos/pack-cama-flavi/images/Pack Cama Flavi Bege.png",
+          "alt": "Pack Cama Flavi - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        },
+        {
+          "id": "product-024-pack-cama-flavi-img-03",
+          "productId": "product-024-pack-cama-flavi",
+          "url": "/produtos/pack-cama-flavi/images/Pack Cama Flavi Cinza Claro.png",
+          "alt": "Pack Cama Flavi - Cinza Claro",
+          "colorName": "Cinza Claro",
+          "isMain": false,
+          "sortOrder": 2
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-025-pack-cama-lorena",
+      "slug": "pack-cama-lorena",
+      "name": "Pack Cama Lorena",
+      "shortDescription": "Pack Cama Lorena com linhas bem definidas e acabamento moderno, perfeita para quem busca conforto com visual limpo.",
+      "description": "Pack Cama Lorena foi projetada para oferecer conforto consistente no descanso diário, com estrutura confiável e visual contemporâneo. O modelo contribui para um quarto mais organizado e acolhedor, facilitando composições com diferentes estilos de mobiliário.",
+      "basePrice": 0,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Branco",
+        "Preto"
+      ],
+      "images": [
+        {
+          "id": "product-025-pack-cama-lorena-img-01",
+          "productId": "product-025-pack-cama-lorena",
+          "url": "/produtos/pack-cama-lorena/images/Pack Cama Lorena branca.png",
+          "alt": "Pack Cama Lorena - Branco",
+          "colorName": "Branco",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-025-pack-cama-lorena-img-02",
+          "productId": "product-025-pack-cama-lorena",
+          "url": "/produtos/pack-cama-lorena/images/Pack Cama Lorena preta.png",
+          "alt": "Pack Cama Lorena - Preto",
+          "colorName": "Preto",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-026-pack-cama-mali",
+      "slug": "pack-cama-mali",
+      "name": "Pack Cama Mali",
+      "shortDescription": "Pack Cama Mali criada para entregar bem-estar no descanso e harmonia com diferentes propostas de decoração.",
+      "description": "Pack Cama Mali entrega uma proposta equilibrada entre funcionalidade e estética. A construção favorece estabilidade de uso, enquanto o desenho atual valoriza o ambiente com uma presença discreta e elegante ao mesmo tempo.",
+      "basePrice": 0,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-026-pack-cama-mali-img-01",
+          "productId": "product-026-pack-cama-mali",
+          "url": "/produtos/pack-cama-mali/images/Pack Cama Mali Cinza.png",
+          "alt": "Pack Cama Mali - Cinza",
+          "colorName": "Cinza",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-027-pack-cama-marte",
+      "slug": "pack-cama-marte",
+      "name": "Pack Cama Marte",
+      "shortDescription": "Pack Cama Marte combina estrutura confiável e aparência atual, favorecendo um quarto mais elegante e funcional.",
+      "description": "Pack Cama Marte é uma alternativa prática para quem deseja renovar o quarto com um produto confortável e de linguagem moderna. O acabamento foi pensado para combinar bem com diferentes paletas e acessórios decorativos.",
+      "basePrice": 0,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Preto"
+      ],
+      "images": [
+        {
+          "id": "product-027-pack-cama-marte-img-01",
+          "productId": "product-027-pack-cama-marte",
+          "url": "/produtos/pack-cama-marte/images/Pack Cama Marte Preta.png",
+          "alt": "Pack Cama Marte - Preto",
+          "colorName": "Preto",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-029-pack-cama-river",
+      "slug": "pack-cama-river",
+      "name": "Pack Cama River",
+      "shortDescription": "Pack Cama River pensada para oferecer base de descanso estável, com presença elegante e boa integração ao ambiente.",
+      "description": "Pack Cama River foi desenvolvida para compor quartos com foco em conforto, praticidade e estética limpa. O modelo se adapta a diferentes layouts e ajuda a criar uma atmosfera mais agradável para descanso.",
+      "basePrice": 0,
+      "categories": [
+        "camas"
+      ],
+      "featured": true,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-029-pack-cama-river-img-01",
+          "productId": "product-029-pack-cama-river",
+          "url": "/produtos/pack-cama-river/images/Pack Cama River Cinza.png",
+          "alt": "Pack Cama River - Cinza",
+          "colorName": "Cinza",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-033-sofa-cama-com-puffs",
+      "slug": "sofa-cama-com-puffs",
+      "name": "Sofá Cama com Puffs",
+      "shortDescription": "Sofá Cama com Puffs versátil para o dia a dia, oferecendo conforto no assento e solução prática para acomodar visitas.",
+      "description": "Sofá Cama com Puffs entrega equilíbrio entre conforto diário, funcionalidade e aparência contemporânea. A abertura para cama ocorre de forma rápida, tornando o produto ideal para quem recebe visitas com frequência e valoriza praticidade no dia a dia.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Bege"
+      ],
+      "images": [
+        {
+          "id": "product-033-sofa-cama-com-puffs-img-01",
+          "productId": "product-033-sofa-cama-com-puffs",
+          "url": "/produtos/sofa-cama-com-puffs/images/Sofá Cama Com Puffs Bege Aberto.png",
+          "alt": "Sofá Cama com Puffs - Bege - Aberto",
+          "colorName": "Bege",
+          "isMain": true,
+          "sortOrder": 0
+        },
+        {
+          "id": "product-033-sofa-cama-com-puffs-img-02",
+          "productId": "product-033-sofa-cama-com-puffs",
+          "url": "/produtos/sofa-cama-com-puffs/images/Sofá Cama Com Puffs Bege.png",
+          "alt": "Sofá Cama com Puffs - Bege",
+          "colorName": "Bege",
+          "isMain": false,
+          "sortOrder": 1
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-031-sofa-cama-mira",
+      "slug": "sofa-cama-mira",
+      "name": "Sofá Cama Mira",
+      "shortDescription": "Sofá Cama Mira desenvolvido para otimizar espaço, entregando conforto na rotina e apoio extra para pernoites.",
+      "description": "Sofá Cama Mira se destaca pela capacidade de unir estética atual e múltiplas funções no mesmo móvel. É uma alternativa inteligente para quem deseja conforto na sala e praticidade extra para pernoites ocasionais.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Azul"
+      ],
+      "images": [
+        {
+          "id": "product-031-sofa-cama-mira-img-01",
+          "productId": "product-031-sofa-cama-mira",
+          "url": "/produtos/sofa-cama-mira/images/Soá Cama Mira Azul.png",
+          "alt": "Sofá Cama Mira - Azul",
+          "colorName": "Azul",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    },
+    {
+      "id": "product-036-sofa-confort",
+      "slug": "sofa-confort",
+      "name": "Sofá Confort",
+      "shortDescription": "Sofá de perfil aconchegante, pensado para uso diário com assento confortável e visual clean de fácil integração na decoração.",
+      "description": "Sofá Confort com proposta voltada ao bem-estar diário, oferecendo boa ergonomia e estética versátil para diferentes composições de sala. O acabamento e a estrutura equilibram presença visual e praticidade, tornando-o uma opção segura para ambientes de convivência.",
+      "basePrice": 0,
+      "categories": [
+        "sofas",
+        "sala"
+      ],
+      "featured": false,
+      "bestSeller": false,
+      "available": true,
+      "characteristics": [],
+      "colors": [
+        "Cinza"
+      ],
+      "images": [
+        {
+          "id": "product-036-sofa-confort-img-01",
+          "productId": "product-036-sofa-confort",
+          "url": "/produtos/sofa-confort/images/Sofá Confort Cinza.png",
+          "alt": "Sofá Confort - Cinza",
+          "colorName": "Cinza",
+          "isMain": true,
+          "sortOrder": 0
+        }
+      ],
+      "measurements": [],
+      "options": []
+    }
+  ],
+  "categories": [
+    {
+      "slug": "sofas",
+      "label": "Sofas"
+    },
+    {
+      "slug": "camas",
+      "label": "Camas"
+    },
+    {
+      "slug": "sala",
+      "label": "Sala"
+    }
+  ],
+  "assets": {
+    "logoSecondary": "/Home/logotipo-secundario.jpeg",
+    "heroImage": "/Home/banner-inicial.png",
+    "logoPrimary": "/Home/logotipo-principal.jpeg"
+  }
+}

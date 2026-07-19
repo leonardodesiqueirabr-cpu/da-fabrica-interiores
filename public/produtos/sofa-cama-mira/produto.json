@@ -1,0 +1,37 @@
+{
+  "productId": "product-031-sofa-cama-mira",
+  "name": "Sofá Cama Mira",
+  "slug": "sofa-cama-mira",
+  "updatedAt": "2026-07-18T23:42:11.577Z",
+  "data": {
+    "id": "product-031-sofa-cama-mira",
+    "slug": "sofa-cama-mira",
+    "name": "Sofá Cama Mira",
+    "shortDescription": "Sofá-cama versátil para uso diário, combinando conforto no assento e abertura prática para acomodar visitas com facilidade.",
+    "description": "Sofá-cama projetado para oferecer conforto no dia a dia e funcionalidade extra quando necessário. A conversão para cama é simples, tornando-o ideal para salas multifuncionais. O design contemporâneo e o bom aproveitamento de espaço ajudam a compor ambientes elegantes, práticos e preparados para receber.",
+    "basePrice": 0,
+    "categories": [
+      "sofas"
+    ],
+    "featured": false,
+    "bestSeller": false,
+    "available": true,
+    "characteristics": [],
+    "colors": [
+      "Azul"
+    ],
+    "images": [
+      {
+        "id": "product-031-sofa-cama-mira-img-01",
+        "productId": "product-031-sofa-cama-mira",
+        "url": "/produtos/sofa-cama-mira/images/Soá Cama Mira Azul.png",
+        "alt": "Sofá Cama Mira - Azul",
+        "colorName": "Azul",
+        "isMain": true,
+        "sortOrder": 0
+      }
+    ],
+    "measurements": [],
+    "options": []
+  }
+}
