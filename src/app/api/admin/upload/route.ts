@@ -2,18 +2,15 @@ import { randomUUID } from "node:crypto";
 import { writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
 import { getSupabaseServiceClient } from "@/lib/supabase/service";
+import { requireAdminSession } from "@/lib/admin-session";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
 
 export async function POST(request: Request) {
-  const cookieStore = await cookies();
-  if (!isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value)) {
-    return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
-  }
+  const unauthorized = await requireAdminSession();
+  if (unauthorized) return unauthorized;
 
   let formData: FormData;
   try {

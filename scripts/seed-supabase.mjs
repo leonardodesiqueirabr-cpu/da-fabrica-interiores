@@ -24,7 +24,6 @@ async function run() {
       .from("products")
       .upsert(
         {
-          id: product.id,
           slug: product.slug,
           name: product.name,
           short_description: product.shortDescription,

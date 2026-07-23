@@ -107,3 +107,17 @@ create policy "Authenticated full product_measurements" on product_measurements 
 
 drop policy if exists "Authenticated full product_options" on product_options;
 create policy "Authenticated full product_options" on product_options for all to authenticated using (true) with check (true);
+
+-- Grants minimos nas tabelas da aplicacao (necessarios alem do RLS/policies acima;
+-- projetos novos do Supabase nao concedem automaticamente esses privilegios).
+grant usage on schema public to anon, authenticated, service_role;
+
+grant select on table
+  categories, products, product_categories,
+  product_images, product_measurements, product_options
+to anon;
+
+grant select, insert, update, delete on table
+  categories, products, product_categories,
+  product_images, product_measurements, product_options
+to authenticated, service_role;

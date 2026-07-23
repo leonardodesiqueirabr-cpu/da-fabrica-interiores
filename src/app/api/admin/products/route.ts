@@ -4,9 +4,14 @@ import { ADMIN_CATEGORIES } from "@/lib/data/categories";
 import { productPayloadSchema } from "@/lib/data/admin-schemas";
 import { syncProductWorkspace } from "@/lib/assets/product-workspaces";
 import { getSupabaseServiceClient } from "@/lib/supabase/service";
+import { requireAdminSession } from "@/lib/admin-session";
 
 export async function POST(request: Request) {
+  const unauthorized = await requireAdminSession();
+  if (unauthorized) return unauthorized;
+
   const supabase = getSupabaseServiceClient();
+  const isReadOnlyRuntime = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
 
   const parsed = productPayloadSchema.safeParse(await request.json());
   if (!parsed.success) {
@@ -95,16 +100,26 @@ export async function POST(request: Request) {
       );
     }
   } else {
+    if (isReadOnlyRuntime) {
+      return NextResponse.json(
+        { error: "Supabase não configurado neste ambiente de deploy. Defina as variáveis do Supabase para usar o admin." },
+        { status: 500 },
+      );
+    }
+
     // Supabase não configurado, usar fallback local
     productId = randomUUID();
   }
 
-  // Sincronizar arquivo local (funciona com ou sem Supabase)
-  try {
-    await syncProductWorkspace(productId, payload);
-  } catch (workspaceError) {
-    const message = workspaceError instanceof Error ? workspaceError.message : "Erro ao criar pasta do produto.";
-    return NextResponse.json({ error: message }, { status: 500 });
+  // Em produção (Supabase ativo), o filesystem pode ser read-only.
+  // Mantemos sincronização local apenas no fallback sem Supabase.
+  if (!supabase) {
+    try {
+      await syncProductWorkspace(productId, payload);
+    } catch (workspaceError) {
+      const message = workspaceError instanceof Error ? workspaceError.message : "Erro ao criar pasta do produto.";
+      return NextResponse.json({ error: message }, { status: 500 });
+    }
   }
 
   return NextResponse.json({ ok: true, id: productId });

@@ -6,9 +6,14 @@ import { ADMIN_CATEGORIES } from "@/lib/data/categories";
 import { productPayloadSchema } from "@/lib/data/admin-schemas";
 import { syncProductWorkspace } from "@/lib/assets/product-workspaces";
 import { getSupabaseServiceClient } from "@/lib/supabase/service";
+import { requireAdminSession } from "@/lib/admin-session";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
+  const unauthorized = await requireAdminSession();
+  if (unauthorized) return unauthorized;
+
   const supabase = getSupabaseServiceClient();
+  const isReadOnlyRuntime = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
 
   const { id } = await params;
   const parsed = productPayloadSchema.safeParse(await request.json());
@@ -102,18 +107,31 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     }
   }
 
-  // Sincronizar arquivo local (funciona com ou sem Supabase)
-  try {
-    await syncProductWorkspace(id, payload);
-  } catch (workspaceError) {
-    const message = workspaceError instanceof Error ? workspaceError.message : "Erro ao atualizar pasta do produto.";
-    return NextResponse.json({ error: message }, { status: 500 });
+  if (!supabase && isReadOnlyRuntime) {
+    return NextResponse.json(
+      { error: "Supabase não configurado neste ambiente de deploy. Defina as variáveis do Supabase para usar o admin." },
+      { status: 500 },
+    );
+  }
+
+  // Em produção (Supabase ativo), o filesystem pode ser read-only.
+  // Mantemos sincronização local apenas no fallback sem Supabase.
+  if (!supabase) {
+    try {
+      await syncProductWorkspace(id, payload);
+    } catch (workspaceError) {
+      const message = workspaceError instanceof Error ? workspaceError.message : "Erro ao atualizar pasta do produto.";
+      return NextResponse.json({ error: message }, { status: 500 });
+    }
   }
 
   return NextResponse.json({ ok: true });
 }
 
 export async function DELETE(_: Request, { params }: { params: Promise<{ id: string }> }) {
+  const unauthorized = await requireAdminSession();
+  if (unauthorized) return unauthorized;
+
   const supabase = getSupabaseServiceClient();
   const { id } = await params;
 
