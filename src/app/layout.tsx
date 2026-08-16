@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
+import { statSync } from "node:fs";
+import path from "node:path";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SiteFooter } from "@/components/site-footer";
@@ -9,11 +11,26 @@ import { getCatalogData } from "@/lib/data/catalog";
 import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
 import "./globals.css";
 
+// Versao derivada do mtime do arquivo para invalidar cache do navegador/CDN quando a favicon for substituida.
+function getFaviconVersion(): string {
+  try {
+    return String(Math.floor(statSync(path.join(process.cwd(), "public", "favicon.png")).mtimeMs));
+  } catch {
+    return "1";
+  }
+}
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://da-fabrica-interiores.vercel.app";
+
 export const metadata: Metadata = {
-  title: "Moveis e Estofados | DA FABRICA",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Moveis e Estofados | DA FABRICA",
+    template: "%s | Da Fábrica Interiores",
+  },
   description: "Loja premium de sofas, camas, colchoes e mobiliario de sala.",
   icons: {
-    icon: "/favicon.png",
+    icon: `/favicon.png?v=${getFaviconVersion()}`,
   },
 };
 

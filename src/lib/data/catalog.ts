@@ -1,6 +1,7 @@
 import localSeed from "@/lib/data/local-seed.json";
 import { existsSync, readdirSync } from "node:fs";
 import path from "node:path";
+import { cache } from "react";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { toSlug } from "@/lib/utils/text";
 import type { CatalogData, Product } from "@/types/catalog";
@@ -186,7 +187,7 @@ function withResolvedHomeAssets(catalog: CatalogData): CatalogData {
   };
 }
 
-export async function getCatalogData(): Promise<CatalogData> {
+export const getCatalogData = cache(async function getCatalogData(): Promise<CatalogData> {
   const supabase = await getSupabaseServerClient();
 
   if (!supabase) {
@@ -231,7 +232,7 @@ export async function getCatalogData(): Promise<CatalogData> {
     categories,
     assets: (localSeed as CatalogData).assets,
   });
-}
+});
 
 export async function getProductBySlug(slug: string) {
   const catalog = await getCatalogData();

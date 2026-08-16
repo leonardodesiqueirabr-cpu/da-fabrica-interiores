@@ -1,9 +1,44 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductConfigurator } from "@/components/product-configurator";
 import { ProductsCarousel } from "@/components/products-carousel";
 import { getCatalogData, getRecommendedProducts } from "@/lib/data/catalog";
 import { buildBreadcrumbFromOrigin } from "@/lib/utils/breadcrumb";
+
+type ProductPageParams = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({ params }: ProductPageParams): Promise<Metadata> {
+  const { slug } = await params;
+  const catalog = await getCatalogData();
+  const product = catalog.products.find((item) => item.slug === slug);
+
+  if (!product) {
+    return { title: "Produto não encontrado" };
+  }
+
+  const description = product.shortDescription || product.description || undefined;
+  const mainImage = product.images.find((image) => image.isMain) ?? product.images[0];
+
+  return {
+    title: product.name,
+    description,
+    alternates: {
+      canonical: `/produto/${product.slug}`,
+    },
+    openGraph: {
+      title: product.name,
+      description,
+      images: mainImage ? [{ url: mainImage.url, alt: mainImage.alt || product.name }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description,
+      images: mainImage ? [mainImage.url] : undefined,
+    },
+  };
+}
 
 export default async function ProductPage({
   params,
