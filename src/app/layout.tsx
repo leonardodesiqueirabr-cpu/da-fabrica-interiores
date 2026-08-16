@@ -7,12 +7,11 @@ import { SiteHeader } from "@/components/site-header";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { getCatalogData } from "@/lib/data/catalog";
 import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { getSiteUrl } from "@/lib/utils/site-url";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://da-fabrica-interiores.vercel.app";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(getSiteUrl()),
   title: {
     default: "Móveis e Estofados | Da Fábrica Interiores",
     template: "%s | Da Fábrica Interiores",

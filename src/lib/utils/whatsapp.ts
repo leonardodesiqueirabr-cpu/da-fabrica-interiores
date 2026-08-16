@@ -19,8 +19,8 @@ export function buildProductMessage(input: {
   ].filter(Boolean);
 
   const details = detailParts.length > 0 ? `, ${detailParts.join(", ")}` : "";
-  const baseMessage = `Ola, gostaria de informacoes sobre o ${input.productName}${details}.`;
-  const withPrice = input.priceLabel ? `${baseMessage} Preco de referencia: ${input.priceLabel}.` : baseMessage;
+  const baseMessage = `Olá, gostaria de informações sobre o ${input.productName}${details}.`;
+  const withPrice = input.priceLabel ? `${baseMessage} Preço de referência: ${input.priceLabel}.` : baseMessage;
 
   if (!input.productUrl) {
     return withPrice;

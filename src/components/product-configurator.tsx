@@ -6,13 +6,13 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/types/catalog";
 import { buildProductMessage, buildWhatsAppUrl } from "@/lib/utils/whatsapp";
+import { buildProductUrl } from "@/lib/utils/site-url";
 
 interface ProductConfiguratorProps {
   product: Product;
 }
 
 const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "351915783035";
-const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
 
 const COLOR_HEX: Record<string, string> = {
   branco: "#f5f5f5",
@@ -192,7 +192,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
     : product.basePrice
       ? `${product.basePrice.toFixed(0)} EUR`
       : undefined;
-  const productUrl = `${siteUrl}/produto/${product.slug}`;
+  const productUrl = buildProductUrl(product.slug);
 
   const message = buildProductMessage({
     productName: product.name,
