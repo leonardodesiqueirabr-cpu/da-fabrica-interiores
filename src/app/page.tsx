@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ProductCard } from "@/components/product-card";
 import { ProductsCarousel } from "@/components/products-carousel";
 import { getBestSellerProducts, getCatalogData, getFeaturedProducts } from "@/lib/data/catalog";
-import { buildWhatsAppUrl } from "@/lib/utils/whatsapp";
+import { buildWhatsAppUrl, WHATSAPP_STORE_INFO_MESSAGE } from "@/lib/utils/whatsapp";
 
 const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "351915783035";
 
@@ -177,7 +177,7 @@ export default async function HomePage() {
             Tenha apoio de especialistas para escolher o modelo ideal e comprar com segurança, rapidez e total confiança.
           </p>
           <Link
-            href={buildWhatsAppUrl(whatsappPhone, "Ola, quero ajuda para escolher o melhor mobiliario.")}
+            href={buildWhatsAppUrl(whatsappPhone, WHATSAPP_STORE_INFO_MESSAGE)}
             target="_blank"
             className="mt-9 inline-flex rounded-full bg-white px-7 py-3 text-sm font-semibold uppercase tracking-wide text-[var(--accent)] transition hover:bg-white/90"
           >

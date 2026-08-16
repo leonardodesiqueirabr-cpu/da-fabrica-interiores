@@ -4,6 +4,10 @@ export function buildWhatsAppUrl(phone: string, message: string) {
   return `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
 }
 
+// Mensagens gerais reutilizadas pelo botao flutuante e pelo CTA da seccao de destaque.
+export const WHATSAPP_ASSISTANT_MESSAGE = "Olá, quero ajuda para escolher o melhor mobiliário.";
+export const WHATSAPP_STORE_INFO_MESSAGE = "Olá, gostaria de informações sobre os produtos da loja.";
+
 export function buildProductMessage(input: {
   productName: string;
   color?: string;

@@ -1,7 +1,25 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { AllProductsCatalog } from "@/components/all-products-catalog";
 import { getCatalogData } from "@/lib/data/catalog";
 import { buildBreadcrumbFromOrigin } from "@/lib/utils/breadcrumb";
+
+export const metadata: Metadata = {
+  title: "Todos os produtos",
+  description: "Compare linhas, preços e diferenciais para encontrar o mobiliário ideal com o melhor equilíbrio entre design, conforto e valor.",
+  alternates: {
+    canonical: "/produtos",
+  },
+  openGraph: {
+    title: "Todos os produtos",
+    description: "Compare linhas, preços e diferenciais para encontrar o mobiliário ideal com o melhor equilíbrio entre design, conforto e valor.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Todos os produtos",
+    description: "Compare linhas, preços e diferenciais para encontrar o mobiliário ideal com o melhor equilíbrio entre design, conforto e valor.",
+  },
+};
 
 export default async function AllProductsPage({
   searchParams,

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Product } from "@/types/catalog";
+import { encodeProductImageUrl } from "@/lib/utils/image-url";
 
 interface ProductCardProps {
   product: Product;
@@ -12,7 +13,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const pathname = usePathname();
   const mainImage = product.images.find((item) => item.isMain) ?? product.images[0];
-  const imageUrl = mainImage?.url ? mainImage.url.replace(/ /g, "%20") : "";
+  const imageUrl = mainImage?.url ? encodeProductImageUrl(mainImage.url) : "";
   const productHref = pathname
     ? {
         pathname: `/produto/${product.slug}`,
