@@ -252,8 +252,6 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
         </div>
 
         <div className="space-y-6">
-          <h2 className="text-lg font-semibold uppercase tracking-wide">Configurar produto</h2>
-
           {product.colors.length > 0 && (
             <div className="space-y-3 text-sm">
               <span className="font-medium">

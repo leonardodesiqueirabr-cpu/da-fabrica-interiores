@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Moveis e Estofados | DA FABRICA",
   description: "Loja premium de sofas, camas, colchoes e mobiliario de sala.",
   icons: {
-    icon: "/Home/logotipo-fundo-laranja.png",
+    icon: "/favicon.png",
   },
 };
 
