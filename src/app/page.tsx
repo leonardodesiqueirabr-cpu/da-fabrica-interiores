@@ -2,13 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { ProductCard } from "@/components/product-card";
 import { ProductsCarousel } from "@/components/products-carousel";
-import { getBestSellerProducts, getCatalogData, getFeaturedProducts } from "@/lib/data/catalog";
+import { getBestSellerProducts, getPublishedCatalogData, getFeaturedProducts } from "@/lib/data/catalog";
 import { buildWhatsAppUrl, WHATSAPP_STORE_INFO_MESSAGE } from "@/lib/utils/whatsapp";
 
 const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "351915783035";
 
 export default async function HomePage() {
-  const catalog = await getCatalogData();
+  const catalog = await getPublishedCatalogData();
   const bestSellers = getBestSellerProducts(catalog.products);
   const bestSellersPreview = bestSellers.slice(0, 6);
   const bestSellerIds = new Set(bestSellersPreview.map((product) => product.id));

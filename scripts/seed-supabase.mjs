@@ -31,6 +31,7 @@ async function run() {
           base_price: product.basePrice,
           featured: product.featured,
           best_seller: product.bestSeller,
+          is_published: product.isPublished,
           available: product.available,
           characteristics: product.characteristics,
         },

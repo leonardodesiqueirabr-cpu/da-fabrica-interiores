@@ -3,14 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductConfigurator } from "@/components/product-configurator";
 import { ProductsCarousel } from "@/components/products-carousel";
-import { getCatalogData, getRecommendedProducts } from "@/lib/data/catalog";
+import { getPublishedCatalogData, getRecommendedProducts } from "@/lib/data/catalog";
 import { buildBreadcrumbFromOrigin } from "@/lib/utils/breadcrumb";
 
 type ProductPageParams = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: ProductPageParams): Promise<Metadata> {
   const { slug } = await params;
-  const catalog = await getCatalogData();
+  const catalog = await getPublishedCatalogData();
   const product = catalog.products.find((item) => item.slug === slug);
 
   if (!product) {
@@ -49,7 +49,7 @@ export default async function ProductPage({
 }) {
   const { slug } = await params;
   const resolvedSearchParams = await searchParams;
-  const catalog = await getCatalogData();
+  const catalog = await getPublishedCatalogData();
   const product = catalog.products.find((item) => item.slug === slug);
 
   if (!product) {

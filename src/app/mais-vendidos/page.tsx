@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { AllProductsCatalog } from "@/components/all-products-catalog";
-import { getCatalogData } from "@/lib/data/catalog";
+import { getPublishedCatalogData } from "@/lib/data/catalog";
 import { buildBreadcrumbFromOrigin } from "@/lib/utils/breadcrumb";
 
 export default async function BestSellersPage({
@@ -9,7 +9,7 @@ export default async function BestSellersPage({
   searchParams: Promise<{ from?: string | string[] }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const catalog = await getCatalogData();
+  const catalog = await getPublishedCatalogData();
   const fromRaw = resolvedSearchParams.from;
   const fromPath =
     typeof fromRaw === "string"

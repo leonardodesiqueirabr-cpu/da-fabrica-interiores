@@ -2,9 +2,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { SiteChrome } from "@/components/site-chrome";
 import { getCatalogData } from "@/lib/data/catalog";
 import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
 import { getSiteUrl } from "@/lib/utils/site-url";
@@ -31,10 +29,13 @@ export default async function RootLayout({
   return (
     <html lang="pt-PT">
       <body>
-        <SiteHeader logoSrc={catalog.assets.logoPrimary || catalog.assets.logoSecondary} showAdminButton={isAdminAuthenticated} />
-        <main>{children}</main>
-        <SiteFooter logoSrc={catalog.assets.logoSecondary || catalog.assets.logoPrimary} />
-        <WhatsAppFloat />
+        <SiteChrome
+          logoHeader={catalog.assets.logoPrimary || catalog.assets.logoSecondary}
+          logoFooter={catalog.assets.logoSecondary || catalog.assets.logoPrimary}
+          isAdminAuthenticated={isAdminAuthenticated}
+        >
+          {children}
+        </SiteChrome>
         <Analytics />
         <SpeedInsights />
       </body>

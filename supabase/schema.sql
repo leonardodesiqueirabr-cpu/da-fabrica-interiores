@@ -16,11 +16,15 @@ create table if not exists products (
   base_price numeric,
   featured boolean not null default false,
   best_seller boolean not null default false,
+  is_published boolean not null default true,
   available boolean not null default true,
   characteristics text[] not null default '{}',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+alter table products
+  add column if not exists is_published boolean not null default true;
 
 create table if not exists product_categories (
   product_id uuid not null references products(id) on delete cascade,

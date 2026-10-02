@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AllProductsCatalog } from "@/components/all-products-catalog";
-import { getCatalogData } from "@/lib/data/catalog";
+import { getPublishedCatalogData } from "@/lib/data/catalog";
 import { buildBreadcrumbFromOrigin } from "@/lib/utils/breadcrumb";
 
 const titleMap: Record<string, string> = {
@@ -63,7 +63,7 @@ export default async function CategoryPage({
     notFound();
   }
 
-  const catalog = await getCatalogData();
+  const catalog = await getPublishedCatalogData();
   const fromRaw = resolvedSearchParams.from;
   const fromPath =
     typeof fromRaw === "string"

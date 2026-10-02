@@ -43,6 +43,7 @@ export interface Product {
   categories: string[];
   featured: boolean;
   bestSeller: boolean;
+  isPublished: boolean;
   available: boolean;
   characteristics: string[];
   colors: string[];

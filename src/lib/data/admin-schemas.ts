@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const productPayloadSchema = z.object({
+const productFieldsSchema = z.object({
   name: z.string().min(2),
   slug: z.string().min(2),
   shortDescription: z.string().optional().default(""),
@@ -8,7 +8,6 @@ export const productPayloadSchema = z.object({
   basePrice: z.number().nullable(),
   featured: z.boolean(),
   bestSeller: z.boolean(),
-  available: z.boolean(),
   characteristics: z.array(z.string()).default([]),
   categories: z.array(z.string()).min(1),
   colors: z.array(z.string()).default([]),
@@ -43,13 +42,24 @@ export const productPayloadSchema = z.object({
     .default([]),
 });
 
-export type ProductPayload = z.infer<typeof productPayloadSchema>;
+export const productCreateSchema = productFieldsSchema.extend({
+  isPublished: z.boolean().default(true),
+});
+
+export const productUpdateSchema = productFieldsSchema.extend({
+  isPublished: z.boolean().optional(),
+});
+
+export type ProductCreatePayload = z.infer<typeof productCreateSchema>;
+export type ProductUpdatePayload = z.infer<typeof productUpdateSchema>;
 
 export const quickEditProductSchema = z.object({
-  name: z.string().min(2),
-  basePrice: z.number().nullable(),
-  available: z.boolean(),
-  categories: z.array(z.string()).min(1),
+  name: z.string().min(2).optional(),
+  basePrice: z.number().nullable().optional(),
+  isPublished: z.boolean().optional(),
+  categories: z.array(z.string()).min(1).optional(),
+}).refine((payload) => Object.values(payload).some((value) => value !== undefined), {
+  message: "Indique pelo menos um campo para atualizar.",
 });
 
 export type QuickEditPayload = z.infer<typeof quickEditProductSchema>;

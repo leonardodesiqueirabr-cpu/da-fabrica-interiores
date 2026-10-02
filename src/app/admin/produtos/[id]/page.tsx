@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AdminProductForm } from "@/components/admin-product-form";
+import { AdminEditPageHeader } from "@/components/admin-edit-page-header";
 import { getCatalogData } from "@/lib/data/catalog";
 
 export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
@@ -13,15 +13,11 @@ export default async function EditProductPage({ params }: { params: Promise<{ id
   }
 
   return (
-    <section className="container-shell py-10">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-semibold">Editar produto</h1>
-        <Link href="/admin" className="text-sm text-[var(--muted)] underline-offset-4 hover:underline">
-          Voltar
-        </Link>
+    <section className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 2xl:px-10">
+      <AdminEditPageHeader product={product} />
+      <div className="mt-6 sm:mt-7">
+        <AdminProductForm mode="edit" product={product} />
       </div>
-
-      <AdminProductForm mode="edit" product={product} />
     </section>
   );
 }

@@ -3,7 +3,7 @@ import { rmdir } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import { ADMIN_CATEGORIES } from "@/lib/data/categories";
-import { productPayloadSchema } from "@/lib/data/admin-schemas";
+import { productUpdateSchema } from "@/lib/data/admin-schemas";
 import { syncProductWorkspace } from "@/lib/assets/product-workspaces";
 import { getSupabaseServiceClient } from "@/lib/supabase/service";
 import { requireAdminSession } from "@/lib/admin-session";
@@ -16,7 +16,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
   const isReadOnlyRuntime = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
 
   const { id } = await params;
-  const parsed = productPayloadSchema.safeParse(await request.json());
+  const parsed = productUpdateSchema.safeParse(await request.json());
   if (!parsed.success) {
     return NextResponse.json({ error: "Payload invalido.", issues: parsed.error.issues }, { status: 400 });
   }
@@ -35,8 +35,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         base_price: payload.basePrice,
         featured: payload.featured,
         best_seller: payload.bestSeller,
-        available: payload.available,
         characteristics: payload.characteristics,
+        ...(payload.isPublished !== undefined && { is_published: payload.isPublished }),
       })
       .eq("id", id);
 

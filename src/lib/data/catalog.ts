@@ -67,6 +67,8 @@ function mapSupabaseToProduct(row: any): Product {
     categories,
     featured: row.featured,
     bestSeller: row.best_seller,
+    // Temporary fallback until is_published is present in every Supabase environment.
+    isPublished: typeof row.is_published === "boolean" ? row.is_published : true,
     available: row.available,
     characteristics: row.characteristics || [],
     colors,
@@ -194,10 +196,7 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
     return withResolvedHomeAssets(localSeed as CatalogData);
   }
 
-  const { data, error } = await supabase
-    .from("products")
-    .select(
-      `
+  const catalogFields = `
       id,
       slug,
       name,
@@ -206,15 +205,27 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
       base_price,
       featured,
       best_seller,
+      is_published,
       available,
       characteristics,
       product_images(id, url, alt_text, color_name, color_hex, is_main, sort_order),
       product_options(id, option_name, values),
       product_measurements(id, measure_label, price, active),
       product_categories(categories(slug))
-      `,
-    )
-    .order("created_at", { ascending: false });
+      `;
+  const legacyCatalogFields = catalogFields.replace("      is_published,\n", "");
+  const fetchCatalog = (fields: string) =>
+    supabase.from("products").select(fields).order("created_at", { ascending: false });
+
+  let { data, error } = await fetchCatalog(catalogFields);
+
+  if (
+    error &&
+    error.message.toLowerCase().includes("is_published") &&
+    (error.code === "42703" || error.code === "PGRST204" || error.message.toLowerCase().includes("schema cache"))
+  ) {
+    ({ data, error } = await fetchCatalog(legacyCatalogFields));
+  }
 
   if (error || !data) {
     return withResolvedHomeAssets(localSeed as CatalogData);
@@ -234,8 +245,16 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
   });
 });
 
-export async function getProductBySlug(slug: string) {
+export async function getPublishedCatalogData(): Promise<CatalogData> {
   const catalog = await getCatalogData();
+  return {
+    ...catalog,
+    products: catalog.products.filter((product) => product.isPublished),
+  };
+}
+
+export async function getProductBySlug(slug: string) {
+  const catalog = await getPublishedCatalogData();
   return catalog.products.find((product) => product.slug === slug) ?? null;
 }
 

@@ -28,47 +28,58 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
 
     // Em produção (Supabase ativo), atualizar no banco para evitar EROFS.
     if (supabase) {
-      const { error: updateError } = await supabase
-        .from("products")
-        .update({
-          name: validatedPayload.name,
-          base_price: validatedPayload.basePrice,
-          available: validatedPayload.available,
-        })
-        .eq("id", id);
-
-      if (updateError) {
-        return Response.json({ error: updateError.message }, { status: 500 });
+      const productUpdate: {
+        name?: string;
+        base_price?: number | null;
+        is_published?: boolean;
+      } = {};
+      if (validatedPayload.name !== undefined) productUpdate.name = validatedPayload.name;
+      if (validatedPayload.basePrice !== undefined) productUpdate.base_price = validatedPayload.basePrice;
+      if (validatedPayload.isPublished !== undefined) {
+        productUpdate.is_published = validatedPayload.isPublished;
       }
 
-      await supabase.from("product_categories").delete().eq("product_id", id);
+      if (Object.keys(productUpdate).length > 0) {
+        const { error: updateError } = await supabase
+          .from("products")
+          .update(productUpdate)
+          .eq("id", id);
 
-      const categoryRows = validatedPayload.categories
-        .map((slug) => ADMIN_CATEGORIES.find((item) => item.slug === slug))
-        .filter((item): item is (typeof ADMIN_CATEGORIES)[number] => Boolean(item));
-
-      if (categoryRows.length > 0) {
-        const { data: categoriesInDb, error: categoriesError } = await supabase
-          .from("categories")
-          .select("id, slug")
-          .in(
-            "slug",
-            categoryRows.map((item) => item.slug),
-          );
-
-        if (categoriesError) {
-          return Response.json({ error: categoriesError.message }, { status: 500 });
+        if (updateError) {
+          return Response.json({ error: updateError.message }, { status: 500 });
         }
+      }
 
-        const linkRows = (categoriesInDb || []).map((cat) => ({
-          product_id: id,
-          category_id: cat.id,
-        }));
+      if (validatedPayload.categories !== undefined) {
+        await supabase.from("product_categories").delete().eq("product_id", id);
 
-        if (linkRows.length > 0) {
-          const { error: linkError } = await supabase.from("product_categories").insert(linkRows);
-          if (linkError) {
-            return Response.json({ error: linkError.message }, { status: 500 });
+        const categoryRows = validatedPayload.categories
+          .map((slug) => ADMIN_CATEGORIES.find((item) => item.slug === slug))
+          .filter((item): item is (typeof ADMIN_CATEGORIES)[number] => Boolean(item));
+
+        if (categoryRows.length > 0) {
+          const { data: categoriesInDb, error: categoriesError } = await supabase
+            .from("categories")
+            .select("id, slug")
+            .in(
+              "slug",
+              categoryRows.map((item) => item.slug),
+            );
+
+          if (categoriesError) {
+            return Response.json({ error: categoriesError.message }, { status: 500 });
+          }
+
+          const linkRows = (categoriesInDb || []).map((cat) => ({
+            product_id: id,
+            category_id: cat.id,
+          }));
+
+          if (linkRows.length > 0) {
+            const { error: linkError } = await supabase.from("product_categories").insert(linkRows);
+            if (linkError) {
+              return Response.json({ error: linkError.message }, { status: 500 });
+            }
           }
         }
       }
@@ -90,13 +101,19 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     const productFile = JSON.parse(readFileSync(productJsonPath, "utf-8")) as any;
 
     // Update only the editable fields in the data object
-    productFile.data.name = validatedPayload.name;
-    productFile.data.basePrice = validatedPayload.basePrice;
-    productFile.data.available = validatedPayload.available;
-    productFile.data.categories = validatedPayload.categories;
-    
-    // Also update top-level name
-    productFile.name = validatedPayload.name;
+    if (validatedPayload.name !== undefined) {
+      productFile.data.name = validatedPayload.name;
+      productFile.name = validatedPayload.name;
+    }
+    if (validatedPayload.basePrice !== undefined) {
+      productFile.data.basePrice = validatedPayload.basePrice;
+    }
+    if (validatedPayload.isPublished !== undefined) {
+      productFile.data.isPublished = validatedPayload.isPublished;
+    }
+    if (validatedPayload.categories !== undefined) {
+      productFile.data.categories = validatedPayload.categories;
+    }
 
     // Update timestamp
     productFile.updatedAt = new Date().toISOString();

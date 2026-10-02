@@ -32,29 +32,35 @@ export function AdminDeleteButton({ productId, productName }: AdminDeleteButtonP
 
   if (confirming) {
     return (
-      <span className="inline-flex items-center gap-2 text-xs">
-        <span className="text-[var(--muted)]">Apagar &ldquo;{productName}&rdquo;?</span>
-        <button
-          onClick={handleDelete}
-          disabled={loading}
-          className="font-semibold text-red-600 hover:text-red-800 disabled:opacity-60"
-        >
-          {loading ? "A apagar…" : "Confirmar"}
-        </button>
-        <button
-          onClick={() => setConfirming(false)}
-          className="text-[var(--muted)] hover:text-[var(--foreground)]"
-        >
-          Cancelar
-        </button>
-      </span>
+      <div className="space-y-2 rounded-lg bg-red-50 p-3">
+        <p className="text-xs leading-relaxed text-[#6d4141]">
+          Apagar &ldquo;{productName}&rdquo;? Esta ação não pode ser anulada.
+        </p>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleDelete}
+            disabled={loading}
+            className="text-xs font-semibold text-red-700 hover:text-red-900 disabled:opacity-60"
+          >
+            {loading ? "A apagar…" : "Confirmar"}
+          </button>
+          <button
+            onClick={() => setConfirming(false)}
+            disabled={loading}
+            className="text-xs font-medium text-[#74777d] hover:text-[#34373c]"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
     );
   }
 
   return (
     <button
+      type="button"
       onClick={() => setConfirming(true)}
-      className="text-xs text-red-500 hover:text-red-700 transition"
+      className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-sm text-red-600 transition hover:bg-red-50"
     >
       Apagar
     </button>

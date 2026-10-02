@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { AllProductsCatalog } from "@/components/all-products-catalog";
-import { getCatalogData } from "@/lib/data/catalog";
+import { getPublishedCatalogData } from "@/lib/data/catalog";
 import { buildBreadcrumbFromOrigin } from "@/lib/utils/breadcrumb";
 
 export const metadata: Metadata = {
@@ -27,7 +27,7 @@ export default async function AllProductsPage({
   searchParams: Promise<{ from?: string | string[] }>;
 }) {
   const resolvedSearchParams = await searchParams;
-  const catalog = await getCatalogData();
+  const catalog = await getPublishedCatalogData();
   const fromRaw = resolvedSearchParams.from;
   const fromPath =
     typeof fromRaw === "string"

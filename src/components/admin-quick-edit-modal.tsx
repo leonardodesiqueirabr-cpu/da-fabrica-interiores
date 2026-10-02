@@ -14,7 +14,7 @@ interface AdminQuickEditModalProps {
 export function AdminQuickEditModal({ product, isOpen, onClose, onSuccess }: AdminQuickEditModalProps) {
   const [name, setName] = useState(product.name);
   const [basePrice, setBasePrice] = useState(product.basePrice?.toString() || "");
-  const [available, setAvailable] = useState(product.available);
+  const [isPublished, setIsPublished] = useState(product.isPublished);
   const [categories, setCategories] = useState<string[]>(product.categories);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,7 +28,7 @@ export function AdminQuickEditModal({ product, isOpen, onClose, onSuccess }: Adm
       const payload = {
         name,
         basePrice: basePrice ? Number(basePrice) : null,
-        available,
+        isPublished,
         categories,
       };
 
@@ -91,15 +91,20 @@ export function AdminQuickEditModal({ product, isOpen, onClose, onSuccess }: Adm
             </div>
           </label>
 
-          {/* Availability */}
+          {/* Visibility */}
           <label className="flex items-center gap-3 rounded-lg border border-[var(--border)] p-3 text-sm">
             <input
               type="checkbox"
-              checked={available}
-              onChange={(e) => setAvailable(e.target.checked)}
+              checked={isPublished}
+              onChange={(e) => setIsPublished(e.target.checked)}
               className="accent-[var(--accent)]"
             />
-            <span className="font-medium">Disponível para compra</span>
+            <span>
+              <span className="block font-medium">Visibilidade no site: {isPublished ? "Publicado" : "Oculto"}</span>
+              <span className="mt-1 block text-xs text-[var(--muted)]">
+                Quando oculto, o produto permanece guardado no painel e deixa de aparecer no site.
+              </span>
+            </span>
           </label>
 
           {/* Categories */}

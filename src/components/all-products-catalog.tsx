@@ -44,7 +44,6 @@ export function AllProductsCatalog({
 
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>(initialSelectedCategories);
-  const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [onlyFeatured, setOnlyFeatured] = useState(false);
   const [onlyBestSellers, setOnlyBestSellers] = useState(initialOnlyBestSellers);
   const [minPrice, setMinPrice] = useState<number>(minAvailablePrice);
@@ -72,7 +71,6 @@ export function AllProductsCatalog({
       const matchesCategory =
         selectedCategories.length === 0 || selectedCategories.some((category) => product.categories.includes(category));
 
-      const matchesAvailability = !onlyAvailable || product.available;
       const matchesFeatured = !onlyFeatured || product.featured;
       const matchesBestSellers = !onlyBestSellers || product.bestSeller;
 
@@ -85,7 +83,6 @@ export function AllProductsCatalog({
       return (
         matchesSearch &&
         matchesCategory &&
-        matchesAvailability &&
         matchesFeatured &&
         matchesBestSellers &&
         matchesPrice
@@ -116,7 +113,6 @@ export function AllProductsCatalog({
     maxPrice,
     minAvailablePrice,
     minPrice,
-    onlyAvailable,
     onlyBestSellers,
     onlyFeatured,
     products,
@@ -128,7 +124,6 @@ export function AllProductsCatalog({
   const clearFilters = () => {
     setSearch("");
     setSelectedCategories(initialSelectedCategories);
-    setOnlyAvailable(false);
     setOnlyFeatured(false);
     setOnlyBestSellers(initialOnlyBestSellers);
     setMinPrice(minAvailablePrice);
@@ -139,7 +134,6 @@ export function AllProductsCatalog({
   const hasActiveFilters =
     search.length > 0 ||
     selectedCategories.join("|") !== initialSelectedCategories.join("|") ||
-    onlyAvailable ||
     onlyFeatured ||
     onlyBestSellers !== initialOnlyBestSellers ||
     minPrice !== minAvailablePrice ||
@@ -198,12 +192,8 @@ export function AllProductsCatalog({
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">Estado</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">Características</p>
           <div className="space-y-2">
-            <label className="flex items-center gap-2 text-sm">
-              <input type="checkbox" checked={onlyAvailable} onChange={(event) => setOnlyAvailable(event.target.checked)} />
-              Apenas disponíveis
-            </label>
             <label className="flex items-center gap-2 text-sm">
               <input type="checkbox" checked={onlyFeatured} onChange={(event) => setOnlyFeatured(event.target.checked)} />
               Em destaque

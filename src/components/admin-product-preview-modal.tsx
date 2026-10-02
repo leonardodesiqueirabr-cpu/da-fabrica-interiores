@@ -116,13 +116,13 @@ export function AdminProductPreviewModal({ product, isOpen, onClose }: AdminProd
           <div>
             <p className="mb-2 text-sm text-[var(--muted)]">Estado</p>
             <div className="flex gap-2">
-              {product.available ? (
+              {product.isPublished ? (
                 <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-700">
-                  Disponível
+                  Publicado
                 </span>
               ) : (
                 <span className="rounded-full bg-red-100 px-3 py-1 text-xs font-semibold text-red-700">
-                  Indisponível
+                  Oculto
                 </span>
               )}
               {product.featured && (

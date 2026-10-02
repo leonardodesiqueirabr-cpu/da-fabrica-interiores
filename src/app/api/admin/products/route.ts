@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { ADMIN_CATEGORIES } from "@/lib/data/categories";
-import { productPayloadSchema } from "@/lib/data/admin-schemas";
+import { productCreateSchema } from "@/lib/data/admin-schemas";
 import { syncProductWorkspace } from "@/lib/assets/product-workspaces";
 import { getSupabaseServiceClient } from "@/lib/supabase/service";
 import { requireAdminSession } from "@/lib/admin-session";
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   const supabase = getSupabaseServiceClient();
   const isReadOnlyRuntime = process.env.VERCEL === "1" || process.env.NODE_ENV === "production";
 
-  const parsed = productPayloadSchema.safeParse(await request.json());
+  const parsed = productCreateSchema.safeParse(await request.json());
   if (!parsed.success) {
     return NextResponse.json({ error: "Payload invalido.", issues: parsed.error.issues }, { status: 400 });
   }
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
         base_price: payload.basePrice,
         featured: payload.featured,
         best_seller: payload.bestSeller,
-        available: payload.available,
+        is_published: payload.isPublished,
         characteristics: payload.characteristics,
       })
       .select("id")

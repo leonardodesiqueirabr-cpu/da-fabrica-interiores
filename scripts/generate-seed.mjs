@@ -227,6 +227,7 @@ for (const row of productRows) {
     categories,
     featured,
     bestSeller,
+    isPublished: true,
     available: row.visible !== "false",
     characteristics: parseCharacteristics(row),
     colors: colorValues,

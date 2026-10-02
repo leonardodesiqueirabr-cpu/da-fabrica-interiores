@@ -1,7 +1,9 @@
 import { mkdir, readFile, rename, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { toSlug } from "@/lib/utils/text";
-import type { ProductPayload } from "@/lib/data/admin-schemas";
+import type { ProductCreatePayload, ProductUpdatePayload } from "@/lib/data/admin-schemas";
+
+type ProductPayload = ProductCreatePayload | ProductUpdatePayload;
 
 const PRODUCTS_ROOT = path.join(process.cwd(), "public", "produtos");
 const INDEX_FILE = path.join(PRODUCTS_ROOT, ".folders-index.json");
