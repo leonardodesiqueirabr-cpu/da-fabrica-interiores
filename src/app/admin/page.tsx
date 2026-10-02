@@ -20,12 +20,8 @@ export default async function AdminPage() {
 
   return (
     <section className="mx-auto max-w-[1440px] px-5 py-8 sm:px-8 sm:py-10">
-      <div className="flex flex-wrap items-end justify-between gap-5">
-        <div className="space-y-1">
-          <p className="text-xs font-medium uppercase tracking-[0.14em] text-[#8a8d93]">Visão geral</p>
-          <h1 className="text-2xl font-semibold tracking-tight text-[#222428] sm:text-3xl">Produtos</h1>
-          <p className="text-sm text-[#777b82]">Gira o catálogo e a visibilidade dos produtos no site.</p>
-        </div>
+      <div className="flex flex-wrap items-center justify-between gap-5">
+        <h1 className="text-2xl font-semibold tracking-tight text-[#222428] sm:text-3xl">Produtos</h1>
         <div className="flex items-center gap-2">
           <Link
             href="/admin/produtos/novo"

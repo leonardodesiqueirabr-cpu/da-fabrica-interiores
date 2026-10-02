@@ -1,23 +1,27 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
 import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { getCatalogData } from "@/lib/data/catalog";
 
 export default async function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = await cookies();
   const isAuthenticated = isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value);
+  const { assets } = await getCatalogData();
+  const logoSrc = assets.logoSecondary || assets.logoPrimary;
 
   return (
-    <div className="min-h-screen bg-[#f7f7f8] text-[#202124]">
+    <div className="flex min-h-screen flex-col bg-[#f7f7f8] text-[#202124]">
       <header className="border-b border-[#e8e8eb] bg-white">
-        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8 2xl:px-10">
+        <div className="mx-auto flex w-full max-w-[1600px] items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8 2xl:px-10">
           <Link href="/admin" className="flex min-w-0 items-center gap-3">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#f47b20] text-sm font-bold text-white">
-              DF
-            </span>
-            <span className="min-w-0">
-              <span className="block truncate text-sm font-semibold tracking-tight">Da Fábrica</span>
-              <span className="block text-xs text-[#777b82]">Administração</span>
-            </span>
+            {logoSrc ? (
+              <Image src={logoSrc} alt="Da Fábrica Interiores" width={128} height={128} className="h-[72px] w-[72px] shrink-0 object-contain sm:h-24 sm:w-24" priority />
+            ) : (
+              <span className="text-sm font-semibold tracking-tight">Da Fábrica</span>
+            )}
+            <span className="h-6 w-px shrink-0 bg-[#e5e5e8]" aria-hidden="true" />
+            <span className="truncate text-sm font-medium text-[#44484f]">Administração</span>
           </Link>
           <div className="flex items-center gap-2">
             <Link
@@ -39,7 +43,15 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
           </div>
         </div>
       </header>
-      {children}
+      <div className="flex-1">{children}</div>
+      <footer className="mt-10 border-t border-[#ececef]">
+        <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center gap-3 px-4 py-8 text-xs text-[#9a9da3] sm:px-6 lg:px-8 2xl:px-10">
+          {logoSrc ? (
+            <Image src={logoSrc} alt="Da Fábrica Interiores" width={120} height={120} className="h-24 w-24 object-contain" />
+          ) : null}
+          <p>© 2026 By DA FABRICA. Desenvolvido por VisualLine.</p>
+        </div>
+      </footer>
     </div>
   );
 }
