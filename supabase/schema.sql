@@ -45,6 +45,16 @@ create table if not exists product_images (
 
 alter table product_images add column if not exists color_hex text;
 
+create table if not exists product_colors (
+  id uuid primary key default gen_random_uuid(),
+  product_id uuid not null references products(id) on delete cascade,
+  name text not null,
+  hex text,
+  position int not null default 0
+);
+
+alter table product_images add column if not exists color_id uuid references product_colors(id) on delete set null;
+
 create table if not exists product_measurements (
   id uuid primary key default gen_random_uuid(),
   product_id uuid not null references products(id) on delete cascade,
@@ -73,6 +83,7 @@ alter table categories enable row level security;
 alter table products enable row level security;
 alter table product_categories enable row level security;
 alter table product_images enable row level security;
+alter table product_colors enable row level security;
 alter table product_measurements enable row level security;
 alter table product_options enable row level security;
 
@@ -87,6 +98,9 @@ create policy "Public read product_categories" on product_categories for select 
 
 drop policy if exists "Public read product_images" on product_images;
 create policy "Public read product_images" on product_images for select using (true);
+
+drop policy if exists "Public read product_colors" on product_colors;
+create policy "Public read product_colors" on product_colors for select using (true);
 
 drop policy if exists "Public read product_measurements" on product_measurements;
 create policy "Public read product_measurements" on product_measurements for select using (true);
@@ -106,6 +120,9 @@ create policy "Authenticated full product_categories" on product_categories for 
 drop policy if exists "Authenticated full product_images" on product_images;
 create policy "Authenticated full product_images" on product_images for all to authenticated using (true) with check (true);
 
+drop policy if exists "Authenticated full product_colors" on product_colors;
+create policy "Authenticated full product_colors" on product_colors for all to authenticated using (true) with check (true);
+
 drop policy if exists "Authenticated full product_measurements" on product_measurements;
 create policy "Authenticated full product_measurements" on product_measurements for all to authenticated using (true) with check (true);
 
@@ -118,10 +135,10 @@ grant usage on schema public to anon, authenticated, service_role;
 
 grant select on table
   categories, products, product_categories,
-  product_images, product_measurements, product_options
+  product_images, product_colors, product_measurements, product_options
 to anon;
 
 grant select, insert, update, delete on table
   categories, products, product_categories,
-  product_images, product_measurements, product_options
+  product_images, product_colors, product_measurements, product_options
 to authenticated, service_role;

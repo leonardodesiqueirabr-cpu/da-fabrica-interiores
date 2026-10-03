@@ -216,7 +216,7 @@ export function AdminProductsTable({ products }: AdminProductsTableProps) {
 
       <AdminProductPreviewModal
         product={previewProduct}
-        isOpen={isPreviewOpen}
+        open={isPreviewOpen}
         onClose={() => setIsPreviewOpen(false)}
       />
     </>

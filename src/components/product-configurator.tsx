@@ -32,7 +32,7 @@ const COLOR_HEX: Record<string, string> = {
 };
 
 export function ProductConfigurator({ product }: ProductConfiguratorProps) {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0] || "");
+  const [selectedColorId, setSelectedColorId] = useState<string | null>(null);
   const [selectedMeasure, setSelectedMeasure] = useState(product.measurements[0]?.label || "");
   const [selectedImageId, setSelectedImageId] = useState("");
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>(
@@ -51,31 +51,16 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
   }, [selectedOptions]);
 
   const orderedImages = useMemo(() => {
-    return [...product.images].sort((a, b) => {
-      const colorA = (a.colorName || "zz-sem-cor").toLowerCase();
-      const colorB = (b.colorName || "zz-sem-cor").toLowerCase();
-      if (colorA !== colorB) {
-        return colorA.localeCompare(colorB, "pt");
-      }
-
-      const sideA = (a.sideLabel || "").toLowerCase();
-      const sideB = (b.sideLabel || "").toLowerCase();
-      if (sideA !== sideB) {
-        return sideA.localeCompare(sideB, "pt");
-      }
-
-      return (a.sortOrder ?? 0) - (b.sortOrder ?? 0);
-    });
+    return [...product.images].sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
   }, [product.images]);
 
   const visibleImages = useMemo(() => {
-    const color = selectedColor.trim().toLowerCase();
-    if (!color) {
+    if (!selectedColorId) {
       return orderedImages;
     }
 
-    return orderedImages.filter((image) => (image.colorName || "").toLowerCase() === color);
-  }, [orderedImages, selectedColor]);
+    return orderedImages.filter((image) => image.colorId === selectedColorId);
+  }, [orderedImages, selectedColorId]);
 
   const selectedImage = useMemo(() => {
     if (visibleImages.length === 0) {
@@ -196,7 +181,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
 
   const message = buildProductMessage({
     productName: product.name,
-    color: selectedColor || undefined,
+    color: product.colors.find((color) => color.id === selectedColorId)?.name || undefined,
     measure: selectedMeasure || undefined,
     options: Object.values(selectedOptions).filter(Boolean),
     priceLabel,
@@ -255,24 +240,24 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
           {product.colors.length > 0 && (
             <div className="space-y-3 text-sm">
               <span className="font-medium">
-                Cor{selectedColor ? (
-                  <span className="ml-2 font-normal capitalize text-[var(--muted)]">{selectedColor}</span>
+                Cor{selectedColorId ? (
+                  <span className="ml-2 font-normal text-[var(--muted)]">
+                    {product.colors.find((color) => color.id === selectedColorId)?.name}
+                  </span>
                 ) : null}
               </span>
               <div className="flex flex-wrap gap-3 pt-1">
                 {product.colors.map((color) => {
-                  const lowerColor = color.toLowerCase();
-                  const imageForColor = orderedImages.find((image) => image.colorName?.toLowerCase() === lowerColor);
-                  const colorHex = imageForColor?.colorHex;
-                  const isSelected = selectedColor.toLowerCase() === lowerColor;
+                  const lowerColor = color.name.toLowerCase();
+                  const isSelected = selectedColorId === color.id;
 
                   return (
                     <button
-                      key={color}
+                      key={color.id}
                       type="button"
-                      title={color}
+                      title={color.name}
                       onClick={() => {
-                        setSelectedColor(isSelected ? "" : color);
+                        setSelectedColorId(isSelected ? null : color.id);
                         setSelectedImageId("");
                       }}
                       className={`size-5 rounded-full border-2 transition ${
@@ -280,7 +265,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
                           ? "border-[var(--foreground)] scale-110"
                           : "border-transparent hover:border-[var(--muted)]"
                       }`}
-                      style={{ backgroundColor: colorHex || COLOR_HEX[lowerColor] || "#d9d4cd" }}
+                      style={{ backgroundColor: color.hex || COLOR_HEX[lowerColor] || "#d9d4cd" }}
                     />
                   );
                 })}

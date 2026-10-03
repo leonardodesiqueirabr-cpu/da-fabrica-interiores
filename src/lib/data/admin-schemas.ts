@@ -10,12 +10,23 @@ const productFieldsSchema = z.object({
   bestSeller: z.boolean(),
   characteristics: z.array(z.string()).default([]),
   categories: z.array(z.string()).min(1),
-  colors: z.array(z.string()).default([]),
+  colors: z
+    .array(
+      z.object({
+        id: z.string().optional(),
+        name: z.string().min(1),
+        hex: z.string().optional().default("").nullable(),
+        position: z.number().optional(),
+      }),
+    )
+    .default([]),
   images: z
     .array(
       z.object({
+        id: z.string().optional(),
         url: z.string().min(1),
         alt: z.string().optional().default(""),
+        colorId: z.string().optional().nullable(),
         colorName: z.string().optional().default(""),
         colorHex: z.string().optional().default("").nullable(),
         isMain: z.boolean().optional().default(false),

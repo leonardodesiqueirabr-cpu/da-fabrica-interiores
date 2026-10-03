@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile, mkdir, unlink } from "node:fs/promises";
 import path from "node:path";
 import { NextResponse } from "next/server";
 import { getSupabaseServiceClient } from "@/lib/supabase/service";
@@ -7,6 +7,54 @@ import { requireAdminSession } from "@/lib/admin-session";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
+const LOCAL_UPLOAD_PREFIX = "/uploads/";
+const PRODUCT_IMAGES_BUCKET = "product-images";
+
+function getSupabaseStoragePathFromUrl(url: string): string | null {
+  const normalizedUrl = url.trim();
+  if (!normalizedUrl) return null;
+
+  const candidatePaths = new Set<string>();
+
+  try {
+    const parsedUrl = new URL(normalizedUrl);
+    candidatePaths.add(parsedUrl.pathname);
+  } catch {
+    // Suporta URLs relativas como /storage/v1/object/public/...
+    try {
+      const parsedRelativeUrl = new URL(normalizedUrl, "http://localhost");
+      candidatePaths.add(parsedRelativeUrl.pathname);
+    } catch {
+      candidatePaths.add(normalizedUrl);
+    }
+  }
+
+  for (const candidatePath of candidatePaths) {
+    const cleanedPath = candidatePath.split("?")[0];
+    const objectMatch = cleanedPath.match(/\/storage\/v1\/object\/(?:public|sign|authenticated|private)\/([^/]+)\/(.+)$/);
+    const renderMatch = cleanedPath.match(
+      /\/storage\/v1\/object\/render\/image\/(?:public|sign|authenticated|private)\/([^/]+)\/(.+)$/,
+    );
+    const match = objectMatch || renderMatch;
+    if (!match) continue;
+
+    const [, bucket, objectPathRaw] = match;
+    if (bucket !== PRODUCT_IMAGES_BUCKET) return null;
+
+    const objectPath = decodeURIComponent(objectPathRaw).replace(/^\/+/, "");
+    if (!objectPath) return null;
+    return objectPath;
+  }
+
+  return null;
+}
+
+function getLocalUploadPathFromUrl(url: string): string | null {
+  if (!url.startsWith(LOCAL_UPLOAD_PREFIX)) return null;
+  const relativePath = url.slice(LOCAL_UPLOAD_PREFIX.length);
+  if (!relativePath || relativePath.includes("..")) return null;
+  return path.join(process.cwd(), "public", "uploads", relativePath);
+}
 
 export async function POST(request: Request) {
   const unauthorized = await requireAdminSession();
@@ -20,6 +68,8 @@ export async function POST(request: Request) {
   }
 
   const file = formData.get("file");
+  const previousUrlValue = formData.get("previousUrl");
+  const previousUrl = typeof previousUrlValue === "string" && previousUrlValue.trim() ? previousUrlValue.trim() : null;
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "Nenhum ficheiro enviado" }, { status: 400 });
   }
@@ -48,7 +98,23 @@ export async function POST(request: Request) {
     }
 
     const { data: { publicUrl } } = supabase.storage.from("product-images").getPublicUrl(filename);
-    return NextResponse.json({ ok: true, url: publicUrl });
+    let oldFileDeleted = false;
+
+    if (previousUrl) {
+      const previousObjectPath = getSupabaseStoragePathFromUrl(previousUrl);
+      if (previousObjectPath) {
+        const { error: deleteError } = await supabase.storage.from("product-images").remove([previousObjectPath]);
+        if (deleteError) {
+          console.warn("[admin/upload] Falha ao remover imagem antiga do bucket product-images:", deleteError.message);
+        } else {
+          oldFileDeleted = true;
+        }
+      } else {
+        console.info("[admin/upload] Imagem antiga preservada: URL anterior não reconhecida como product-images.");
+      }
+    }
+
+    return NextResponse.json({ ok: true, url: publicUrl, oldFileDeleted });
   }
 
   // Fallback: save to public/uploads (local development)
@@ -56,5 +122,23 @@ export async function POST(request: Request) {
   await mkdir(uploadDir, { recursive: true });
   await writeFile(path.join(uploadDir, filename), buffer);
 
-  return NextResponse.json({ ok: true, url: `/uploads/${filename}` });
+  const newLocalUrl = `${LOCAL_UPLOAD_PREFIX}${filename}`;
+  let oldFileDeleted = false;
+
+  if (previousUrl) {
+    const previousLocalPath = getLocalUploadPathFromUrl(previousUrl);
+    if (previousLocalPath) {
+      try {
+        await unlink(previousLocalPath);
+        oldFileDeleted = true;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : "Erro desconhecido";
+        console.warn("[admin/upload] Falha ao remover imagem antiga local:", message);
+      }
+    } else {
+      console.info("[admin/upload] Imagem antiga local preservada: URL anterior não pertence a /uploads.");
+    }
+  }
+
+  return NextResponse.json({ ok: true, url: newLocalUrl, oldFileDeleted });
 }

@@ -4,7 +4,7 @@ import path from "node:path";
 import { cache } from "react";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { toSlug } from "@/lib/utils/text";
-import type { CatalogData, Product } from "@/types/catalog";
+import type { CatalogData, Product, ProductColor, ProductImage } from "@/types/catalog";
 
 const categoryMap: Record<string, string> = {
   sofas: "Sofas",
@@ -25,16 +25,33 @@ function mapCategory(name: string): string {
 }
 
 function mapSupabaseToProduct(row: any): Product {
-  const images = (row.product_images ?? []).map((item: any) => ({
-    id: item.id,
-    productId: row.id,
-    url: item.url,
-    alt: item.alt_text || row.name,
-    colorName: item.color_name || undefined,
-    colorHex: item.color_hex || undefined,
-    isMain: item.is_main,
-    sortOrder: item.sort_order,
-  }));
+  const rawColors: ProductColor[] = (row.product_colors ?? [])
+    .map((item: any) => ({
+      id: item.id,
+      productId: row.id,
+      name: item.name,
+      hex: item.hex || null,
+      position: item.position ?? 0,
+    }))
+    .sort((a: ProductColor, b: ProductColor) => (a.position ?? 0) - (b.position ?? 0));
+
+  const colorsById = new Map<string, ProductColor>(rawColors.map((color: ProductColor) => [color.id, color]));
+  const images: ProductImage[] = (row.product_images ?? [])
+    .map((item: any) => ({
+      id: item.id,
+      productId: row.id,
+      url: item.url,
+      alt: item.alt_text || row.name,
+      colorId: item.color_id || null,
+      colorName: item.color_name || undefined,
+      colorHex: item.color_hex || undefined,
+      isMain: item.is_main,
+      sortOrder: item.sort_order,
+    }))
+    .sort(
+      (a: { sortOrder?: number }, b: { sortOrder?: number }) =>
+        (a.sortOrder ?? Number.MAX_SAFE_INTEGER) - (b.sortOrder ?? Number.MAX_SAFE_INTEGER),
+    );
 
   const options = (row.product_options ?? []).map((item: any) => ({
     id: item.id,
@@ -53,9 +70,46 @@ function mapSupabaseToProduct(row: any): Product {
 
   const categories = (row.product_categories ?? []).map((item: any) => item.categories?.slug).filter(Boolean);
 
-  const colors: string[] = Array.from(
-    new Set(images.map((item: any) => item.colorName).filter((value: unknown): value is string => Boolean(value))),
-  );
+  const derivedColors: ProductColor[] = [];
+  const derivedColorByKey = new Map<string, ProductColor>();
+  for (const image of images) {
+    if (!image.colorName) continue;
+    const key = `${toSlug(image.colorName)}::${(image.colorHex || "").trim().toLowerCase()}`;
+    if (derivedColorByKey.has(key)) continue;
+    const color: ProductColor = {
+      id: `legacy-${row.id}-${toSlug(image.colorName)}-${derivedColorByKey.size + 1}`,
+      productId: row.id,
+      name: image.colorName,
+      hex: image.colorHex || null,
+      position: derivedColorByKey.size,
+    };
+    derivedColorByKey.set(key, color);
+    derivedColors.push(color);
+  }
+
+  const colors: ProductColor[] = rawColors.length > 0 ? rawColors : derivedColors;
+
+  const normalizedImages = images.map((image: ProductImage) => {
+    if (image.colorId && colorsById.has(image.colorId)) {
+      const color = colorsById.get(image.colorId)!;
+      return {
+        ...image,
+        colorName: color.name || image.colorName,
+        colorHex: color.hex || image.colorHex,
+      };
+    }
+
+    if (!image.colorId && image.colorName) {
+      const matchedColor = colors.find((color) => toSlug(color.name) === toSlug(image.colorName!));
+      return {
+        ...image,
+        colorId: matchedColor?.id ?? null,
+        colorHex: matchedColor?.hex ?? image.colorHex,
+      };
+    }
+
+    return image;
+  });
 
   return {
     id: row.id,
@@ -72,9 +126,61 @@ function mapSupabaseToProduct(row: any): Product {
     available: row.available,
     characteristics: row.characteristics || [],
     colors,
-    images,
+    images: normalizedImages,
     measurements,
     options,
+  };
+}
+
+function normalizeLocalCatalogData(catalog: CatalogData): CatalogData {
+  return {
+    ...catalog,
+    products: catalog.products.map((product) => {
+      const normalizedColors: ProductColor[] = (product.colors as unknown[]).map((color: unknown, index: number) => {
+        if (typeof color === "string") {
+          return {
+            id: `legacy-${product.id}-${toSlug(color)}-${index + 1}`,
+            productId: product.id,
+            name: color,
+            hex: null,
+            position: index,
+          };
+        }
+        const typed = color as ProductColor;
+        return {
+          id: typed.id || `legacy-${product.id}-${toSlug(typed.name)}-${index + 1}`,
+          productId: typed.productId || product.id,
+          name: typed.name,
+          hex: typed.hex ?? null,
+          position: typed.position ?? index,
+        };
+      });
+
+      const colorByName = new Map(normalizedColors.map((color) => [toSlug(color.name), color]));
+      const normalizedImages = product.images.map((image) => {
+        if (image.colorId) {
+          const color = normalizedColors.find((item: ProductColor) => item.id === image.colorId);
+          return color
+            ? { ...image, colorName: color.name || image.colorName, colorHex: color.hex || image.colorHex }
+            : image;
+        }
+
+        if (image.colorName) {
+          const matchedColor = colorByName.get(toSlug(image.colorName));
+          return matchedColor
+            ? { ...image, colorId: matchedColor.id, colorHex: matchedColor.hex || image.colorHex }
+            : image;
+        }
+
+        return image;
+      });
+
+      return {
+        ...product,
+        colors: normalizedColors,
+        images: normalizedImages,
+      };
+    }),
   };
 }
 
@@ -193,7 +299,7 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
   const supabase = await getSupabaseServerClient();
 
   if (!supabase) {
-    return withResolvedHomeAssets(localSeed as CatalogData);
+    return withResolvedHomeAssets(normalizeLocalCatalogData(localSeed as CatalogData));
   }
 
   const catalogFields = `
@@ -208,12 +314,16 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
       is_published,
       available,
       characteristics,
-      product_images(id, url, alt_text, color_name, color_hex, is_main, sort_order),
+      product_images(id, url, alt_text, color_id, color_name, color_hex, is_main, sort_order),
+      product_colors(id, name, hex, position),
       product_options(id, option_name, values),
       product_measurements(id, measure_label, price, active),
       product_categories(categories(slug))
       `;
-  const legacyCatalogFields = catalogFields.replace("      is_published,\n", "");
+  const legacyCatalogFields = catalogFields
+    .replace("      is_published,\n", "")
+    .replace("      product_colors(id, name, hex, position),\n", "")
+    .replace("color_id, ", "");
   const fetchCatalog = (fields: string) =>
     supabase.from("products").select(fields).order("created_at", { ascending: false });
 
@@ -221,14 +331,16 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
 
   if (
     error &&
-    error.message.toLowerCase().includes("is_published") &&
+    (error.message.toLowerCase().includes("is_published") ||
+      error.message.toLowerCase().includes("product_colors") ||
+      error.message.toLowerCase().includes("color_id")) &&
     (error.code === "42703" || error.code === "PGRST204" || error.message.toLowerCase().includes("schema cache"))
   ) {
     ({ data, error } = await fetchCatalog(legacyCatalogFields));
   }
 
   if (error || !data) {
-    return withResolvedHomeAssets(localSeed as CatalogData);
+    return withResolvedHomeAssets(normalizeLocalCatalogData(localSeed as CatalogData));
   }
 
   const products = data.map(mapSupabaseToProduct);

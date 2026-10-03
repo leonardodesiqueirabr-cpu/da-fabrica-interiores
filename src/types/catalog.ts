@@ -11,11 +11,20 @@ export interface ProductImage {
   productId: string;
   url: string;
   alt: string;
+  colorId?: string | null;
   colorName?: string;
   colorHex?: string;
   sideLabel?: string;
   isMain: boolean;
   sortOrder: number;
+}
+
+export interface ProductColor {
+  id: string;
+  productId?: string;
+  name: string;
+  hex?: string | null;
+  position: number;
 }
 
 export interface ProductMeasurement {
@@ -46,7 +55,7 @@ export interface Product {
   isPublished: boolean;
   available: boolean;
   characteristics: string[];
-  colors: string[];
+  colors: ProductColor[];
   images: ProductImage[];
   measurements: ProductMeasurement[];
   options: ProductOption[];

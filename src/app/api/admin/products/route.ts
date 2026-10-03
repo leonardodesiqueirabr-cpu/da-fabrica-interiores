@@ -65,17 +65,51 @@ export async function POST(request: Request) {
       }
     }
 
+    const colorIdMap = new Map<string, string>();
+    if (payload.colors.length > 0) {
+      for (const [index, color] of payload.colors.entries()) {
+        const { data: insertedColor, error: colorError } = await supabase
+          .from("product_colors")
+          .insert({
+            product_id: insertedProduct.id,
+            name: color.name,
+            hex: color.hex || null,
+            position: color.position ?? index,
+          })
+          .select("id")
+          .single();
+
+        if (colorError || !insertedColor) {
+          return NextResponse.json({ error: colorError?.message || "Erro ao criar cor do produto." }, { status: 500 });
+        }
+
+        if (color.id) {
+          colorIdMap.set(color.id, insertedColor.id);
+        }
+        colorIdMap.set(insertedColor.id, insertedColor.id);
+      }
+    }
+
     if (payload.images.length > 0) {
+
       await supabase.from("product_images").insert(
-        payload.images.map((item, index) => ({
-          product_id: insertedProduct.id,
-          url: item.url,
-          alt_text: item.alt || payload.name,
-          color_name: item.colorName || null,
-          color_hex: item.colorHex || null,
-          is_main: item.isMain ?? index === 0,
-          sort_order: item.sortOrder ?? index,
-        })),
+        payload.images.map((item, index) => {
+          const resolvedColorId = item.colorId ? colorIdMap.get(item.colorId) || null : null;
+          const colorFromPayload = resolvedColorId
+            ? payload.colors.find((color) => (colorIdMap.get(color.id || "") || color.id) === resolvedColorId)
+            : null;
+
+          return {
+            product_id: insertedProduct.id,
+            url: item.url,
+            alt_text: item.alt || payload.name,
+            color_id: resolvedColorId,
+            color_name: colorFromPayload?.name || item.colorName || null,
+            color_hex: colorFromPayload?.hex || item.colorHex || null,
+            is_main: item.isMain ?? index === 0,
+            sort_order: item.sortOrder ?? index,
+          };
+        }),
       );
     }
 

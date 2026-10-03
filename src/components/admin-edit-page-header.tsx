@@ -47,7 +47,7 @@ export function AdminEditPageHeader({ product }: AdminEditPageHeaderProps) {
           </Link>
         </div>
       </div>
-      <AdminProductPreviewModal product={product} isOpen={previewOpen} onClose={() => setPreviewOpen(false)} />
+      <AdminProductPreviewModal product={product} open={previewOpen} onClose={() => setPreviewOpen(false)} />
     </>
   );
 }

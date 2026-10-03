@@ -1,11 +1,14 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { ArrowLeft, Eye, Save } from "lucide-react";
 import { toSlug } from "@/lib/utils/text";
 import type { Product } from "@/types/catalog";
 import { ADMIN_CATEGORIES } from "@/lib/data/categories";
+import { AdminProductPreviewModal } from "@/components/admin-product-preview-modal";
 
 interface AdminProductFormProps {
   mode: "create" | "edit";
@@ -13,12 +16,21 @@ interface AdminProductFormProps {
 }
 
 interface EditableImage {
+  id?: string;
   url: string;
   alt: string;
+  colorId?: string | null;
   colorName?: string;
   colorHex?: string;
   isMain: boolean;
   uploading?: boolean;
+}
+
+interface EditableColor {
+  id: string;
+  name: string;
+  hex: string;
+  position: number;
 }
 
 interface EditableMeasure {
@@ -32,30 +44,71 @@ interface EditableOption {
   values: string;
 }
 
-const STEPS = ["Edição", "Revisão"] as const;
+const TEMP_COLOR_ID_PREFIX = "temp-color-";
+
+function toColorHexValue(hex?: string | null) {
+  if (!hex) return "#cccccc";
+  return /^#[0-9A-Fa-f]{6}$/.test(hex) ? hex : "#cccccc";
+}
+
+function shouldUseSubtleBorder(hex?: string | null) {
+  const safeHex = toColorHexValue(hex);
+  const r = parseInt(safeHex.slice(1, 3), 16);
+  const g = parseInt(safeHex.slice(3, 5), 16);
+  const b = parseInt(safeHex.slice(5, 7), 16);
+  const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+  return luminance > 0.86;
+}
+
+function toColorKey(value?: string | null) {
+  return (value || "").trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function normalizeInitialColors(product?: Product): EditableColor[] {
+  if (!product) return [];
+  if (product.colors.length > 0) {
+    return product.colors
+      .map((color, index) => ({
+        id: color.id,
+        name: color.name,
+        hex: toColorHexValue(color.hex),
+        position: color.position ?? index,
+      }))
+      .sort((a, b) => a.position - b.position);
+  }
+
+  const fallbackColors = new Map<string, EditableColor>();
+  product.images.forEach((image) => {
+    if (!image.colorName) return;
+    const key = `${toColorKey(image.colorName)}::${toColorHexValue(image.colorHex)}`;
+    if (fallbackColors.has(key)) return;
+    fallbackColors.set(key, {
+      id: `${TEMP_COLOR_ID_PREFIX}${toColorKey(image.colorName)}-${fallbackColors.size + 1}`,
+      name: image.colorName,
+      hex: toColorHexValue(image.colorHex),
+      position: fallbackColors.size,
+    });
+  });
+
+  return Array.from(fallbackColors.values());
+}
 
 export function AdminProductForm({ mode, product }: AdminProductFormProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const [stepIndex, setStepIndex] = useState(0);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [dragActive, setDragActive] = useState(false);
+  const [draggedImageIndex, setDraggedImageIndex] = useState<number | null>(null);
+  const [dragOverImageIndex, setDragOverImageIndex] = useState<number | null>(null);
+  const [draggedColorIndex, setDraggedColorIndex] = useState<number | null>(null);
+  const [dragOverColorIndex, setDragOverColorIndex] = useState<number | null>(null);
+  const [isColorEditorOpen, setIsColorEditorOpen] = useState(false);
+  const [draftColors, setDraftColors] = useState<EditableColor[]>([]);
   const dropZoneRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  // Ler step da URL ao carregar
-  useEffect(() => {
-    const stepParam = searchParams.get("step");
-    if (stepParam) {
-      const step = parseInt(stepParam, 10);
-      if (!isNaN(step) && step >= 0 && step < STEPS.length) {
-        setStepIndex(step);
-      }
-    }
-    setIsInitialized(true);
-  }, [searchParams]);
+  const replaceInputRef = useRef<HTMLInputElement>(null);
+  const replaceIndexRef = useRef<number | null>(null);
 
   const [name, setName] = useState(product?.name || "");
   const [slug, setSlug] = useState(product?.slug || "");
@@ -66,23 +119,31 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
   const [bestSeller, setBestSeller] = useState(product?.bestSeller || false);
   const [isPublished, setIsPublished] = useState(product?.isPublished ?? true);
   const [categories, setCategories] = useState<string[]>(product?.categories || []);
+  const initialColors = useMemo(() => normalizeInitialColors(product), [product]);
+  const initialColorByName = useMemo(
+    () => new Map(initialColors.map((color) => [toColorKey(color.name), color.id])),
+    [initialColors],
+  );
+  const [colors, setColors] = useState<EditableColor[]>(initialColors);
   const [images, setImages] = useState<EditableImage[]>(
     product?.images.map((img) => ({
+      id: img.id,
       url: img.url,
       alt: img.alt,
+      colorId: img.colorId ?? (img.colorName ? initialColorByName.get(toColorKey(img.colorName)) ?? null : null),
       colorName: img.colorName,
       colorHex: img.colorHex,
       isMain: img.isMain,
     })) || [],
   );
-  const [measurements, setMeasurements] = useState<EditableMeasure[]>(
+  const [measurements] = useState<EditableMeasure[]>(
     product?.measurements.map((m) => ({
       label: m.label,
       price: m.price?.toString() || "",
       active: m.active,
     })) || [{ label: "", price: "", active: true }],
   );
-  const [options, setOptions] = useState<EditableOption[]>(
+  const [options] = useState<EditableOption[]>(
     product?.options.map((o) => ({ name: o.name, values: o.values.join(", ") })) || [],
   );
 
@@ -91,13 +152,100 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
     [name, slug, categories.length],
   );
 
-  async function uploadFile(file: File): Promise<string> {
+  const previewProduct: Product = useMemo(() => {
+    const normalizedColors = colors
+      .map((color, index) => ({
+        id: color.id,
+        productId: product?.id || "preview",
+        name: color.name.trim(),
+        hex: color.hex?.trim() || null,
+        position: index,
+      }))
+      .filter((color) => color.name.length > 0);
+    const colorsById = new Map(normalizedColors.map((color) => [color.id, color]));
+
+    return {
+      id: product?.id || "preview",
+      slug: slug || "preview",
+      name: name || product?.name || "Produto sem nome",
+      shortDescription: description || "",
+      description: description || "",
+      basePrice: basePrice ? Number(basePrice) : null,
+      categories,
+      featured,
+      bestSeller,
+      isPublished,
+      available: true,
+      characteristics: characteristicsText
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      colors: normalizedColors,
+      images: images
+        .filter((img) => img.url.trim())
+        .map((img, idx) => {
+          const mappedColor = img.colorId ? colorsById.get(img.colorId) : null;
+          return {
+            id: img.id || `preview-image-${idx}`,
+            productId: product?.id || "preview",
+            url: img.url,
+            alt: img.alt || name || product?.name || "Imagem do produto",
+            colorId: img.colorId || null,
+            colorName: mappedColor?.name || img.colorName,
+            colorHex: mappedColor?.hex || img.colorHex,
+            isMain: img.isMain,
+            sortOrder: idx,
+          };
+        }),
+      measurements: measurements
+        .filter((m) => m.label.trim())
+        .map((m, idx) => ({
+          id: `preview-measure-${idx}`,
+          productId: product?.id || "preview",
+          label: m.label,
+          price: m.price ? Number(m.price) : null,
+          active: m.active,
+        })),
+      options: options
+        .filter((o) => o.name.trim())
+        .map((o, idx) => ({
+          id: `preview-option-${idx}`,
+          productId: product?.id || "preview",
+          name: o.name,
+          values: o.values
+            .split(",")
+            .map((v) => v.trim())
+            .filter(Boolean),
+        })),
+    };
+  }, [
+    basePrice,
+    bestSeller,
+    categories,
+    characteristicsText,
+    colors,
+    description,
+    featured,
+    images,
+    isPublished,
+    measurements,
+    name,
+    options,
+    product?.id,
+    product?.name,
+    slug,
+  ]);
+
+  async function uploadFile(file: File, previousUrl?: string): Promise<{ url: string }> {
     const formData = new FormData();
     formData.append("file", file);
+    if (previousUrl) {
+      formData.append("previousUrl", previousUrl);
+    }
     const response = await fetch("/api/admin/upload", { method: "POST", body: formData });
     const result = (await response.json()) as { url?: string; error?: string };
     if (!response.ok) throw new Error(result.error || "Erro no upload");
-    return result.url!;
+    return { url: result.url! };
   }
 
   async function handleFiles(files: FileList | File[]) {
@@ -118,7 +266,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
         try {
           const url = await uploadFile(file);
           setImages((prev) =>
-            prev.map((img, idx) => (idx === startIndex + i ? { ...img, url, uploading: false } : img)),
+            prev.map((img, idx) => (idx === startIndex + i ? { ...img, url: url.url, uploading: false } : img)),
           );
         } catch (err) {
           setError(err instanceof Error ? err.message : "Erro no upload");
@@ -126,6 +274,125 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
         }
       }),
     );
+  }
+
+  function openReplaceFilePicker(index: number) {
+    replaceIndexRef.current = index;
+    replaceInputRef.current?.click();
+  }
+
+  async function handleReplaceFile(file: File, index: number) {
+    const currentImage = images[index];
+    if (!currentImage?.url.trim()) return;
+
+    setError(null);
+    setImages((prev) => prev.map((img, i) => (i === index ? { ...img, uploading: true } : img)));
+
+    try {
+      const { url } = await uploadFile(file, currentImage.url);
+      setImages((prev) => prev.map((img, i) => (i === index ? { ...img, url, uploading: false } : img)));
+    } catch (err) {
+      setImages((prev) => prev.map((img, i) => (i === index ? { ...img, uploading: false } : img)));
+      setError(err instanceof Error ? err.message : "Erro ao substituir imagem");
+    }
+  }
+
+  function moveImage(fromIndex: number, toIndex: number) {
+    if (fromIndex === toIndex) return;
+    setImages((prev) => {
+      if (fromIndex < 0 || toIndex < 0 || fromIndex >= prev.length || toIndex >= prev.length) {
+        return prev;
+      }
+      const reordered = [...prev];
+      const [moved] = reordered.splice(fromIndex, 1);
+      reordered.splice(toIndex, 0, moved);
+      return reordered;
+    });
+  }
+
+  function addColor() {
+    setDraftColors((prev) => [
+      ...prev,
+      {
+        id: `${TEMP_COLOR_ID_PREFIX}${crypto.randomUUID()}`,
+        name: "",
+        hex: "#cccccc",
+        position: prev.length,
+      },
+    ]);
+  }
+
+  function updateColor(index: number, updater: (color: EditableColor) => EditableColor) {
+    setDraftColors((prev) => prev.map((color, i) => (i === index ? updater(color) : color)));
+  }
+
+  function removeColor(index: number) {
+    const colorToRemove = draftColors[index];
+    if (!colorToRemove) return;
+
+    const associatedCount = images.filter((image) => image.colorId === colorToRemove.id).length;
+    if (associatedCount > 0) {
+      const confirmed = window.confirm(
+        `A cor "${colorToRemove.name || "sem nome"}" está associada a ${associatedCount} imagem(ns). Deseja desassociar essas imagens e remover a cor?`,
+      );
+      if (!confirmed) return;
+    }
+
+    setDraftColors((prev) =>
+      prev
+        .filter((_, i) => i !== index)
+        .map((color, position) => ({
+          ...color,
+          position,
+        })),
+    );
+  }
+
+  function moveDraftColor(fromIndex: number, toIndex: number) {
+    if (fromIndex === toIndex) return;
+    setDraftColors((prev) => {
+      if (fromIndex < 0 || toIndex < 0 || fromIndex >= prev.length || toIndex >= prev.length) {
+        return prev;
+      }
+      const reordered = [...prev];
+      const [moved] = reordered.splice(fromIndex, 1);
+      reordered.splice(toIndex, 0, moved);
+      return reordered.map((color, position) => ({
+        ...color,
+        position,
+      }));
+    });
+  }
+
+  function openColorEditor() {
+    setDraftColors(colors.map((color, index) => ({ ...color, position: color.position ?? index })));
+    setIsColorEditorOpen(true);
+  }
+
+  function saveColorEditor() {
+    const removedColorIds = colors
+      .map((color) => color.id)
+      .filter((id) => !draftColors.some((draft) => draft.id === id));
+
+    if (removedColorIds.length > 0) {
+      setImages((prev) =>
+        prev.map((image) =>
+          image.colorId && removedColorIds.includes(image.colorId)
+            ? { ...image, colorId: null }
+            : image,
+        ),
+      );
+    }
+
+    setColors(
+      draftColors.map((color, index) => ({
+        ...color,
+        position: index,
+      })),
+    );
+    setDraggedColorIndex(null);
+    setDragOverColorIndex(null);
+    setIsColorEditorOpen(false);
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -138,6 +405,16 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
     setError(null);
 
     try {
+      const normalizedColors = colors
+        .map((color, index) => ({
+          id: color.id,
+          name: color.name.trim(),
+          hex: color.hex?.trim() || null,
+          position: index,
+        }))
+        .filter((color) => color.name.length > 0);
+      const colorsById = new Map(normalizedColors.map((color) => [color.id, color]));
+
       const payload = {
         name,
         slug,
@@ -152,13 +429,16 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
           .map((s) => s.trim())
           .filter(Boolean),
         categories,
+        colors: normalizedColors,
         images: images
           .filter((img) => img.url.trim())
           .map((img, idx) => ({
+            id: img.id,
             url: img.url,
             alt: img.alt || name,
-            colorName: img.colorName || null,
-            colorHex: img.colorHex || null,
+            colorId: img.colorId || null,
+            colorName: img.colorId ? colorsById.get(img.colorId)?.name || null : null,
+            colorHex: img.colorId ? colorsById.get(img.colorId)?.hex || null : null,
             isMain: img.isMain,
             sortOrder: idx,
           })),
@@ -204,45 +484,41 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
     }
   }
 
-  function handleStepChange(newStep: number, e?: React.MouseEvent) {
-    e?.preventDefault();
-    setStepIndex(newStep);
-    const params = new URLSearchParams(searchParams);
-    params.set("step", newStep.toString());
-    router.push(`?${params.toString()}`);
-  }
-
   return (
     <form id="admin-product-form" onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-      {/* Step tabs */}
-      <div className="flex w-fit max-w-full items-center gap-1 border-b border-[#e8e8eb]">
-        {STEPS.map((step, index) => (
+      <div className="flex flex-col gap-5 border-b border-[#e7e7e9] pb-5 md:flex-row md:items-end md:justify-between">
+        <h1 className="min-w-0 truncate text-2xl font-semibold tracking-tight text-[#222428] sm:text-3xl">
+          {name || product?.name || "Novo produto"}
+        </h1>
+        <div className="flex flex-wrap items-center gap-2">
           <button
-            key={step}
-            type="button"
-            onClick={(e) => handleStepChange(index, e)}
-            className={`flex items-center justify-center gap-2 border-b-2 px-3.5 py-2.5 text-xs font-semibold transition sm:px-4 ${
-              stepIndex === index
-                ? "border-[#e98a47] text-[#37393e]"
-                : index < stepIndex
-                  ? "border-transparent text-[#555960] hover:text-[#292b30]"
-                  : "border-transparent text-[#92959b] hover:text-[#555960]"
-            }`}
+            type="submit"
+            disabled={!canSubmit || loading}
+            className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#f47b20] px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-[#dd6818] disabled:opacity-60"
           >
-            <span className={`inline-flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full text-[10px] font-semibold ${
-              stepIndex === index ? "bg-[#f8e8dc] text-[#a95622]" : "bg-[#f0f0f1] text-[#777b82]"
-            }`}>
-              {index < stepIndex ? "✓" : index + 1}
-            </span>
-            <span>{step}</span>
+            <Save size={16} />
+            {loading ? "A gravar…" : mode === "create" ? "Criar produto" : "Guardar"}
           </button>
-        ))}
+          <button
+            type="button"
+            onClick={() => setIsPreviewOpen(true)}
+            className="inline-flex h-10 items-center gap-2 rounded-lg border border-[#e5e5e8] bg-white px-3.5 text-sm font-medium text-[#44484f] transition hover:border-[#f2a064] hover:text-[#d96512]"
+          >
+            <Eye size={16} />
+            Pré-visualizar
+          </button>
+          <Link
+            href="/admin"
+            className="inline-flex h-10 items-center gap-2 rounded-lg border border-[#e5e5e8] bg-white px-3.5 text-sm font-medium text-[#44484f] transition hover:bg-[#f5f5f6]"
+          >
+            <ArrowLeft size={16} />
+            Voltar
+          </Link>
+        </div>
       </div>
 
       <div className="rounded-2xl bg-transparent">
-        {/* ── Step 1: Edição (Informações + Imagens + Medidas + Opções) ── */}
-        {stepIndex === 0 && (
-          <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.95fr)] lg:gap-5 xl:gap-6">
+        <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(280px,0.95fr)] lg:gap-5 xl:gap-6">
             <div className="min-w-0 space-y-4 lg:space-y-5">
             {/* ── Informações ── */}
             <section className="space-y-4 rounded-xl border border-[#e9e9ec] bg-white p-4 sm:space-y-5 sm:p-5">
@@ -308,6 +584,39 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                 />
               </label>
 
+            </section>
+
+            <section className="space-y-3.5 rounded-xl border border-[#e9e9ec] bg-white p-4 sm:p-5">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h2 className="text-base font-semibold tracking-tight text-[#292b30]">Cores disponíveis</h2>
+                  <p className="mt-1 text-xs text-[#858990]">Defina as cores do produto para associar às imagens.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={openColorEditor}
+                  className="shrink-0 rounded-lg border border-[#e7e7e9] px-3 py-2 text-xs font-semibold text-[#555960] transition hover:border-[#f2a064] hover:text-[#d96512]"
+                >
+                  Editar
+                </button>
+              </div>
+
+              {colors.length > 0 ? (
+                <div className="flex flex-wrap items-start gap-3">
+                  {colors.map((color) => (
+                    <div key={color.id} className="flex w-[74px] flex-col items-center gap-1 text-center">
+                      <span
+                        className={`h-6 w-6 rounded-full ${shouldUseSubtleBorder(color.hex) ? "border border-[#dfe1e6]" : ""}`}
+                        style={{ backgroundColor: toColorHexValue(color.hex) }}
+                        title={`${color.name || "Sem nome"} · ${toColorHexValue(color.hex)}`}
+                      />
+                      <span className="w-full truncate text-[11px] text-[#6f737b]">{color.name || "Sem nome"}</span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-xs text-[#858990]">Nenhuma cor cadastrada.</p>
+              )}
             </section>
 
             {/* ── Imagens ── */}
@@ -382,14 +691,56 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                   }}
                 />
               </div>
+              <input
+                ref={replaceInputRef}
+                type="file"
+                accept="image/jpeg,image/jpg,image/png,image/webp"
+                className="hidden"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  const selectedIndex = replaceIndexRef.current;
+                  if (file && selectedIndex !== null) {
+                    await handleReplaceFile(file, selectedIndex);
+                  }
+                  replaceIndexRef.current = null;
+                  e.target.value = "";
+                }}
+              />
 
               {/* Image grid */}
               {images.length > 0 && (
-                <div className="grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
+                <div className="grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-4">
                   {images.map((img, index) => (
-                    <div key={index} className="min-w-0 space-y-2 rounded-lg border border-[#ededf0] bg-white p-2">
+                    <div
+                      key={img.id ?? `${img.url}-${index}`}
+                      onDragOver={(e) => {
+                        if (draggedImageIndex === null || draggedImageIndex === index) return;
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setDragOverImageIndex(index);
+                      }}
+                      onDrop={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (draggedImageIndex === null || draggedImageIndex === index) {
+                          setDraggedImageIndex(null);
+                          setDragOverImageIndex(null);
+                          return;
+                        }
+                        moveImage(draggedImageIndex, index);
+                        setDraggedImageIndex(null);
+                        setDragOverImageIndex(null);
+                      }}
+                      className={`min-w-0 overflow-hidden rounded-md border bg-white transition ${
+                        draggedImageIndex === index
+                          ? "border-[#f2a064] opacity-75"
+                          : dragOverImageIndex === index
+                            ? "border-[#f2a064] ring-2 ring-[#f47b20]/25"
+                            : "border-[#ededf0]"
+                      }`}
+                    >
                       {/* Preview */}
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-[#f2f2f3]">
+                      <div className="group relative aspect-[16/10] w-full overflow-hidden bg-[#f2f2f3]">
                         {img.uploading ? (
                           <div className="flex h-full items-center justify-center">
                             <div className="h-7 w-7 animate-spin rounded-full border-2 border-[#f47b20] border-t-transparent" />
@@ -411,213 +762,248 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                             Principal
                           </span>
                         )}
+
+                        <button
+                          type="button"
+                          draggable
+                          onDragStart={(e) => {
+                            e.stopPropagation();
+                            setDraggedImageIndex(index);
+                            setDragOverImageIndex(index);
+                            e.dataTransfer.effectAllowed = "move";
+                            e.dataTransfer.setData("text/plain", String(index));
+                          }}
+                          onDragEnd={() => {
+                            setDraggedImageIndex(null);
+                            setDragOverImageIndex(null);
+                          }}
+                          className="absolute left-2 bottom-2 flex h-7 w-7 items-center justify-center rounded-md bg-black/55 text-white opacity-0 transition hover:bg-black/70 group-hover:opacity-100 focus-visible:opacity-100"
+                          title="Arrastar para reordenar"
+                          aria-label="Arrastar para reordenar"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className="h-4 w-4"
+                          >
+                            <path d="M7 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm0 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm9-13a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+                          </svg>
+                        </button>
+
+                        {!img.uploading && img.url ? (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              openReplaceFilePicker(index);
+                            }}
+                            className="absolute bottom-2 left-11 rounded-md bg-black/55 px-2.5 py-1 text-[11px] font-medium text-white opacity-0 transition hover:bg-black/70 group-hover:opacity-100 focus-visible:opacity-100"
+                          >
+                            Substituir imagem
+                          </button>
+                        ) : null}
                       </div>
 
-                      <input
-                        placeholder="Texto alternativo (ex: Sofá bege)"
-                        value={img.alt}
-                        onChange={(e) =>
-                          setImages((prev) => prev.map((item, i) => (i === index ? { ...item, alt: e.target.value } : item)))
-                        }
-                        className="w-full rounded-md border border-[#e7e7e9] bg-[#fcfcfd] px-2.5 py-1.5 text-xs outline-none focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10"
-                      />
+                      <div className="space-y-2 p-2 md:p-2.5">
+                        <div className="flex items-center gap-1.5">
+                          <div className="min-w-0 flex-1">
+                            <select
+                              value={img.colorId || ""}
+                              onChange={(e) => {
+                                const value = e.target.value || null;
+                                setImages((prev) => prev.map((item, i) => (i === index ? { ...item, colorId: value } : item)));
+                              }}
+                              className="w-full rounded-md border border-[#e8e8eb] bg-white px-2 py-1.5 text-xs text-[#37393e] outline-none focus:border-[#f2a064]"
+                            >
+                              <option value="">Sem associação</option>
+                              {colors
+                                .filter((color) => color.name.trim())
+                                .map((color) => (
+                                  <option key={color.id} value={color.id}>
+                                    ● {color.name}
+                                  </option>
+                                ))}
+                            </select>
+                          </div>
 
-                      <div className="flex gap-2">
-                        <input
-                          placeholder="Nome da cor"
-                          value={img.colorName || ""}
-                          onChange={(e) =>
-                            setImages((prev) => prev.map((item, i) => (i === index ? { ...item, colorName: e.target.value } : item)))
-                          }
-                          className="min-w-0 flex-1 rounded-md border border-[#e7e7e9] bg-[#fcfcfd] px-2.5 py-1.5 text-xs outline-none focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10"
-                        />
-                        <div className="flex items-center gap-1">
-                          <input
-                            type="color"
-                            title="Selector de cor"
-                            value={img.colorHex || "#cccccc"}
-                            onChange={(e) =>
-                              setImages((prev) => prev.map((item, i) => (i === index ? { ...item, colorHex: e.target.value } : item)))
-                            }
-                            className="h-8 w-9 cursor-pointer rounded-md border border-[#e7e7e9] p-0.5"
-                          />
-                          <input
-                            type="text"
-                            placeholder="#cccccc"
-                            value={img.colorHex || "#cccccc"}
-                            maxLength={7}
-                            onChange={(e) => {
-                              const val = e.target.value;
-                              if (/^#[0-9A-Fa-f]{6}$/.test(val) || val === "") {
-                                setImages((prev) => prev.map((item, i) => (i === index ? { ...item, colorHex: val || "#cccccc" } : item)));
+                          <label className="flex shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-1 py-1 text-[11px] text-[#555960]">
+                            <input
+                              type="checkbox"
+                              checked={img.isMain}
+                              onChange={(e) =>
+                                setImages((prev) =>
+                                  prev.map((item, i) => ({ ...item, isMain: i === index ? e.target.checked : false })),
+                                )
                               }
-                            }}
-                            className="w-[4.5rem] rounded-md border border-[#e7e7e9] bg-[#fcfcfd] px-2 py-1.5 text-xs font-mono outline-none focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10"
-                          />
+                              className="h-3.5 w-3.5 accent-[var(--accent)]"
+                            />
+                            Principal
+                          </label>
                         </div>
                       </div>
-
-                      <label className="flex cursor-pointer items-center gap-2 rounded-md bg-[#fff7f0] px-2.5 py-2 text-xs font-medium text-[#99511e]">
-                        <input
-                          type="checkbox"
-                          checked={img.isMain}
-                          onChange={(e) =>
-                            setImages((prev) =>
-                              prev.map((item, i) => ({ ...item, isMain: i === index ? e.target.checked : false })),
-                            )
-                          }
-                          className="accent-[var(--accent)]"
-                        />
-                        Imagem principal
-                      </label>
                     </div>
                   ))}
                 </div>
               )}
-            </section>
 
-            {/* ── Medidas e Opções ── */}
-            <section className="space-y-5 rounded-xl border border-[#e9e9ec] bg-white p-4 sm:p-5">
-              {/* Measurements */}
-              <div className="space-y-3">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-base font-semibold tracking-tight text-[#292b30]">Medidas e variantes</h2>
-                    <p className="mt-1 text-xs text-[#858990]">Defina tamanhos, preços e disponibilidade de cada medida.</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setMeasurements((prev) => [...prev, { label: "", price: "", active: true }])}
-                    className="shrink-0 rounded-lg border border-[#e7e7e9] px-3 py-2 text-xs font-semibold text-[#555960] transition hover:border-[#f2a064] hover:text-[#d96512]"
-                  >
-                    + Adicionar
-                  </button>
-                </div>
-
-                {measurements.length > 0 ? (
-                  <div className="space-y-2">
-                    {measurements.map((measure, index) => (
-                      <div
-                        key={index}
-                        className="flex min-w-0 flex-wrap items-center gap-2 rounded-lg border border-[#ededf0] bg-[#fcfcfd] p-2.5 sm:flex-nowrap"
+              {isColorEditorOpen ? (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-4 backdrop-blur-[2px]">
+                  <div className="w-full max-w-[700px] rounded-2xl border border-[#ebedf0] bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.22)]">
+                    <div className="relative pr-8">
+                      <h3 className="text-[32px] font-semibold tracking-tight text-[#1f2430]">Editar cores</h3>
+                      <p className="mt-1 text-[15px] text-[#7a7f88]">Adicione, edite ou remova as cores disponíveis do produto.</p>
+                      <button
+                        type="button"
+                        onClick={() => setIsColorEditorOpen(false)}
+                        className="absolute -right-1 top-0 inline-flex h-8 w-8 items-center justify-center rounded-full text-[28px] leading-none text-[#9ca1aa] transition hover:bg-[#f3f4f6] hover:text-[#596070]"
                       >
-                        <input
-                          placeholder="Medida (ex: 2 lugares, 160×200)"
-                          value={measure.label}
-                          onChange={(e) =>
-                            setMeasurements((prev) =>
-                              prev.map((item, i) => (i === index ? { ...item, label: e.target.value } : item)),
-                            )
-                          }
-                          className="min-w-0 flex-1 rounded-md border border-[#e5e5e8] bg-white px-2.5 py-1.5 text-sm outline-none focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10"
-                        />
-                        <div className="relative">
-                          <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-xs text-[var(--muted)]">€</span>
-                          <input
-                            type="number"
-                            step="0.01"
-                            min="0"
-                            placeholder="0,00"
-                            value={measure.price}
-                            onChange={(e) =>
-                              setMeasurements((prev) =>
-                                prev.map((item, i) => (i === index ? { ...item, price: e.target.value } : item)),
-                              )
-                            }
-                            className="w-28 rounded-md border border-[#e5e5e8] bg-white py-1.5 pl-6 pr-2.5 text-sm outline-none focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10"
-                          />
+                        ×
+                      </button>
+                    </div>
+
+                    <div className="mt-5 border-t border-[#eff1f4]">
+                      {draftColors.length > 0 ? (
+                        <div className="divide-y divide-[#eff1f4]">
+                          {draftColors.map((color, index) => (
+                            <div
+                              key={color.id}
+                              draggable
+                              onDragStart={() => {
+                                setDraggedColorIndex(index);
+                                setDragOverColorIndex(index);
+                              }}
+                              onDragOver={(e) => {
+                                if (draggedColorIndex === null || draggedColorIndex === index) return;
+                                e.preventDefault();
+                                setDragOverColorIndex(index);
+                              }}
+                              onDrop={(e) => {
+                                e.preventDefault();
+                                if (draggedColorIndex === null || draggedColorIndex === index) {
+                                  setDraggedColorIndex(null);
+                                  setDragOverColorIndex(null);
+                                  return;
+                                }
+                                moveDraftColor(draggedColorIndex, index);
+                                setDraggedColorIndex(null);
+                                setDragOverColorIndex(null);
+                              }}
+                              onDragEnd={() => {
+                                setDraggedColorIndex(null);
+                                setDragOverColorIndex(null);
+                              }}
+                              className={`grid grid-cols-[24px_36px_minmax(0,1fr)_170px_28px] items-center gap-3 py-3 ${
+                                draggedColorIndex === index
+                                  ? "opacity-65"
+                                  : dragOverColorIndex === index
+                                    ? "bg-[#fbfbfc]"
+                                    : ""
+                              }`}
+                            >
+                              <button
+                                type="button"
+                                draggable
+                                onDragStart={() => {
+                                  setDraggedColorIndex(index);
+                                  setDragOverColorIndex(index);
+                                }}
+                                className="inline-flex h-6 w-6 cursor-grab items-center justify-center rounded text-[#9ea4ad] active:cursor-grabbing"
+                                aria-label="Reordenar cor"
+                                title="Reordenar cor"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4">
+                                  <path d="M7 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm0 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm9-13a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm-1 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm1 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
+                                </svg>
+                              </button>
+                              <label
+                                className={`relative h-9 w-9 shrink-0 cursor-pointer rounded-full ${
+                                  shouldUseSubtleBorder(color.hex) ? "border border-[#dfe1e6]" : ""
+                                }`}
+                                title="Cor"
+                              >
+                                <span
+                                  className="absolute inset-0 rounded-full"
+                                  style={{ backgroundColor: toColorHexValue(color.hex) }}
+                                />
+                                <input
+                                  type="color"
+                                  value={toColorHexValue(color.hex)}
+                                  onChange={(e) => updateColor(index, (current) => ({ ...current, hex: e.target.value }))}
+                                  className="absolute inset-0 cursor-pointer opacity-0"
+                                  aria-label="Selecionar cor"
+                                />
+                              </label>
+                              <input
+                                value={color.name}
+                                onChange={(e) => updateColor(index, (current) => ({ ...current, name: e.target.value }))}
+                                placeholder="Nome da cor"
+                                className="h-10 min-w-0 rounded-xl border border-[#e6e8ed] bg-white px-3 text-sm text-[#343a46] outline-none transition focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10"
+                              />
+                              <div className="relative">
+                                <span
+                                  className="pointer-events-none absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 rounded-full border border-[#dfe2e7]"
+                                  style={{ backgroundColor: toColorHexValue(color.hex) }}
+                                />
+                                <input
+                                  value={toColorHexValue(color.hex)}
+                                  onChange={(e) => {
+                                    const value = e.target.value;
+                                    if (/^#[0-9A-Fa-f]{6}$/.test(value) || value === "") {
+                                      updateColor(index, (current) => ({ ...current, hex: value || "#cccccc" }));
+                                    }
+                                  }}
+                                  placeholder="#cccccc"
+                                  maxLength={7}
+                                  className="h-10 w-full rounded-xl border border-[#e6e8ed] bg-white py-2 pl-8 pr-3 text-sm font-medium text-[#596070] outline-none transition focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10"
+                                />
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => removeColor(index)}
+                                className="inline-flex h-7 w-7 items-center justify-center rounded-full text-[22px] leading-none text-[#9da2ab] transition hover:bg-[#f5f5f6] hover:text-red-600"
+                                aria-label="Remover cor"
+                                title="Remover cor"
+                              >
+                                ×
+                              </button>
+                            </div>
+                          ))}
                         </div>
-                        <label className="flex items-center gap-1.5 whitespace-nowrap text-xs">
-                          <input
-                            type="checkbox"
-                            checked={measure.active}
-                            onChange={(e) =>
-                              setMeasurements((prev) =>
-                                prev.map((item, i) => (i === index ? { ...item, active: e.target.checked } : item)),
-                              )
-                            }
-                            className="accent-[var(--accent)]"
-                          />
-                          Disponível
-                        </label>
-                        <button
-                          type="button"
-                          title="Remover"
-                          onClick={() => setMeasurements((prev) => prev.filter((_, i) => i !== index))}
-                          className="flex h-7 w-7 items-center justify-center rounded text-[var(--muted)] transition hover:bg-red-50 hover:text-red-600"
-                        >
-                          ×
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <p className="rounded-lg bg-[#f8f8f9] px-3 py-3 text-center text-xs text-[#858990]">
-                    Nenhuma medida adicionada.
-                  </p>
-                )}
-              </div>
+                      ) : (
+                        <p className="py-4 text-sm text-[#858990]">Nenhuma cor cadastrada.</p>
+                      )}
+                    </div>
 
-              {/* Options */}
-              <div className="space-y-3 border-t border-[#eeeeef] pt-4">
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <h2 className="text-sm font-semibold text-[#3b3e43]">Opções personalizadas</h2>
-                    <p className="mt-1 text-xs text-[#858990]">Campos extra, como cor do tecido ou tipo de pé.</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setOptions((prev) => [...prev, { name: "", values: "" }])}
-                    className="shrink-0 rounded-lg border border-[#e7e7e9] px-3 py-2 text-xs font-semibold text-[#555960] transition hover:border-[#f2a064] hover:text-[#d96512]"
-                  >
-                    + Adicionar
-                  </button>
-                </div>
-
-                {options.length > 0 ? (
-                  <div className="space-y-2">
-                    {options.map((option, index) => (
-                      <div
-                        key={index}
-                        className="flex min-w-0 flex-wrap items-center gap-2 rounded-lg border border-[#ededf0] bg-[#fcfcfd] p-2.5 sm:flex-nowrap"
+                    <div className="mt-5 flex items-center justify-between gap-3">
+                      <button
+                        type="button"
+                        onClick={addColor}
+                        className="rounded-xl border border-[#e7e9ee] bg-white px-4 py-2.5 text-sm font-medium text-[#4c5563] transition hover:border-[#cfd5dd]"
                       >
-                        <input
-                          placeholder="Nome da opção (ex: Cor do tecido)"
-                          value={option.name}
-                          onChange={(e) =>
-                            setOptions((prev) =>
-                              prev.map((item, i) => (i === index ? { ...item, name: e.target.value } : item)),
-                            )
-                          }
-                          className="w-full min-w-0 rounded-md border border-[#e5e5e8] bg-white px-2.5 py-1.5 text-sm outline-none focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10 sm:w-48 sm:shrink-0"
-                        />
-                        <input
-                          placeholder="Valores separados por vírgula (ex: Bege, Cinza, Azul)"
-                          value={option.values}
-                          onChange={(e) =>
-                            setOptions((prev) =>
-                              prev.map((item, i) => (i === index ? { ...item, values: e.target.value } : item)),
-                            )
-                          }
-                          className="min-w-0 flex-1 rounded-md border border-[#e5e5e8] bg-white px-2.5 py-1.5 text-sm outline-none focus:border-[#f2a064] focus:ring-2 focus:ring-[#f47b20]/10"
-                        />
+                        + Adicionar cor
+                      </button>
+                      <div className="flex items-center gap-3">
                         <button
                           type="button"
-                          title="Remover"
-                          onClick={() => setOptions((prev) => prev.filter((_, i) => i !== index))}
-                          className="flex h-7 w-7 items-center justify-center rounded text-[var(--muted)] transition hover:bg-red-50 hover:text-red-600"
+                          onClick={() => setIsColorEditorOpen(false)}
+                          className="rounded-xl border border-[#e7e9ee] bg-white px-5 py-2.5 text-sm font-medium text-[#4c5563] transition hover:border-[#cfd5dd]"
                         >
-                          ×
+                          Cancelar
+                        </button>
+                        <button
+                          type="button"
+                          onClick={saveColorEditor}
+                          className="rounded-xl bg-[#f47b20] px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-[#dd6818]"
+                        >
+                          Guardar
                         </button>
                       </div>
-                    ))}
+                    </div>
                   </div>
-                ) : (
-                  <p className="rounded-lg bg-[#f8f8f9] px-3 py-3 text-center text-xs text-[#858990]">
-                    Nenhuma opção adicionada.
-                  </p>
-                )}
-              </div>
+                </div>
+              ) : null}
             </section>
 
             </div>
@@ -709,118 +1095,6 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                 </section>
               </aside>
           </div>
-        )}
-
-        {/* ── Step 2: Revisão ── */}
-        {stepIndex === 1 && (
-          <div className="space-y-5 rounded-xl border border-[#e9e9ec] bg-white p-4 text-sm sm:p-5">
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              <div className="min-w-0 space-y-1 rounded-lg bg-[#f8f8f9] p-3">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Nome</p>
-                <p className="truncate font-medium text-[#292b30]">{name || "—"}</p>
-              </div>
-              <div className="min-w-0 space-y-1 rounded-lg bg-[#f8f8f9] p-3">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Slug</p>
-                <p className="truncate font-mono text-xs text-[#555960]">/produto/{slug || "—"}</p>
-              </div>
-              <div className="space-y-1 rounded-lg bg-[#f8f8f9] p-3">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Preço base</p>
-                <p className="font-medium text-[#292b30]">{basePrice ? `€ ${Number(basePrice).toFixed(2)}` : "Consultar preço"}</p>
-              </div>
-              <div className="min-w-0 space-y-1 rounded-lg bg-[#f8f8f9] p-3">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Categorias</p>
-                <p className="truncate text-[#555960]">{categories.length ? categories.join(", ") : "—"}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {featured && (
-                <span className="rounded-full bg-[#fff6eb] px-2.5 py-1 text-xs font-medium text-[#8c5d2d]">
-                  Destaque
-                </span>
-              )}
-              {bestSeller && (
-                <span className="rounded-full bg-[#f5f5f6] px-2.5 py-1 text-xs font-medium text-[#555960]">
-                  Mais vendido
-                </span>
-              )}
-              {isPublished ? (
-                <span className="rounded-full bg-[#edf5ef] px-2.5 py-1 text-xs font-medium text-[#477052]">
-                  Publicado
-                </span>
-              ) : (
-                <span className="rounded-full bg-[#f1f1f2] px-2.5 py-1 text-xs font-medium text-[#656970]">
-                  Oculto
-                </span>
-              )}
-            </div>
-
-            {description && (
-              <div className="space-y-1">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Descrição (como aparece no site)</p>
-                <p className="line-clamp-2 text-sm leading-relaxed text-[var(--muted)]">{description}</p>
-              </div>
-            )}
-
-            <div className="space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
-                Imagens <span className="font-medium text-[#a0a2a7]">· {images.filter((img) => img.url).length}</span>
-              </p>
-              {images.filter((img) => img.url).length > 0 ? (
-                <div className="flex flex-wrap gap-3">
-                  {images
-                    .filter((img) => img.url)
-                    .map((img, idx) => (
-                      <figure key={idx} className="w-[150px] shrink-0">
-                        <div
-                          className={`relative aspect-[4/3] overflow-hidden rounded-lg border ${img.isMain ? "border-[#e8c4a8]" : "border-[#ececef]"}`}
-                        >
-                          <Image
-                            src={img.url}
-                            alt={img.alt || "Imagem"}
-                            fill
-                            sizes="150px"
-                            className="object-cover"
-                          />
-                        </div>
-                        {img.isMain && (
-                          <figcaption className="mt-1.5 flex items-center gap-1.5 text-[11px] font-medium text-[#8e572f]">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#e98a47]" />
-                            Principal
-                          </figcaption>
-                        )}
-                      </figure>
-                    ))}
-                </div>
-              ) : (
-                <p className="text-[var(--muted)]">Nenhuma imagem</p>
-              )}
-            </div>
-
-            {measurements.filter((m) => m.label).length > 0 && (
-              <div className="space-y-1">
-                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">Medidas</p>
-                <ul className="space-y-0.5 pl-4 text-[var(--muted)]">
-                  {measurements
-                    .filter((m) => m.label)
-                    .map((m, idx) => (
-                      <li key={idx} className="list-disc">
-                        {m.label}
-                        {m.price ? ` — € ${Number(m.price).toFixed(2)}` : ""}
-                        {!m.active ? " (indisponível)" : ""}
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            )}
-
-            {!canSubmit && (
-              <div className="rounded-lg bg-[#fff8ef] px-3 py-2.5 text-sm text-[#805b36]">
-                Preencha o nome, slug e pelo menos uma categoria antes de gravar.
-              </div>
-            )}
-          </div>
-        )}
       </div>
 
       {error && (
@@ -829,36 +1103,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
         </div>
       )}
 
-      <div className="flex items-center justify-between border-t border-[#e8e8eb] py-3">
-        <button
-          type="button"
-          disabled={stepIndex === 0}
-          onClick={(e) => handleStepChange(Math.max(0, stepIndex - 1), e)}
-          className="rounded-lg border border-[#e5e5e8] px-4 py-2 text-sm font-semibold text-[#555960] transition hover:bg-[#f6f6f7] disabled:opacity-40"
-        >
-          ← Anterior
-        </button>
-
-        {stepIndex < STEPS.length - 1 ? (
-          <button
-            key="next-step"
-            type="button"
-            onClick={(e) => handleStepChange(stepIndex + 1, e)}
-            className="rounded-lg bg-[#303238] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#1f2024]"
-          >
-            Próximo →
-          </button>
-        ) : (
-          <button
-            key="submit"
-            type="submit"
-            disabled={!canSubmit || loading}
-            className="rounded-lg bg-[#f47b20] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#dd6818] disabled:opacity-60"
-          >
-            {loading ? "A gravar…" : mode === "create" ? "Criar produto" : "Guardar alterações"}
-          </button>
-        )}
-      </div>
+      <AdminProductPreviewModal product={previewProduct} open={isPreviewOpen} onClose={() => setIsPreviewOpen(false)} />
     </form>
   );
 }
