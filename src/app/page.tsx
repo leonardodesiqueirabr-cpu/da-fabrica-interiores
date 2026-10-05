@@ -2,13 +2,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { ProductCard } from "@/components/product-card";
 import { ProductsCarousel } from "@/components/products-carousel";
+import { HomeHeroSection } from "@/components/home-hero-section";
+import { HomeSelectionSection } from "@/components/home-selection-section";
 import { getBestSellerProducts, getPublishedCatalogData, getFeaturedProducts } from "@/lib/data/catalog";
+import { getHomepageContent } from "@/lib/data/homepage";
 import { buildWhatsAppUrl, WHATSAPP_STORE_INFO_MESSAGE } from "@/lib/utils/whatsapp";
 
 const whatsappPhone = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "351915783035";
 
 export default async function HomePage() {
   const catalog = await getPublishedCatalogData();
+  const homepageContent = await getHomepageContent(catalog);
   const bestSellers = getBestSellerProducts(catalog.products);
   const bestSellersPreview = bestSellers.slice(0, 6);
   const bestSellerIds = new Set(bestSellersPreview.map((product) => product.id));
@@ -21,38 +25,11 @@ export default async function HomePage() {
 
   const bestSellersKey = bestSellersPreview.map((product) => product.id).join("-") || "empty";
   const featuredKey = featured.map((product) => product.id).join("-") || "empty";
-  const environmentImageA = catalog.products[1]?.images[0]?.url || catalog.assets.heroImage;
   const promotionalBanner = "/Home/banner-publicidade.png";
 
   return (
     <div className="pb-24">
-      <section className="relative min-h-[86svh] overflow-hidden md:min-h-[86vh]">
-        {catalog.assets.heroImage ? (
-          <Image src={catalog.assets.heroImage} alt="Ambiente premium" fill priority className="object-cover" />
-        ) : (
-          <div className="absolute inset-0 bg-[var(--surface-soft)]" />
-        )}
-
-        <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-transparent" />
-
-        <div className="container-shell relative z-10 flex min-h-[86svh] items-end pb-16 md:min-h-[86vh]">
-          <div className="max-w-2xl space-y-6 text-white fade-up">
-            <p className="text-xs uppercase tracking-[0.2em] text-white/80">Os Mais Vendidos</p>
-            <h1 className="text-4xl font-semibold leading-tight md:text-6xl">
-              Conforto e design para transformar a sua casa
-            </h1>
-            <p className="max-w-xl text-sm leading-relaxed text-white/85 md:text-base">
-              Móveis bonitos que duram anos sem problema. Conforto que sua família vai aproveitar todo dia, com o design que você gosta.
-            </p>
-            <Link
-              href={{ pathname: "/produtos", query: { from: "/" } }}
-              className="inline-flex rounded-full bg-[var(--accent)] px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-[var(--accent-strong)]"
-            >
-              Explorar colecao
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HomeHeroSection content={homepageContent.hero} />
 
       <section className="container-shell section-gap">
         <div className="grid gap-8 md:grid-cols-3">
@@ -94,33 +71,7 @@ export default async function HomePage() {
         <ProductsCarousel key={bestSellersKey} products={bestSellersPreview} />
       </section>
 
-      <section className="section-gap grid gap-6 lg:grid-cols-2">
-        <div className="relative min-h-[520px] overflow-hidden bg-[var(--surface-soft)]">
-          {environmentImageA ? (
-            <Image src={environmentImageA} alt="Ambiente decorado" fill className="object-cover" />
-          ) : null}
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/50 to-transparent p-8 text-white">
-            <p className="text-xs uppercase tracking-[0.18em] text-white/80">Viver bem</p>
-            <h3 className="mt-3 text-2xl font-semibold">Menos excesso. Mais elegância.</h3>
-          </div>
-        </div>
-        <div className="container-shell flex items-center">
-          <div className="max-w-xl space-y-5 py-12">
-            <p className="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">Seleção</p>
-            <h2 className="text-4xl font-semibold">A sala que você deseja começa com a escolha certa</h2>
-            <p className="text-sm leading-relaxed text-[var(--muted)]">
-              Escolha agora entre os modelos mais procurados — converse com a gente e encontre a peça perfeita pra sua casa em minutos.
-            </p>
-            <Link
-              href={buildWhatsAppUrl(whatsappPhone, "Ola, quero uma recomendacao personalizada para a minha sala.")}
-              target="_blank"
-              className="inline-flex rounded-full bg-[var(--accent)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:bg-[var(--accent-strong)]"
-            >
-              Falar com especialista
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HomeSelectionSection content={homepageContent.selection} />
 
       <section className="container-shell section-gap space-y-8">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">

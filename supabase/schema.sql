@@ -70,6 +70,22 @@ create table if not exists product_options (
   values text[] not null default '{}'
 );
 
+create table if not exists homepage_sections (
+  id uuid primary key default gen_random_uuid(),
+  section_key text not null unique check (section_key in ('hero', 'selection')),
+  image_url text,
+  image_alt text,
+  eyebrow text,
+  kicker text,
+  subheadline text,
+  headline text,
+  description text,
+  cta_label text,
+  cta_href text,
+  image_managed boolean not null default false,
+  updated_at timestamptz not null default now()
+);
+
 insert into categories (slug, label)
 values
   ('sofas', 'Sofas'),
@@ -86,6 +102,7 @@ alter table product_images enable row level security;
 alter table product_colors enable row level security;
 alter table product_measurements enable row level security;
 alter table product_options enable row level security;
+alter table homepage_sections enable row level security;
 
 drop policy if exists "Public read categories" on categories;
 create policy "Public read categories" on categories for select using (true);
@@ -107,6 +124,9 @@ create policy "Public read product_measurements" on product_measurements for sel
 
 drop policy if exists "Public read product_options" on product_options;
 create policy "Public read product_options" on product_options for select using (true);
+
+drop policy if exists "Public read homepage_sections" on homepage_sections;
+create policy "Public read homepage_sections" on homepage_sections for select using (true);
 
 drop policy if exists "Authenticated full categories" on categories;
 create policy "Authenticated full categories" on categories for all to authenticated using (true) with check (true);
@@ -135,10 +155,14 @@ grant usage on schema public to anon, authenticated, service_role;
 
 grant select on table
   categories, products, product_categories,
-  product_images, product_colors, product_measurements, product_options
+  product_images, product_colors, product_measurements, product_options,
+  homepage_sections
 to anon;
 
 grant select, insert, update, delete on table
   categories, products, product_categories,
   product_images, product_colors, product_measurements, product_options
 to authenticated, service_role;
+
+grant select on table homepage_sections to authenticated;
+grant select, insert, update, delete on table homepage_sections to service_role;

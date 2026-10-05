@@ -27,8 +27,8 @@ const productFieldsSchema = z.object({
         url: z.string().min(1),
         alt: z.string().optional().default(""),
         colorId: z.string().optional().nullable(),
-        colorName: z.string().optional().default(""),
-        colorHex: z.string().optional().default("").nullable(),
+        colorName: z.string().optional().nullable(),
+        colorHex: z.string().optional().nullable(),
         isMain: z.boolean().optional().default(false),
         sortOrder: z.number().optional(),
       }),
@@ -74,3 +74,23 @@ export const quickEditProductSchema = z.object({
 });
 
 export type QuickEditPayload = z.infer<typeof quickEditProductSchema>;
+
+const homepageSectionSchema = z.object({
+  imageUrl: z.string().min(1),
+  imageAlt: z.string().min(1),
+  eyebrow: z.string().min(1),
+  kicker: z.string().optional(),
+  subheadline: z.string().optional(),
+  headline: z.string().min(1),
+  description: z.string().min(1),
+  ctaLabel: z.string().min(1),
+  ctaHref: z.string().min(1),
+  imageManaged: z.boolean().default(false),
+});
+
+export const homepageSectionUpdateSchema = z.object({
+  sectionKey: z.enum(["hero", "selection"]),
+  section: homepageSectionSchema,
+});
+
+export type HomepageSectionUpdatePayload = z.infer<typeof homepageSectionUpdateSchema>;

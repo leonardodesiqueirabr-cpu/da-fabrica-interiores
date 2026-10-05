@@ -9,6 +9,7 @@ const ALLOWED_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
 const LOCAL_UPLOAD_PREFIX = "/uploads/";
 const PRODUCT_IMAGES_BUCKET = "product-images";
+const ALLOWED_UPLOAD_FOLDERS = new Set(["homepage"]);
 
 function getSupabaseStoragePathFromUrl(url: string): string | null {
   const normalizedUrl = url.trim();
@@ -69,9 +70,15 @@ export async function POST(request: Request) {
 
   const file = formData.get("file");
   const previousUrlValue = formData.get("previousUrl");
+  const folderValue = formData.get("folder");
+  const folder = typeof folderValue === "string" && folderValue.trim() ? folderValue.trim() : null;
   const previousUrl = typeof previousUrlValue === "string" && previousUrlValue.trim() ? previousUrlValue.trim() : null;
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "Nenhum ficheiro enviado" }, { status: 400 });
+  }
+
+  if (folder && !ALLOWED_UPLOAD_FOLDERS.has(folder)) {
+    return NextResponse.json({ error: "Pasta de upload inválida." }, { status: 400 });
   }
 
   if (!ALLOWED_TYPES.includes(file.type)) {
@@ -83,7 +90,7 @@ export async function POST(request: Request) {
   }
 
   const ext = path.extname(file.name).toLowerCase() || ".jpg";
-  const filename = `${randomUUID()}${ext}`;
+  const filename = folder ? `${folder}/${randomUUID()}${ext}` : `${randomUUID()}${ext}`;
   const buffer = Buffer.from(await file.arrayBuffer());
 
   // Use Supabase Storage when configured (production / Vercel)

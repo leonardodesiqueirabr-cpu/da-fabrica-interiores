@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { getCatalogData } from "@/lib/data/catalog";
 import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
 import { AdminProductsTable } from "@/components/admin-products-table";
-import { Eye, EyeOff, Package, Star } from "lucide-react";
+import { Eye, EyeOff, FilePenLine, Package, Star } from "lucide-react";
 
 export default async function AdminPage() {
   const cookieStore = await cookies();
@@ -24,8 +24,15 @@ export default async function AdminPage() {
         <h1 className="text-2xl font-semibold tracking-tight text-[#222428] sm:text-3xl">Produtos</h1>
         <div className="flex items-center gap-2">
           <Link
+            href="/admin/homepage"
+            className="inline-flex h-10 items-center gap-2 rounded-lg border border-[#e5e5e8] bg-white px-4 text-sm font-medium text-[#44484f] transition hover:border-[#f2a064] hover:text-[#d96512]"
+          >
+            <FilePenLine size={16} />
+            Editar Homepage
+          </Link>
+          <Link
             href="/admin/produtos/novo"
-            className="rounded-lg bg-[#f47b20] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[#dd6818]"
+            className="inline-flex h-10 items-center rounded-lg bg-[#f47b20] px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-[#dd6818]"
           >
             + Novo produto
           </Link>
