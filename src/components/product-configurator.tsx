@@ -323,7 +323,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
                 ? `${chosenMeasure.price.toFixed(0)} EUR`
                 : product.basePrice
                   ? `${product.basePrice.toFixed(0)} EUR`
-                  : "Consultar Preço"}
+                  : "Consultar Preço de Fábrica"}
             </p>
           </div>
 

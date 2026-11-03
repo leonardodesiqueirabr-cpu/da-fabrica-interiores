@@ -41,15 +41,15 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="space-y-2 pb-2">
         <h3 className="text-xl font-medium tracking-tight">{product.name}</h3>
         <p className="line-clamp-2 text-sm leading-relaxed text-[var(--muted)]">{product.shortDescription || product.description}</p>
-        <div className="flex items-center justify-between pt-2">
+        <div className="flex items-center justify-between gap-3 pt-2">
           <p className="text-base font-bold text-[var(--accent)]">
             {product.measurements.length > 0
               ? (() => {
                   const prices = product.measurements.map((m) => m.price).filter((p): p is number => p != null && p > 0);
                   const min = prices.length ? Math.min(...prices) : null;
-                  return min ? `A partir de ${min.toFixed(0)} EUR` : (product.basePrice ? `${product.basePrice.toFixed(0)} EUR` : "Consultar Preço");
+                  return min ? `A partir de ${min.toFixed(0)} EUR` : (product.basePrice ? `${product.basePrice.toFixed(0)} EUR` : "Consultar Preço de Fábrica");
                 })()
-              : product.basePrice ? `${product.basePrice.toFixed(0)} EUR` : "Consultar Preço"}
+              : product.basePrice ? `${product.basePrice.toFixed(0)} EUR` : "Consultar Preço de Fábrica"}
           </p>
           <Link
             href={productHref}
