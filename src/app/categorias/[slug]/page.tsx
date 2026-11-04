@@ -9,7 +9,6 @@ const titleMap: Record<string, string> = {
   sofas: "Sofas",
   camas: "Camas",
   colchoes: "Colchoes",
-  sala: "Sala",
   "mais-vendidos": "Mais vendidos",
 };
 
@@ -17,7 +16,6 @@ const categoryMetadata: Record<string, { title: string; description: string }> =
   sofas: { title: "Sofás", description: "Sofás e sofás-cama para compor a sua sala com conforto e estilo." },
   camas: { title: "Camas", description: "Camas, packs de cama e bases para o seu quarto." },
   colchoes: { title: "Colchões", description: "Colchões para complementar o seu conjunto de cama." },
-  sala: { title: "Sala", description: "Mobiliário e complementos para a sua sala." },
   "mais-vendidos": { title: "Mais vendidos", description: "Os modelos mais procurados pelos nossos clientes." },
 };
 

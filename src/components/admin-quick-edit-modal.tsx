@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { Product } from "@/types/catalog";
-import { ADMIN_CATEGORIES } from "@/lib/data/categories";
+import { VISIBLE_ADMIN_CATEGORIES } from "@/lib/data/categories";
 
 interface AdminQuickEditModalProps {
   product: Product;
@@ -111,7 +111,7 @@ export function AdminQuickEditModal({ product, isOpen, onClose, onSuccess }: Adm
           <div className="space-y-2">
             <p className="text-sm font-medium">Categorias</p>
             <div className="grid gap-2 grid-cols-2">
-              {ADMIN_CATEGORIES.map((cat) => (
+              {VISIBLE_ADMIN_CATEGORIES.map((cat) => (
                 <label
                   key={cat.slug}
                   className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs cursor-pointer transition ${

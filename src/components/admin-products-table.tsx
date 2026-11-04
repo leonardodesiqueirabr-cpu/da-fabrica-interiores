@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Product } from "@/types/catalog";
-import { ADMIN_CATEGORIES } from "@/lib/data/categories";
+import { ADMIN_CATEGORIES, HIDDEN_ADMIN_CATEGORY_SLUGS } from "@/lib/data/categories";
 import { AdminProductActions } from "@/components/admin-product-actions";
 import { AdminProductPreviewModal } from "@/components/admin-product-preview-modal";
 
@@ -24,7 +24,10 @@ export function AdminProductsTable({ products }: AdminProductsTableProps) {
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
   const categories = useMemo(
-    () => Array.from(new Set(products.flatMap((product) => product.categories))).sort((a, b) => a.localeCompare(b)),
+    () =>
+      Array.from(new Set(products.flatMap((product) => product.categories)))
+        .filter((category) => !HIDDEN_ADMIN_CATEGORY_SLUGS.has(category))
+        .sort((a, b) => a.localeCompare(b)),
     [products],
   );
 
@@ -177,7 +180,10 @@ export function AdminProductsTable({ products }: AdminProductsTableProps) {
                       </button>
                     </td>
                     <td className="px-4 py-3 text-xs text-[#666a71] sm:px-5">
-                      {product.categories.map((category) => categoryLabels.get(category) ?? category).join(", ") || "—"}
+                      {product.categories
+                        .filter((category) => !HIDDEN_ADMIN_CATEGORY_SLUGS.has(category))
+                        .map((category) => categoryLabels.get(category) ?? category)
+                        .join(", ") || "—"}
                     </td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm tabular-nums text-[#454950] sm:px-5">
                       {product.basePrice ? `€ ${product.basePrice.toFixed(0)}` : "Consultar"}

@@ -7,7 +7,7 @@ import Image from "next/image";
 import { ArrowLeft, Eye, Save } from "lucide-react";
 import { toSlug } from "@/lib/utils/text";
 import type { Product } from "@/types/catalog";
-import { ADMIN_CATEGORIES } from "@/lib/data/categories";
+import { VISIBLE_ADMIN_CATEGORIES } from "@/lib/data/categories";
 import { AdminProductPreviewModal } from "@/components/admin-product-preview-modal";
 
 interface AdminProductFormProps {
@@ -1017,7 +1017,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                   <div className="space-y-2.5">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#777b82]">Categorias *</p>
                     <div className="grid grid-cols-2 gap-1.5">
-                      {ADMIN_CATEGORIES.map((cat) => (
+                      {VISIBLE_ADMIN_CATEGORIES.map((cat) => (
                         <label
                           key={cat.slug}
                           className={`flex min-w-0 cursor-pointer items-center gap-2 rounded-md border px-2 py-2 text-xs transition ${

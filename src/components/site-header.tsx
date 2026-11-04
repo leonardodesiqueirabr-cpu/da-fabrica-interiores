@@ -16,7 +16,6 @@ const navItems = [
   { href: "/categorias/sofas", label: "Sofas" },
   { href: "/categorias/camas", label: "Camas" },
   { href: "/categorias/colchoes", label: "Colchoes" },
-  { href: "/categorias/sala", label: "Sala" },
   { href: "/produtos", label: "Todos os Produtos" },
 ];
 

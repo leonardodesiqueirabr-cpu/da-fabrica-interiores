@@ -33,7 +33,6 @@ export function SiteFooter({ logoSrc }: SiteFooterProps) {
     { href: "/categorias/sofas", label: "Sofas" },
     { href: "/categorias/camas", label: "Camas" },
     { href: "/categorias/colchoes", label: "Colchoes" },
-    { href: "/categorias/sala", label: "Sala" },
   ];
 
   return (

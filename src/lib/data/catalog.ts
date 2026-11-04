@@ -357,11 +357,14 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
   });
 });
 
+const HIDDEN_PUBLIC_CATEGORIES = new Set(["sala"]);
+
 export async function getPublishedCatalogData(): Promise<CatalogData> {
   const catalog = await getCatalogData();
   return {
     ...catalog,
     products: catalog.products.filter((product) => product.isPublished),
+    categories: catalog.categories.filter((category) => !HIDDEN_PUBLIC_CATEGORIES.has(category.slug)),
   };
 }
 
