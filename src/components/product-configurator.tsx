@@ -185,9 +185,8 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
     color: product.colors.find((color) => color.id === selectedColorId)?.name || undefined,
     measure: selectedMeasure || undefined,
     options: Object.values(selectedOptions).filter(Boolean),
-    priceLabel: product.available ? priceLabel : undefined,
+    priceLabel,
     productUrl,
-    soldOut: !product.available,
   });
 
   return (
@@ -340,14 +339,26 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
             </p>
           </div>
 
-          <Link
-            href={buildWhatsAppUrl(whatsappPhone, message)}
-            target="_blank"
-            data-wa-source="product"
-            className="inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-[var(--accent-strong)]"
-          >
-            {product.available ? "Solicitar informações pelo WhatsApp" : "Consultar disponibilidade"}
-          </Link>
+          {product.available ? (
+            <Link
+              href={buildWhatsAppUrl(whatsappPhone, message)}
+              target="_blank"
+              data-wa-source="product"
+              className="inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-[var(--accent-strong)]"
+            >
+              Solicitar informações pelo WhatsApp
+            </Link>
+          ) : (
+            // Esgotado: botão desativado, sem link nem registo de cliques.
+            <button
+              type="button"
+              disabled
+              aria-disabled="true"
+              className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-full bg-[#737373] px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white"
+            >
+              Esgotado
+            </button>
+          )}
         </div>
 
         {product.characteristics.length > 0 && (
