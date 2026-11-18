@@ -5,6 +5,7 @@ import { ProductConfigurator } from "@/components/product-configurator";
 import { ProductsCarousel } from "@/components/products-carousel";
 import { getPublishedCatalogData, getRecommendedProducts } from "@/lib/data/catalog";
 import { buildBreadcrumbFromOrigin } from "@/lib/utils/breadcrumb";
+import { getCoverImage } from "@/lib/data/product-visibility";
 
 type ProductPageParams = { params: Promise<{ slug: string }> };
 
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: ProductPageParams): Promise<M
   }
 
   const description = product.shortDescription || product.description || undefined;
-  const mainImage = product.images.find((image) => image.isMain) ?? product.images[0];
+  const mainImage = getCoverImage(product);
 
   return {
     title: product.name,

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ExternalLink, Eye, EyeOff, LoaderCircle, MoreHorizontal, Pencil } from "lucide-react";
+import { CircleSlash, ExternalLink, Eye, EyeOff, LoaderCircle, MoreHorizontal, PackageCheck, Pencil } from "lucide-react";
 import type { Product } from "@/types/catalog";
 import { AdminDeleteButton } from "@/components/admin-delete-button";
 import { AdminQuickEditModal } from "@/components/admin-quick-edit-modal";
@@ -17,6 +17,7 @@ export function AdminProductActions({ product }: AdminProductActionsProps) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [quickEditOpen, setQuickEditOpen] = useState(false);
   const [savingVisibility, setSavingVisibility] = useState(false);
+  const [savingStock, setSavingStock] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function toggleVisibility() {
@@ -41,6 +42,31 @@ export function AdminProductActions({ product }: AdminProductActionsProps) {
       setError(caughtError instanceof Error ? caughtError.message : "Não foi possível alterar a visibilidade.");
     } finally {
       setSavingVisibility(false);
+    }
+  }
+
+  async function toggleStock() {
+    setSavingStock(true);
+    setError(null);
+
+    try {
+      const response = await fetch(`/api/admin/products/${product.id}/quick-edit`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ available: !product.available }),
+      });
+      const result = (await response.json()) as { error?: string };
+
+      if (!response.ok) {
+        throw new Error(result.error || "Não foi possível alterar a disponibilidade.");
+      }
+
+      setMenuOpen(false);
+      router.refresh();
+    } catch (caughtError) {
+      setError(caughtError instanceof Error ? caughtError.message : "Não foi possível alterar a disponibilidade.");
+    } finally {
+      setSavingStock(false);
     }
   }
 
@@ -113,6 +139,22 @@ export function AdminProductActions({ product }: AdminProductActionsProps) {
                 <Eye size={15} className="text-[#777b82]" />
               )}
               {product.isPublished ? "Ocultar" : "Publicar"}
+            </button>
+            <button
+              type="button"
+              role="menuitem"
+              disabled={savingStock}
+              className={menuItemClass}
+              onClick={toggleStock}
+            >
+              {savingStock ? (
+                <LoaderCircle size={15} className="animate-spin text-[#777b82]" />
+              ) : product.available ? (
+                <CircleSlash size={15} className="text-[#777b82]" />
+              ) : (
+                <PackageCheck size={15} className="text-[#777b82]" />
+              )}
+              {product.available ? "Marcar como esgotado" : "Marcar como disponível"}
             </button>
             <div className="my-1 border-t border-[#eeeeef]" />
             <AdminDeleteButton productId={product.id} productName={product.name} />

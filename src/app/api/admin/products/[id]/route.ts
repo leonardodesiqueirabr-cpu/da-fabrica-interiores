@@ -34,6 +34,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         best_seller: payload.bestSeller,
         characteristics: payload.characteristics,
         ...(payload.isPublished !== undefined && { is_published: payload.isPublished }),
+        ...(payload.available !== undefined && { available: payload.available }),
       })
       .eq("id", id);
 
@@ -177,6 +178,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         color_name: mappedColor?.name || item.colorName || null,
         color_hex: mappedColor?.hex || item.colorHex || null,
         is_main: item.isMain ?? index === 0,
+        is_hidden: item.isHidden ?? false,
         sort_order: item.sortOrder ?? index,
       };
     });
@@ -203,6 +205,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         color_name: item.color_name,
         color_hex: item.color_hex,
         is_main: item.is_main,
+        is_hidden: item.is_hidden,
         sort_order: item.sort_order,
       }));
 
@@ -218,6 +221,7 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
           color_name: image.color_name,
           color_hex: image.color_hex,
           is_main: image.is_main,
+          is_hidden: image.is_hidden,
           sort_order: image.sort_order,
         })
         .eq("id", image.id)

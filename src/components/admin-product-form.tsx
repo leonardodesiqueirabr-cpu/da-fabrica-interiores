@@ -4,7 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ArrowLeft, Eye, Save } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, Save } from "lucide-react";
 import { toSlug } from "@/lib/utils/text";
 import type { Product } from "@/types/catalog";
 import { VISIBLE_ADMIN_CATEGORIES } from "@/lib/data/categories";
@@ -23,6 +23,7 @@ interface EditableImage {
   colorName?: string;
   colorHex?: string;
   isMain: boolean;
+  isHidden: boolean;
   uploading?: boolean;
 }
 
@@ -118,6 +119,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
   const [featured, setFeatured] = useState(product?.featured || false);
   const [bestSeller, setBestSeller] = useState(product?.bestSeller || false);
   const [isPublished, setIsPublished] = useState(product?.isPublished ?? true);
+  const [available, setAvailable] = useState(product?.available ?? true);
   const [categories, setCategories] = useState<string[]>(product?.categories || []);
   const initialColors = useMemo(() => normalizeInitialColors(product), [product]);
   const initialColorByName = useMemo(
@@ -134,6 +136,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
       colorName: img.colorName,
       colorHex: img.colorHex,
       isMain: img.isMain,
+      isHidden: img.isHidden ?? false,
     })) || [],
   );
   const [measurements] = useState<EditableMeasure[]>(
@@ -175,7 +178,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
       featured,
       bestSeller,
       isPublished,
-      available: true,
+      available,
       characteristics: characteristicsText
         .split("\n")
         .map((s) => s.trim())
@@ -194,6 +197,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
             colorName: mappedColor?.name || img.colorName,
             colorHex: mappedColor?.hex || img.colorHex,
             isMain: img.isMain,
+            isHidden: img.isHidden,
             sortOrder: idx,
           };
         }),
@@ -219,6 +223,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
         })),
     };
   }, [
+    available,
     basePrice,
     bestSeller,
     categories,
@@ -257,6 +262,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
       url: "",
       alt: "",
       isMain: startIndex + i === 0,
+      isHidden: false,
       uploading: true,
     }));
     setImages((prev) => [...prev, ...placeholders]);
@@ -424,6 +430,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
         featured,
         bestSeller,
         isPublished,
+        available,
         characteristics: characteristicsText
           .split("\n")
           .map((s) => s.trim())
@@ -440,6 +447,7 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
             colorName: img.colorId ? colorsById.get(img.colorId)?.name || null : null,
             colorHex: img.colorId ? colorsById.get(img.colorId)?.hex || null : null,
             isMain: img.isMain,
+            isHidden: img.isHidden,
             sortOrder: idx,
           })),
         measurements: measurements
@@ -482,6 +490,14 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
     } finally {
       setLoading(false);
     }
+  }
+
+  const savedImages = images.filter((img) => img.url.trim());
+  const visibleImageCount = savedImages.filter((img) => !img.isHidden).length;
+  const isMainImageHidden = savedImages.some((img) => img.isMain && img.isHidden);
+
+  function toggleImageHidden(index: number) {
+    setImages((prev) => prev.map((img, i) => (i === index ? { ...img, isHidden: !img.isHidden } : img)));
   }
 
   return (
@@ -628,7 +644,12 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                   Arraste ficheiros para a área abaixo ou clique para selecionar. Pode enviar várias imagens de uma vez.
                   </p>
                 </div>
-                {images.length ? <span className="text-xs text-[#858990]">{images.length} imagens</span> : null}
+                {images.length ? (
+                  <span className="text-xs text-[#858990]">
+                    {images.length} imagens
+                    {savedImages.length - visibleImageCount > 0 ? ` · ${savedImages.length - visibleImageCount} ocultas` : ""}
+                  </span>
+                ) : null}
               </div>
 
               {/* Drop zone */}
@@ -746,22 +767,39 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                             <div className="h-7 w-7 animate-spin rounded-full border-2 border-[#f47b20] border-t-transparent" />
                           </div>
                         ) : img.url ? (
-                          <Image src={img.url} alt={img.alt || "Imagem do produto"} fill className="object-cover" />
+                          <Image
+                            src={img.url}
+                            alt={img.alt || "Imagem do produto"}
+                            fill
+                            className={`object-cover transition ${img.isHidden ? "opacity-40 grayscale" : ""}`}
+                          />
                         ) : null}
 
                         <button
                           type="button"
                           onClick={() => setImages((prev) => prev.filter((_, i) => i !== index))}
+                          title="Excluir imagem"
+                          aria-label="Excluir imagem"
                           className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/55 text-sm font-bold text-white transition hover:bg-red-600"
                         >
                           ×
                         </button>
 
-                        {img.isMain && (
-                          <span className="absolute left-2 top-2 rounded-full bg-[#f47b20] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm">
-                            Principal
+                        {img.isMain || img.isHidden ? (
+                          <span className="absolute left-2 top-2 flex gap-1">
+                            {img.isMain ? (
+                              <span className="rounded-full bg-[#f47b20] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm">
+                                Principal
+                              </span>
+                            ) : null}
+                            {img.isHidden ? (
+                              <span className="inline-flex items-center gap-1 rounded-full bg-[#3f4349] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white shadow-sm">
+                                <EyeOff size={11} />
+                                Oculta
+                              </span>
+                            ) : null}
                           </span>
-                        )}
+                        ) : null}
 
                         <button
                           type="button"
@@ -842,11 +880,36 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                             Principal
                           </label>
                         </div>
+                        {!img.uploading && img.url ? (
+                          <button
+                            type="button"
+                            onClick={() => toggleImageHidden(index)}
+                            aria-pressed={img.isHidden}
+                            className={`inline-flex w-full items-center justify-center gap-1.5 rounded-md border px-2 py-1.5 text-[11px] font-semibold transition ${
+                              img.isHidden
+                                ? "border-[#d9dadd] bg-[#f4f4f5] text-[#3f4349] hover:border-[#f2a064] hover:text-[#d96512]"
+                                : "border-[#e8e8eb] bg-white text-[#555960] hover:border-[#f2a064] hover:text-[#d96512]"
+                            }`}
+                          >
+                            {img.isHidden ? <Eye size={13} /> : <EyeOff size={13} />}
+                            {img.isHidden ? "Mostrar no site" : "Ocultar do site"}
+                          </button>
+                        ) : null}
                       </div>
                     </div>
                   ))}
                 </div>
               )}
+
+              {savedImages.length > 0 && visibleImageCount === 0 ? (
+                <p className="rounded-lg border border-[#f1e2c8] bg-[#fffaf0] px-3 py-2 text-xs text-[#8a6326]">
+                  Todas as imagens estão ocultas. No site será mostrado um placeholder.
+                </p>
+              ) : isMainImageHidden ? (
+                <p className="rounded-lg border border-[#f1e2c8] bg-[#fffaf0] px-3 py-2 text-xs text-[#8a6326]">
+                  A imagem principal está oculta. No site, a primeira imagem visível será usada como capa.
+                </p>
+              ) : null}
 
               {isColorEditorOpen ? (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 p-4 backdrop-blur-[2px]">
@@ -1072,6 +1135,34 @@ export function AdminProductForm({ mode, product }: AdminProductFormProps) {
                         </button>
                       ))}
                     </div>
+                  </div>
+                  <div className="space-y-2 border-t border-[#eeeeef] pt-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#777b82]">Disponibilidade</p>
+                    <div className="grid grid-cols-2 rounded-lg bg-[#f3f3f4] p-1">
+                      {[
+                        { value: true, label: "Disponível" },
+                        { value: false, label: "Esgotado" },
+                      ].map((option) => (
+                        <button
+                          key={option.label}
+                          type="button"
+                          aria-pressed={available === option.value}
+                          onClick={() => setAvailable(option.value)}
+                          className={`rounded-md px-2 py-2 text-xs font-semibold transition ${
+                            available === option.value
+                              ? option.value
+                                ? "bg-white text-[#39764e] shadow-sm"
+                                : "bg-white text-[#a2521a] shadow-sm"
+                              : "text-[#858990] hover:text-[#555960]"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="text-[11px] leading-relaxed text-[#858990]">
+                      Esgotado mantém o produto no catálogo com a etiqueta “Esgotado”.
+                    </p>
                   </div>
                   <div className="space-y-2 border-t border-[#eeeeef] pt-3">
                     {[

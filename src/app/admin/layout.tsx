@@ -3,6 +3,7 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
 import { getCatalogData } from "@/lib/data/catalog";
+import { AdminNav } from "@/components/admin-nav";
 
 export default async function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const cookieStore = await cookies();
@@ -43,6 +44,7 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
           </div>
         </div>
       </header>
+      {isAuthenticated ? <AdminNav /> : null}
       <div className="flex-1">{children}</div>
       <footer className="mt-10 border-t border-[#ececef]">
         <div className="mx-auto flex w-full max-w-[1600px] flex-col items-center gap-3 px-4 py-8 text-xs text-[#9a9da3] sm:px-6 lg:px-8 2xl:px-10">

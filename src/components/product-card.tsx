@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Product } from "@/types/catalog";
 import { encodeProductImageUrl } from "@/lib/utils/image-url";
+import { getCoverImage } from "@/lib/data/product-visibility";
+import { ProductImagePlaceholder, SoldOutBadge } from "@/components/product-image-placeholder";
 
 interface ProductCardProps {
   product: Product;
@@ -12,7 +14,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const pathname = usePathname();
-  const mainImage = product.images.find((item) => item.isMain) ?? product.images[0];
+  const mainImage = getCoverImage(product);
   const imageUrl = mainImage?.url ? encodeProductImageUrl(mainImage.url) : "";
   const productHref = pathname
     ? {
@@ -23,7 +25,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
   return (
     <article className="space-y-3">
-      <Link href={productHref} className="block aspect-square overflow-hidden rounded-xl bg-[var(--surface-soft)]">
+      <Link href={productHref} className="relative block aspect-square overflow-hidden rounded-xl bg-[var(--surface-soft)]">
         {mainImage ? (
           <Image
             src={imageUrl}
@@ -34,8 +36,9 @@ export function ProductCard({ product }: ProductCardProps) {
             className="h-full w-full rounded-xl object-cover transition duration-700 hover:scale-[1.03]"
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center text-sm text-[var(--muted)]">Sem imagem</div>
+          <ProductImagePlaceholder className="rounded-xl" />
         )}
+        {!product.available ? <SoldOutBadge className="absolute left-3 top-3" /> : null}
       </Link>
 
       <div className="space-y-2 pb-2">

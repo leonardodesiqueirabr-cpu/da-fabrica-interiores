@@ -32,11 +32,15 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
         name?: string;
         base_price?: number | null;
         is_published?: boolean;
+        available?: boolean;
       } = {};
       if (validatedPayload.name !== undefined) productUpdate.name = validatedPayload.name;
       if (validatedPayload.basePrice !== undefined) productUpdate.base_price = validatedPayload.basePrice;
       if (validatedPayload.isPublished !== undefined) {
         productUpdate.is_published = validatedPayload.isPublished;
+      }
+      if (validatedPayload.available !== undefined) {
+        productUpdate.available = validatedPayload.available;
       }
 
       if (Object.keys(productUpdate).length > 0) {
@@ -110,6 +114,9 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     }
     if (validatedPayload.isPublished !== undefined) {
       productFile.data.isPublished = validatedPayload.isPublished;
+    }
+    if (validatedPayload.available !== undefined) {
+      productFile.data.available = validatedPayload.available;
     }
     if (validatedPayload.categories !== undefined) {
       productFile.data.categories = validatedPayload.categories;

@@ -16,6 +16,8 @@ export interface ProductImage {
   colorHex?: string;
   sideLabel?: string;
   isMain: boolean;
+  /** Imagem oculta: visível só no admin, nunca no site público. */
+  isHidden?: boolean;
   sortOrder: number;
 }
 
@@ -53,6 +55,7 @@ export interface Product {
   featured: boolean;
   bestSeller: boolean;
   isPublished: boolean;
+  /** false = Esgotado (independente de Publicado/Oculto). */
   available: boolean;
   characteristics: string[];
   colors: ProductColor[];

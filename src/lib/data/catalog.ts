@@ -4,6 +4,7 @@ import path from "node:path";
 import { cache } from "react";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 import { toSlug } from "@/lib/utils/text";
+import { toPublicProduct } from "@/lib/data/product-visibility";
 import type { CatalogData, Product, ProductColor, ProductImage } from "@/types/catalog";
 
 const categoryMap: Record<string, string> = {
@@ -46,6 +47,7 @@ function mapSupabaseToProduct(row: any): Product {
       colorName: item.color_name || undefined,
       colorHex: item.color_hex || undefined,
       isMain: item.is_main,
+      isHidden: item.is_hidden === true,
       sortOrder: item.sort_order,
     }))
     .sort(
@@ -123,7 +125,7 @@ function mapSupabaseToProduct(row: any): Product {
     bestSeller: row.best_seller,
     // Temporary fallback until is_published is present in every Supabase environment.
     isPublished: typeof row.is_published === "boolean" ? row.is_published : true,
-    available: row.available,
+    available: row.available !== false,
     characteristics: row.characteristics || [],
     colors,
     images: normalizedImages,
@@ -314,7 +316,7 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
       is_published,
       available,
       characteristics,
-      product_images(id, url, alt_text, color_id, color_name, color_hex, is_main, sort_order),
+      product_images(id, url, alt_text, color_id, color_name, color_hex, is_main, is_hidden, sort_order),
       product_colors(id, name, hex, position),
       product_options(id, option_name, values),
       product_measurements(id, measure_label, price, active),
@@ -323,11 +325,18 @@ export const getCatalogData = cache(async function getCatalogData(): Promise<Cat
   const legacyCatalogFields = catalogFields
     .replace("      is_published,\n", "")
     .replace("      product_colors(id, name, hex, position),\n", "")
-    .replace("color_id, ", "");
+    .replace("color_id, ", "")
+    .replace("is_hidden, ", "");
+  // Fallback intermédio: base com cores mas ainda sem a migração de imagens ocultas.
+  const withoutHiddenImagesFields = catalogFields.replace("is_hidden, ", "");
   const fetchCatalog = (fields: string) =>
     supabase.from("products").select(fields).order("created_at", { ascending: false });
 
   let { data, error } = await fetchCatalog(catalogFields);
+
+  if (error && error.message.toLowerCase().includes("is_hidden")) {
+    ({ data, error } = await fetchCatalog(withoutHiddenImagesFields));
+  }
 
   if (
     error &&
@@ -363,7 +372,7 @@ export async function getPublishedCatalogData(): Promise<CatalogData> {
   const catalog = await getCatalogData();
   return {
     ...catalog,
-    products: catalog.products.filter((product) => product.isPublished),
+    products: catalog.products.filter((product) => product.isPublished).map(toPublicProduct),
     categories: catalog.categories.filter((category) => !HIDDEN_PUBLIC_CATEGORIES.has(category.slug)),
   };
 }

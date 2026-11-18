@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 
 interface SiteChromeProps {
   children: React.ReactNode;
@@ -25,6 +26,7 @@ export function SiteChrome({ children, logoHeader, logoFooter, isAdminAuthentica
       <main>{children}</main>
       <SiteFooter logoSrc={logoFooter} />
       <WhatsAppFloat />
+      <AnalyticsTracker />
     </>
   );
 }

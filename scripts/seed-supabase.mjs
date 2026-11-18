@@ -75,6 +75,7 @@ async function run() {
           color_name: item.colorName || null,
           color_hex: item.colorHex || null,
           is_main: item.isMain,
+          is_hidden: item.isHidden ?? false,
           sort_order: item.sortOrder ?? index,
         })),
       );

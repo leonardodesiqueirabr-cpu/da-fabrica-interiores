@@ -228,7 +228,8 @@ for (const row of productRows) {
     featured,
     bestSeller,
     isPublished: true,
-    available: row.visible !== "false",
+    // `available` = não esgotado (Esgotado no admin); não confundir com visibilidade.
+    available: true,
     characteristics: parseCharacteristics(row),
     colors: colorValues,
     images,

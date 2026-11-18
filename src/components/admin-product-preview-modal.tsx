@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import type { Product } from "@/types/catalog";
 import { X } from "lucide-react";
 import { ProductConfigurator } from "@/components/product-configurator";
+import { toPublicProduct } from "@/lib/data/product-visibility";
 
 interface AdminProductPreviewModalProps {
   product: Product | null;
@@ -45,7 +46,7 @@ export function AdminProductPreviewModal({ product, open, onClose }: AdminProduc
         </button>
         <div className="h-full overflow-y-auto overscroll-contain p-2 pt-11 sm:p-3 sm:pt-12">
           <div className="container-shell pb-6 pt-3 sm:pb-8 sm:pt-4">
-            <ProductConfigurator product={product} />
+            <ProductConfigurator product={toPublicProduct(product)} />
           </div>
         </div>
       </div>

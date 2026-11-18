@@ -30,6 +30,7 @@ const productFieldsSchema = z.object({
         colorName: z.string().optional().nullable(),
         colorHex: z.string().optional().nullable(),
         isMain: z.boolean().optional().default(false),
+        isHidden: z.boolean().optional().default(false),
         sortOrder: z.number().optional(),
       }),
     )
@@ -55,10 +56,12 @@ const productFieldsSchema = z.object({
 
 export const productCreateSchema = productFieldsSchema.extend({
   isPublished: z.boolean().default(true),
+  available: z.boolean().default(true),
 });
 
 export const productUpdateSchema = productFieldsSchema.extend({
   isPublished: z.boolean().optional(),
+  available: z.boolean().optional(),
 });
 
 export type ProductCreatePayload = z.infer<typeof productCreateSchema>;
@@ -68,6 +71,7 @@ export const quickEditProductSchema = z.object({
   name: z.string().min(2).optional(),
   basePrice: z.number().nullable().optional(),
   isPublished: z.boolean().optional(),
+  available: z.boolean().optional(),
   categories: z.array(z.string()).min(1).optional(),
 }).refine((payload) => Object.values(payload).some((value) => value !== undefined), {
   message: "Indique pelo menos um campo para atualizar.",

@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/types/catalog";
 import { buildProductMessage, buildWhatsAppUrl } from "@/lib/utils/whatsapp";
 import { buildProductUrl } from "@/lib/utils/site-url";
+import { ProductImagePlaceholder, SoldOutBadge } from "@/components/product-image-placeholder";
 
 interface ProductConfiguratorProps {
   product: Product;
@@ -186,12 +187,13 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
     options: Object.values(selectedOptions).filter(Boolean),
     priceLabel,
     productUrl,
+    soldOut: !product.available,
   });
 
   return (
     <section className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr]">
       <div className="space-y-5">
-        <div className="relative aspect-square overflow-hidden rounded-3xl bg-[var(--surface-soft)] md:aspect-[4/3] lg:h-[620px] lg:aspect-auto">
+        <div className="relative aspect-square w-full overflow-hidden rounded-3xl bg-[var(--surface-soft)]">
           {selectedImage ? (
             <div
               className="relative h-full w-full"
@@ -200,10 +202,16 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
               onWheel={handleWheel}
               style={{ touchAction: "pan-y" }}
             >
-              <Image src={selectedImage.url} alt={selectedImage.alt} fill className="object-cover rounded-3xl" />
+              <Image
+                src={selectedImage.url}
+                alt={selectedImage.alt}
+                fill
+                sizes="(min-width: 1024px) 58vw, 100vw"
+                className="object-cover object-center"
+              />
             </div>
           ) : (
-            <div className="flex h-full items-center justify-center">Sem imagem</div>
+            <ProductImagePlaceholder />
           )}
 
           {visibleImages.length > 1 && (
@@ -232,6 +240,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
 
       <div className="space-y-10">
         <div className="space-y-4 border-b border-[var(--border)] pb-8">
+          {!product.available ? <SoldOutBadge /> : null}
           <h1 className="text-5xl font-semibold">{product.name}</h1>
           <p className="text-sm leading-relaxed text-[var(--muted)]">{product.description}</p>
         </div>
@@ -330,9 +339,10 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
           <Link
             href={buildWhatsAppUrl(whatsappPhone, message)}
             target="_blank"
+            data-wa-source="product"
             className="inline-flex w-full items-center justify-center rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-[var(--accent-strong)]"
           >
-            Solicitar informações pelo WhatsApp
+            {product.available ? "Solicitar informações pelo WhatsApp" : "Consultar disponibilidade"}
           </Link>
         </div>
 

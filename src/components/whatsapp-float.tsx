@@ -9,6 +9,7 @@ export function WhatsAppFloat() {
     <Link
       href={buildWhatsAppUrl(whatsappPhone, WHATSAPP_ASSISTANT_MESSAGE)}
       target="_blank"
+      data-wa-source="float"
       className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-[#1e1e1e] px-5 py-3 text-sm font-semibold text-white shadow-2xl transition hover:-translate-y-1"
     >
       <MessageCircle className="size-4" />

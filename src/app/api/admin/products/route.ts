@@ -34,6 +34,7 @@ export async function POST(request: Request) {
         featured: payload.featured,
         best_seller: payload.bestSeller,
         is_published: payload.isPublished,
+        available: payload.available,
         characteristics: payload.characteristics,
       })
       .select("id")
@@ -107,6 +108,7 @@ export async function POST(request: Request) {
             color_name: colorFromPayload?.name || item.colorName || null,
             color_hex: colorFromPayload?.hex || item.colorHex || null,
             is_main: item.isMain ?? index === 0,
+            is_hidden: item.isHidden ?? false,
             sort_order: item.sortOrder ?? index,
           };
         }),

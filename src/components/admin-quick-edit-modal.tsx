@@ -15,6 +15,7 @@ export function AdminQuickEditModal({ product, isOpen, onClose, onSuccess }: Adm
   const [name, setName] = useState(product.name);
   const [basePrice, setBasePrice] = useState(product.basePrice?.toString() || "");
   const [isPublished, setIsPublished] = useState(product.isPublished);
+  const [isSoldOut, setIsSoldOut] = useState(!product.available);
   const [categories, setCategories] = useState<string[]>(product.categories);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -29,6 +30,7 @@ export function AdminQuickEditModal({ product, isOpen, onClose, onSuccess }: Adm
         name,
         basePrice: basePrice ? Number(basePrice) : null,
         isPublished,
+        available: !isSoldOut,
         categories,
       };
 
@@ -103,6 +105,22 @@ export function AdminQuickEditModal({ product, isOpen, onClose, onSuccess }: Adm
               <span className="block font-medium">Visibilidade no site: {isPublished ? "Publicado" : "Oculto"}</span>
               <span className="mt-1 block text-xs text-[var(--muted)]">
                 Quando oculto, o produto permanece guardado no painel e deixa de aparecer no site.
+              </span>
+            </span>
+          </label>
+
+          {/* Stock */}
+          <label className="flex items-center gap-3 rounded-lg border border-[var(--border)] p-3 text-sm">
+            <input
+              type="checkbox"
+              checked={isSoldOut}
+              onChange={(e) => setIsSoldOut(e.target.checked)}
+              className="accent-[var(--accent)]"
+            />
+            <span>
+              <span className="block font-medium">Esgotado</span>
+              <span className="mt-1 block text-xs text-[var(--muted)]">
+                O produto continua no catálogo com a etiqueta “Esgotado”. Desmarque para voltar a disponível.
               </span>
             </span>
           </label>

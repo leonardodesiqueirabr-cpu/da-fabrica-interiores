@@ -15,6 +15,7 @@ export function buildProductMessage(input: {
   options?: string[];
   productUrl?: string;
   priceLabel?: string;
+  soldOut?: boolean;
 }) {
   const detailParts = [
     input.color ? `na cor ${input.color}` : null,
@@ -23,7 +24,9 @@ export function buildProductMessage(input: {
   ].filter(Boolean);
 
   const details = detailParts.length > 0 ? `, ${detailParts.join(", ")}` : "";
-  const baseMessage = `Olá, gostaria de informações sobre o ${input.productName}${details}.`;
+  const baseMessage = input.soldOut
+    ? `Olá, gostaria de consultar a disponibilidade do ${input.productName}${details}.`
+    : `Olá, gostaria de informações sobre o ${input.productName}${details}.`;
   const withPrice = input.priceLabel ? `${baseMessage} Preço de referência: ${input.priceLabel}.` : baseMessage;
 
   if (!input.productUrl) {

@@ -176,6 +176,13 @@ concedem acesso amplo a `storage.objects` como um todo.
 
 ## 8. Permissões / RLS (Postgres)
 
+> **Estatísticas (`analytics_events`)**: exceção às regras abaixo — RLS ativo **sem
+> policies** e sem grants para `anon`/`authenticated`. Só o servidor (service_role)
+> grava eventos (`/api/analytics`) e lê o resumo (`analytics_summary`) na aba
+> Estatísticas do admin. Variáveis opcionais: `ANALYTICS_SALT` (sal do hash diário de
+> visitantes; por omissão usa a service key) e `ANALYTICS_ENABLED` (`true`/`false`;
+> por omissão só recolhe com `VERCEL_ENV=production`).
+
 ### RLS por tabela (`supabase/schema.sql`)
 Todas as 6 tabelas de aplicação têm RLS habilitado com duas policies cada:
 - **`Public read <tabela>`**: `select using (true)` — leitura pública, usada pelo

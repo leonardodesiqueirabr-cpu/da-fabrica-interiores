@@ -170,6 +170,11 @@ export function AdminProductsTable({ products }: AdminProductsTableProps) {
                                 Destaque
                               </span>
                             ) : null}
+                            {!product.available ? (
+                              <span className="rounded bg-[#fdf0e6] px-1.5 py-0.5 text-[10px] font-medium text-[#a2521a]">
+                                Esgotado
+                              </span>
+                            ) : null}
                             {product.bestSeller ? (
                               <span className="rounded bg-[#f3f3f4] px-1.5 py-0.5 text-[10px] font-medium text-[#666a71]">
                                 Mais vendido
