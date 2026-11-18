@@ -329,7 +329,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
                 {chosenMeasure?.price ? "Preço para a medida selecionada" : "Preço base"}
               </p>
             ) : null}
-            <p className={`${product.available ? "mt-1 " : ""}text-3xl font-bold text-[var(--accent)]`}>
+            <p className={`text-3xl font-bold ${product.available ? "mt-1 text-[var(--accent)]" : "text-[#737373]"}`}>
               {!product.available
                 ? "Esgotado"
                 : chosenMeasure?.price

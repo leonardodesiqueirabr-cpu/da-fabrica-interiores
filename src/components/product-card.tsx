@@ -46,7 +46,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <h3 className="text-xl font-medium tracking-tight">{product.name}</h3>
         <p className="line-clamp-2 text-sm leading-relaxed text-[var(--muted)]">{product.shortDescription || product.description}</p>
         <div className="flex items-center justify-between gap-3 pt-2">
-          <p className="text-base font-bold text-[var(--accent)]">
+          <p className={`text-base font-bold ${product.available ? "text-[var(--accent)]" : "text-[#737373]"}`}>
             {!product.available
               ? "Esgotado"
               : product.measurements.length > 0
