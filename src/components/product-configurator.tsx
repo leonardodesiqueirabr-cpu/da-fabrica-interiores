@@ -324,15 +324,19 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
           ))}
 
           <div className="border-t border-[var(--border)] pt-5">
-            <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
-              {chosenMeasure?.price ? "Preço para a medida selecionada" : "Preço base"}
-            </p>
-            <p className="mt-1 text-3xl font-bold text-[var(--accent)]">
+            {chosenMeasure?.price ? (
+              <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">Preço para a medida selecionada</p>
+            ) : product.available ? (
+              <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">Preço base</p>
+            ) : null}
+            <p className={`${chosenMeasure?.price || product.available ? "mt-1 " : ""}text-3xl font-bold text-[var(--accent)]`}>
               {chosenMeasure?.price
                 ? `${chosenMeasure.price.toFixed(0)} EUR`
                 : product.basePrice
                   ? `${product.basePrice.toFixed(0)} EUR`
-                  : "Consultar Preço de Fábrica"}
+                  : product.available
+                    ? "Consultar Preço de Fábrica"
+                    : "Esgotado"}
             </p>
           </div>
 

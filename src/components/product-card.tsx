@@ -15,6 +15,7 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const pathname = usePathname();
   const mainImage = getCoverImage(product);
+  const priceFallback = product.available ? "Consultar Preço de Fábrica" : "Esgotado";
   const imageUrl = mainImage?.url ? encodeProductImageUrl(mainImage.url) : "";
   const productHref = pathname
     ? {
@@ -50,9 +51,9 @@ export function ProductCard({ product }: ProductCardProps) {
               ? (() => {
                   const prices = product.measurements.map((m) => m.price).filter((p): p is number => p != null && p > 0);
                   const min = prices.length ? Math.min(...prices) : null;
-                  return min ? `A partir de ${min.toFixed(0)} EUR` : (product.basePrice ? `${product.basePrice.toFixed(0)} EUR` : "Consultar Preço de Fábrica");
+                  return min ? `A partir de ${min.toFixed(0)} EUR` : (product.basePrice ? `${product.basePrice.toFixed(0)} EUR` : priceFallback);
                 })()
-              : product.basePrice ? `${product.basePrice.toFixed(0)} EUR` : "Consultar Preço de Fábrica"}
+              : product.basePrice ? `${product.basePrice.toFixed(0)} EUR` : priceFallback}
           </p>
           <Link
             href={productHref}
