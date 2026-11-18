@@ -185,7 +185,7 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
     color: product.colors.find((color) => color.id === selectedColorId)?.name || undefined,
     measure: selectedMeasure || undefined,
     options: Object.values(selectedOptions).filter(Boolean),
-    priceLabel,
+    priceLabel: product.available ? priceLabel : undefined,
     productUrl,
     soldOut: !product.available,
   });
@@ -324,19 +324,19 @@ export function ProductConfigurator({ product }: ProductConfiguratorProps) {
           ))}
 
           <div className="border-t border-[var(--border)] pt-5">
-            {chosenMeasure?.price ? (
-              <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">Preço para a medida selecionada</p>
-            ) : product.available ? (
-              <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">Preço base</p>
+            {product.available ? (
+              <p className="text-xs uppercase tracking-[0.12em] text-[var(--muted)]">
+                {chosenMeasure?.price ? "Preço para a medida selecionada" : "Preço base"}
+              </p>
             ) : null}
-            <p className={`${chosenMeasure?.price || product.available ? "mt-1 " : ""}text-3xl font-bold text-[var(--accent)]`}>
-              {chosenMeasure?.price
-                ? `${chosenMeasure.price.toFixed(0)} EUR`
-                : product.basePrice
-                  ? `${product.basePrice.toFixed(0)} EUR`
-                  : product.available
-                    ? "Consultar Preço de Fábrica"
-                    : "Esgotado"}
+            <p className={`${product.available ? "mt-1 " : ""}text-3xl font-bold text-[var(--accent)]`}>
+              {!product.available
+                ? "Esgotado"
+                : chosenMeasure?.price
+                  ? `${chosenMeasure.price.toFixed(0)} EUR`
+                  : product.basePrice
+                    ? `${product.basePrice.toFixed(0)} EUR`
+                    : "Consultar Preço de Fábrica"}
             </p>
           </div>
 
