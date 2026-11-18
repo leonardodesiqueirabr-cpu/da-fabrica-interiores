@@ -1,7 +1,11 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { AdminProductForm } from "@/components/admin-product-form";
+import { hasAdminSession } from "@/lib/admin-session";
 
-export default function NewProductPage() {
+export default async function NewProductPage() {
+  if (!(await hasAdminSession())) redirect("/admin/login");
+
   return (
     <section className="container-shell py-10">
       <div className="mb-6 flex items-center justify-between">

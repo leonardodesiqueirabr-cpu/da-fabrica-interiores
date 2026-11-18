@@ -1,14 +1,12 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { getCatalogData } from "@/lib/data/catalog";
-import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { hasAdminSession } from "@/lib/admin-session";
 import { AdminProductsTable } from "@/components/admin-products-table";
 import { Eye, EyeOff, FilePenLine, Package, Star } from "lucide-react";
 
 export default async function AdminPage() {
-  const cookieStore = await cookies();
-  if (!isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value)) {
+  if (!(await hasAdminSession())) {
     redirect("/admin/login");
   }
 

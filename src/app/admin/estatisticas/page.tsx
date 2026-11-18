@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { Eye, MessageCircle, Users } from "lucide-react";
-import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { hasAdminSession } from "@/lib/admin-session";
 import { ANALYTICS_PERIODS, type AnalyticsPeriod, getProductSlugFromPath } from "@/lib/analytics/shared";
 import { getAnalyticsSummary } from "@/lib/data/analytics";
 import { getCatalogData } from "@/lib/data/catalog";
@@ -42,8 +41,7 @@ export default async function AdminStatsPage({
 }: {
   searchParams: Promise<{ periodo?: string | string[] }>;
 }) {
-  const cookieStore = await cookies();
-  if (!isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value)) {
+  if (!(await hasAdminSession())) {
     redirect("/admin/login");
   }
 

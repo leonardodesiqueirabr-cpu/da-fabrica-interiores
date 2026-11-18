@@ -1,8 +1,11 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { hasAdminSession } from "@/lib/admin-session";
 import { AdminProductForm } from "@/components/admin-product-form";
 import { getCatalogData } from "@/lib/data/catalog";
 
 export default async function EditProductPage({ params }: { params: Promise<{ id: string }> }) {
+  if (!(await hasAdminSession())) redirect("/admin/login");
+
   const { id } = await params;
   const catalog = await getCatalogData();
   const product = catalog.products.find((item) => item.id === id);

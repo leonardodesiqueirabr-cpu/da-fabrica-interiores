@@ -1,15 +1,20 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { ADMIN_SESSION_COOKIE, isValidAdminSession } from "@/lib/admin-auth";
+
+/** true quando o pedido atual tem uma sessão de administrador assinada e válida. */
+export async function hasAdminSession(): Promise<boolean> {
+  const cookieStore = await cookies();
+  return isValidAdminSession(cookieStore.get(ADMIN_SESSION_COOKIE)?.value);
+}
 
 /**
- * Valida a sessão de admin (cookie httpOnly) para uso em API routes.
- * Retorna uma resposta 401 pronta para ser retornada quando não houver
- * sessão válida, ou `null` quando o pedido está autenticado.
+ * Valida a sessão de admin para uso em API routes.
+ * Retorna uma resposta 401 pronta a devolver quando não houver sessão válida,
+ * ou `null` quando o pedido está autenticado.
  */
 export async function requireAdminSession(): Promise<NextResponse | null> {
-  const cookieStore = await cookies();
-  if (!isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value)) {
+  if (!(await hasAdminSession())) {
     return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   }
   return null;

@@ -20,8 +20,10 @@ Next.js 15 (App Router) ──┬── Leitura pública do catálogo (getCatalo
 ```
 
 Pontos-chave:
-- **Autenticação do admin** é feita por um cookie httpOnly (`dafabrica_admin_session`),
-  validado por `src/lib/admin-auth.ts` e `src/lib/admin-session.ts`. Não usa
+- **Autenticação do admin** é feita por um cookie httpOnly (`dafabrica_admin_session`)
+  com um token assinado (HMAC-SHA256, expira em 8 h, segredo `ADMIN_SESSION_SECRET`),
+  validado em `src/middleware.ts` (páginas `/admin/**` e APIs `/api/admin/**`) e de novo em
+  cada rota por `src/lib/admin-session.ts`. Não usa
   Supabase Auth — é um login simples usuário/senha via variáveis de ambiente.
 - **Todas as rotas de escrita** em `/api/admin/**` (criar/editar/excluir produto,
   quick-edit, upload) exigem sessão válida e retornam `401` caso contrário.
@@ -43,6 +45,7 @@ Pontos-chave:
 | `SUPABASE_SERVICE_ROLE_KEY` | Chave privada (`sb_secret_...`), usada só no servidor | `.env.local` + Vercel (**nunca** com prefixo `NEXT_PUBLIC_`) |
 | `ADMIN_USERNAME` | Usuário do painel admin | `.env.local` + Vercel |
 | `ADMIN_PASSWORD` | Senha do painel admin | `.env.local` + Vercel |
+| `ADMIN_SESSION_SECRET` | Segredo (≥ 32 caracteres) que assina a cookie de sessão do admin; gerar com `openssl rand -base64 48`. Sem ele o login é recusado. Alterá-lo termina todas as sessões. | `.env.local` + Vercel (**nunca** com prefixo `NEXT_PUBLIC_`) |
 | `NEXT_PUBLIC_SITE_URL` | URL pública do site | `.env.local` + Vercel |
 | `NEXT_PUBLIC_WHATSAPP_NUMBER` | Número usado no botão flutuante do WhatsApp | `.env.local` + Vercel |
 

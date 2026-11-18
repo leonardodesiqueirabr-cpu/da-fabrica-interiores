@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { SiteChrome } from "@/components/site-chrome";
 import { getCatalogData } from "@/lib/data/catalog";
-import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { hasAdminSession } from "@/lib/admin-session";
 import { getSiteUrl } from "@/lib/utils/site-url";
 import "./globals.css";
 
@@ -23,8 +22,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const catalog = await getCatalogData();
-  const cookieStore = await cookies();
-  const isAdminAuthenticated = isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value);
+  const isAdminAuthenticated = await hasAdminSession();
 
   return (
     <html lang="pt-PT">

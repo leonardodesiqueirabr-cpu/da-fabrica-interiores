@@ -1,13 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cookies } from "next/headers";
-import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { hasAdminSession } from "@/lib/admin-session";
 import { getCatalogData } from "@/lib/data/catalog";
 import { AdminNav } from "@/components/admin-nav";
 
 export default async function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const cookieStore = await cookies();
-  const isAuthenticated = isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value);
+  const isAuthenticated = await hasAdminSession();
   const { assets } = await getCatalogData();
   const logoSrc = assets.logoSecondary || assets.logoPrimary;
 

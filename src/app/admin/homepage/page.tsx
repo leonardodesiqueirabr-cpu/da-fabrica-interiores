@@ -1,14 +1,12 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { AdminHomepageForm } from "@/components/admin-homepage-form";
-import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { hasAdminSession } from "@/lib/admin-session";
 import { getPublishedCatalogData } from "@/lib/data/catalog";
 import { getHomepageContent } from "@/lib/data/homepage";
 
 export default async function AdminHomepagePage() {
-  const cookieStore = await cookies();
-  if (!isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value)) {
+  if (!(await hasAdminSession())) {
     redirect("/admin/login");
   }
 

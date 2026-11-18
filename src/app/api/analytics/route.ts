@@ -1,7 +1,6 @@
 import { createHash } from "node:crypto";
-import { cookies } from "next/headers";
 import { z } from "zod";
-import { ADMIN_SESSION_COOKIE, isAdminSessionValue } from "@/lib/admin-auth";
+import { hasAdminSession } from "@/lib/admin-session";
 import { getProductSlugFromPath, normalizeTrackedPath } from "@/lib/analytics/shared";
 import { getSupabaseServiceClient } from "@/lib/supabase/service";
 
@@ -53,8 +52,7 @@ export async function POST(request: Request) {
   if (!originHost || !host || originHost !== host) return noContent();
 
   // Sessões de administrador não contam.
-  const cookieStore = await cookies();
-  if (isAdminSessionValue(cookieStore.get(ADMIN_SESSION_COOKIE)?.value)) return noContent();
+  if (await hasAdminSession()) return noContent();
 
   let body: unknown;
   try {
